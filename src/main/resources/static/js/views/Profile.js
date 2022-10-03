@@ -13,5 +13,5 @@ export default function Profile(props) {
 }
 
 export function ProfileEvent(){
-
+    console.log("Test")
 }
