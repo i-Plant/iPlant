@@ -1,15 +1,14 @@
 import Home from "./views/Home.js";
-import PostIndex from "./views/PostIndex.js";
 import About from "./views/About.js";
 import Error404 from "./views/Error404.js";
 import Loading from "./views/Loading.js";
 import Login from "./views/Login.js";
 import LoginEvent from "./auth.js";
-import Register, {RegisterEvent} from "./views/Register.js"
-import MessageBoard from "./views/MessageBoard.js";
-import Products from "./views/Products.js";
+import Register, {RegisterEvent} from "./views/Register.js";
+import MessageBoard, {MessageBoardEvent}  from "./views/MessageBoard.js";
+import Products, {ProductsEvent} from "./views/Products.js";
 import Profile, {ProfileEvent} from "./views/Profile.js";
-import Checkout from "./views/Checkout.js";
+import Checkout, {CheckoutEvent} from "./views/Checkout.js";
 
 /**
  * Returns the route object for a specific route based on the given URI
@@ -41,9 +40,9 @@ export default function router(URI) {
         '/message': {
             returnView: MessageBoard,
             state: {
-                messages: '/api/messages'
+                // messages: '/api/messages'
             },
-            uri: '/message',
+            uri: '/messages',
             title: 'All Messages',
             viewEvent: MessageBoardEvent
         },
