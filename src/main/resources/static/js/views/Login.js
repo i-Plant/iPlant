@@ -6,22 +6,19 @@ export default function Login(props) {
     <title>Log In</title>
 </head>
 <body>
-<h1>Log In/Register</h1>
+<h1>Log In</h1>
 
 
 <div class="container">
-    <div class="row">
+    <div class="row align-items-sm-center">
         <div class="col-12-sm">
             <form id="login-form">
             
-                <label for="username">Username</label>
-                <input id="username" name="username" type="text"/>
+<!--                <label for="username">Username</label>-->
+                <input id="username" name="username" type="text" placeholder="Enter username"/>
+<!--                <label for="password">Password</label>-->
+                <input id="password" name="password" type="password" placeholder="Enter password"/>
                 
-                <label for="email">Email</label>
-                <input id="email" name="email" type="text"/>
-                
-                <label for="password">Password</label>
-                <input id="password" name="password" type="password"/>
                 <input id="login-btn" type="submit" value="Log In"/>
                 
             </form>
@@ -30,7 +27,7 @@ export default function Login(props) {
     </div>
 </div>
 </body>
-<footer>
+<footer style="position: absolute; bottom: 10px; left: 10px">
 <a href="/about" data-link>I.Plant About Us</a>
 </footer>
 </html>`;
