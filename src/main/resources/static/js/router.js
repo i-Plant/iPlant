@@ -67,7 +67,9 @@ export default function router(URI) {
         '/products': {
             returnView: Products,
             state: {
-                // maybe products
+                products: {
+                    url: "https://https://growstuff.org/crops.json"
+                }
             },
             uri: '/products',
             title: 'Products',
