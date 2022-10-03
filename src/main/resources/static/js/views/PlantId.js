@@ -1,4 +1,4 @@
-export default function PlanId(props) {
+export default function PlantId(props) {
     return `
     <header>
         <h1>Plant ID</h1>
