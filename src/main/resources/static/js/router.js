@@ -38,12 +38,12 @@ export default function router(URI) {
             title: 'Register',
             viewEvent: RegisterEvent
         },
-        '/message': {
+        '/messageboard': {
             returnView: MessageBoard,
             state: {
                 // messages: '/api/messages'
             },
-            uri: '/messages',
+            uri: '/messageboard',
             title: 'All Messages',
             viewEvent: MessageBoardEvent
         },
