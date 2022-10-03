@@ -9,6 +9,7 @@ export default function Navbar(props) {
             <a href="/plantId" data-link>PlantId</a>
             <a href="/checkout" data-link>checkout</a>
             <a href="/profile" data-link>Profile</a>
+            <a href="/logout" data-link>Logout</a>
             <a href="/about" data-link>About Us</a>
         </nav>
     `;

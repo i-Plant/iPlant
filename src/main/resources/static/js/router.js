@@ -10,6 +10,7 @@ import Products, {ProductsEvent} from "./views/Products.js";
 import Profile, {ProfileEvent} from "./views/Profile.js";
 import Checkout, {CheckoutEvent} from "./views/Checkout.js";
 import PlantId, {PlantIdEvent} from "./views/PlantId.js"
+import Logout, {LogoutEvent} from "./views/Logout.js";
 
 /**
  * Returns the route object for a specific route based on the given URI
@@ -30,6 +31,13 @@ export default function router(URI) {
             uri: '/login',
             title: "Login",
             viewEvent: LoginEvent
+        },
+        '/logout': {
+            returnView: Logout,
+            state: {},
+            uri: '/logout',
+            title: "Logout",
+            viewEvent: LogoutEvent
         },
         '/register': {
             returnView: Register,
