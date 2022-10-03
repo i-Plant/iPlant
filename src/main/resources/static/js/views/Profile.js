@@ -1,9 +1,9 @@
 import CreateView from "../createView.js"
 
-export default function Register(props) {
+export default function Profile(props) {
     return `
     <header>
-        <h1>Checkout</h1>
+        <h1>Profile</h1>
     </header>
     
     
