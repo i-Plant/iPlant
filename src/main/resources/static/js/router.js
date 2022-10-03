@@ -74,12 +74,12 @@ export default function router(URI) {
             title: 'Profile',
             viewEvent: ProfileEvent
         },
-        '/plantid': {
+        '/plantId': {
             returnView: PlantId,
             state: {
                 // plants
             },
-            uri: '/plantid',
+            uri: '/plantId',
             title: 'PlantId',
             viewEvent: PlantIdEvent
         },
