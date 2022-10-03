@@ -5,8 +5,11 @@ import Error404 from "./views/Error404.js";
 import Loading from "./views/Loading.js";
 import Login from "./views/Login.js";
 import LoginEvent from "./auth.js";
-import Register from "./views/Register.js"
-import {RegisterEvent} from "./views/Register.js";
+import Register, {RegisterEvent} from "./views/Register.js"
+import MessageBoard from "./views/MessageBoard.js";
+import Products from "./views/Products.js";
+import Profile, {ProfileEvent} from "./views/Profile.js";
+import Checkout from "./views/Checkout.js";
 
 /**
  * Returns the route object for a specific route based on the given URI
@@ -35,13 +38,41 @@ export default function router(URI) {
             title: 'Register',
             viewEvent: RegisterEvent
         },
-        '/posts': {
-            returnView: PostIndex,
+        '/message': {
+            returnView: MessageBoard,
             state: {
-                posts: '/api/posts'
+                messages: '/api/messages'
             },
-            uri: '/posts',
-            title: 'All Posts',
+            uri: '/message',
+            title: 'All Messages',
+            viewEvent: MessageBoardEvent
+        },
+        '/checkout': {
+            returnView: Checkout,
+            state: {
+                // maybe orders?
+            },
+            uri: '/checkout',
+            title: 'Checkout',
+            viewEvent: CheckoutEvent
+        },
+        '/products': {
+            returnView: Products,
+            state: {
+                // maybe products
+            },
+            uri: '/products',
+            title: 'Products',
+            viewEvent: ProductsEvent
+        },
+        '/profile': {
+            returnView: Profile,
+            state: {
+                // user
+            },
+            uri: '/profile',
+            title: 'Profile',
+            viewEvent: ProfileEvent
         },
         '/about': {
             returnView: About,
