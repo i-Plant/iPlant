@@ -9,6 +9,7 @@ import MessageBoard, {MessageBoardEvent}  from "./views/MessageBoard.js";
 import Products, {ProductsEvent} from "./views/Products.js";
 import Profile, {ProfileEvent} from "./views/Profile.js";
 import Checkout, {CheckoutEvent} from "./views/Checkout.js";
+import PlantId, {PlantIdEvent} from "./views/PlantId.js"
 
 /**
  * Returns the route object for a specific route based on the given URI
@@ -72,6 +73,15 @@ export default function router(URI) {
             uri: '/profile',
             title: 'Profile',
             viewEvent: ProfileEvent
+        },
+        '/plantid': {
+            returnView: PlantId,
+            state: {
+                // plants
+            },
+            uri: '/plantid',
+            title: 'PlantId',
+            viewEvent: PlantIdEvent
         },
         '/about': {
             returnView: About,
