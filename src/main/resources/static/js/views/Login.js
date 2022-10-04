@@ -1,5 +1,6 @@
 export default function Login(props) {
     return `
+    <div id="buttonDiv" data-link></div>
 `;
 
 }
