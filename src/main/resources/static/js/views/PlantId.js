@@ -3,6 +3,7 @@ export default function PlantId(props) {
     <header>
         <h1>Plant ID</h1>
     </header>
+    
     `
 }
 export function PlantIdEvent(){
