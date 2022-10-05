@@ -12,19 +12,23 @@ import java.util.Date;
 @AllArgsConstructor
 @ToString
 @Entity
-@Table(name="comment")
+@Table(name="comments")
 public class Comment {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long postId;
     @ManyToOne
-    @JoinColumn (name = "users_id")
-    private Long userId;
+    private Message message;
+
+    @ManyToOne
+    private User commentor;
+
     @NotNull
     @Column(nullable = false, unique = true, length = 100)
     private String content;
-    @Column()
+
+    @Column(nullable = false)
     private LocalDate createdAt;
 }

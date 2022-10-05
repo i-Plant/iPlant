@@ -20,36 +20,43 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     @NotNull
-    @Column(nullable = false, unique = true, length = 100)
-    private String userName;
+    @Column(nullable = false, unique = true, length = 32)
+    private String screenName;
+
     @Column(nullable = false, length = 100)
     private String firstName;
+
     @Column(nullable = false, length = 100)
     private String lastName;
+
     @Email
     @NotEmpty
     @Column(nullable = false, length = 100)
     private String email;
+
     @Column()
     private String street;
+
     @Column()
     private String city;
+
     @Column()
     private String state;
+
     @Column(length = 5)
     private Integer zipCode;
+
     @ToString.Exclude
     @Column(nullable = false, length = 100)
     private String password;
+
     @Column()
     private LocalDate createdAt;
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    @Column
-    private UserRole role;
-//    @OneToMany(mappedBy = "author")
-//    @JsonIgnoreProperties("author")
-//    private Collection<Post> posts;
+
+    @OneToMany(mappedBy = "author")
+    @JsonIgnoreProperties("author")
+    private Collection<Message> messages;
 
 }

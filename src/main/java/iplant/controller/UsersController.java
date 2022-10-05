@@ -1,13 +1,11 @@
 package iplant.controller;
 
 import iplant.data.User;
-import iplant.data.UserRole;
 import iplant.misc.FieldHelper;
 import iplant.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -41,7 +39,7 @@ public class UsersController {
 
     @GetMapping("/me")
     private Optional<User> fetchMe(User user) {
-        String userName = user.getUserName();
+        String userName = user.getScreenName();
 //        User user1 =  usersRepository.findByUsername(userName);
 //        return Optional.of(user1);
         return null;
@@ -54,7 +52,7 @@ public class UsersController {
 
     @PostMapping("/create")
     public void createUser(@RequestBody User newUser) {
-       newUser.setRole(UserRole.USER);
+
 
        String plainTextPassword = newUser.getPassword();
 //       String encryptedPassword = passwordEncoder.encode(plainTextPassword);

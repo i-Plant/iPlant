@@ -1,11 +1,11 @@
 package iplant.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
-import java.awt.*;
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.Collection;
 
 @Getter
 @Setter
@@ -14,13 +14,14 @@ import java.util.Date;
 @ToString
 @Entity
 @Table(name="messages")
-public class Messages {
-
+public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long userId;
+    @ManyToOne
+    @JsonIgnoreProperties({"messages", "password", "firstName", "lastName", "street", "city", "state", "zip", "role"})
+    private User author;
 
     @Column(nullable = false)
     private String subject;
@@ -34,6 +35,6 @@ public class Messages {
     @Column(nullable = false)
     private LocalDate createdAt;
 
-
-
+    @OneToMany( mappedBy = "message")
+    private Collection<Comment> comments;
 }
