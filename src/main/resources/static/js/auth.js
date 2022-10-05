@@ -13,7 +13,7 @@ export default function addLoginEvent() {
             password: document.querySelector("#password").value,
             grant_type: 'password'
         }
-        console.log("got to login event")
+        console.log("go to login event")
         // TODO: these are the only request params /oauth/token accepts in Spring Security
         // TODO: need to possibly implement a random bit handshake w/ SHA256 on the password before sending
         //      -> Alternatively, encrypt the entire request body
@@ -55,13 +55,63 @@ export function getHeaders() {
  * Attempts to set the access and refresh tokens needs to authenticate and authorize the client and user
  * @param responseData
  */
-function setTokens(responseData) {
-    if (responseData.route['access_token']) {
-        localStorage.setItem("access_token", responseData.route['access_token']);
+export function setTokens(responseData) {
+    if (responseData) {
+        localStorage.setItem("access_token", responseData);
         console.log("Access token set");
     }
-    if (responseData.route['refresh_token']) {
-        localStorage.setItem("refresh_token", responseData.route['refresh_token']);
-        console.log("Refresh token set")
+
+    export function isLoggedIn() {
+        return !!localStorage.getItem('access_token');
+
+    }
+
+//  returns an object with user_name and authority from the access_token
+    export function getUser() {
+        const accessToken = localStorage.getItem("access_token");
+        if (!accessToken) {
+            return false;
+        }
+        const parts = accessToken.split('.');
+        const payload = parts[1];
+        const decodedPayload = atob(payload);
+        const payloadObject = JSON.parse(decodedPayload);
+        const user = {
+            userName: payloadObject.user_name,
+            role: payloadObject.authorities[0]
+        }
+        return user;
+    }
+
+    export function getUserRole() {
+        const accessToken = localStorage.getItem("access_token");
+        if (!accessToken) {
+            return false;
+        }
+        const parts = accessToken.split('.');
+        const payload = parts[1];
+        const decodedPayload = atob(payload);
+        const payloadObject = JSON.parse(decodedPayload);
+        return payloadObject.authorities[0];
+    }
+
+    export async function removeStaleTokens() {
+        console.log("Removing stale tokens...");
+
+        // clear tokens from localStorage if backend tells us the tokens are invalid
+        // make the request
+        const request = {
+            method: 'GET',
+            headers: getHeaders()
+        };
+        await fetch(`/api/users`, request)
+            .then((response) => {
+                // if fetch error then you might be using stale tokens
+                if (response.status === 401) {
+                    window.localStorage.clear();
+                }
+            }).catch(error => {
+                console.log("FETCH ERROR: " + error);
+            });
     }
 }
