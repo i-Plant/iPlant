@@ -63,7 +63,9 @@ export default function router(URI) {
         '/checkout': {
             returnView: Checkout,
             state: {
-                // maybe orders?
+                products: {
+                    url: "/api/checkout"
+                }
             },
             uri: '/checkout',
             title: 'Checkout',
