@@ -19,5 +19,7 @@ export function LoginEvent() {
 
 function handleCredentialResponse(response) {
     console.log("Encoded JWT ID token: " + response.credential);
+    //write to local storage:
+
 }
 
