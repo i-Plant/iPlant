@@ -9,13 +9,13 @@ import Register from "./views/Register.js"
 import {RegisterEvent} from "./views/Register.js";
 
 
-import MessageBoard, {MessageBoardEvent}  from "./views/MessageBoard.js";
+import Review, {MessageBoardEvent}  from "./views/Review.js";
 import Products, {ProductsEvent} from "./views/Products.js";
 import Profile, {ProfileEvent} from "./views/Profile.js";
 import Checkout, {CheckoutEvent} from "./views/Checkout.js";
 import PlantId, {PlantIdEvent} from "./views/PlantId.js"
 import Logout, {LogoutEvent} from "./views/Logout.js";
-
+import PaymentOk from "./views/PaymentOk.js";
 
 /**
  * Returns the route object for a specific route based on the given URI
@@ -52,7 +52,7 @@ export default function router(URI) {
             viewEvent: RegisterEvent
         },
         '/messageboard': {
-            returnView: MessageBoard,
+            returnView: Review,
             state: {
                 // messages: '/api/messages'
             },
@@ -117,7 +117,14 @@ export default function router(URI) {
             state: {},
             uri: location.pathname,
             title: 'Loading...',
+        },
+        '/paymentOk': {
+            returnView: PaymentOk,
+            state: {},
+            uri: '/paymentOk',
+            title: 'PaymentOkay',
         }
+
     };
 
     return routes[URI];

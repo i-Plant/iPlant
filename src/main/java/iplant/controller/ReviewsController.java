@@ -1,5 +1,4 @@
 package iplant.controller;
-
 import iplant.data.Review;
 import iplant.data.User;
 import iplant.repository.ReviewsRepository;
@@ -8,7 +7,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -30,18 +28,22 @@ public class ReviewsController {
         }
         return optionalReview;
     }
-    @PostMapping("")
+//    @PostMapping("")
 //    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')");
-    public void createReview(@RequestBody Review newReview) {
-        if (newReview.getTitle() == null || newReview.getTitle().length() < 1) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Title cannot be blank!");
-        }
-        if (newReview.getContent() == null || newReview.getContent().length() < 1) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Content cannot be blank!");
-        }
-        User author = usersRepository.findByScreenName(screenName);
-        newReview.setAuthor(author);
+//    public void createReview(@RequestBody Review newReview) {
+//        if (newReview.getTitle() == null || newReview.getTitle().length() < 1) {
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Title cannot be blank!");
+//        }
+//        if (newReview.getContent() == null || newReview.getContent().length() < 1) {
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Content cannot be blank!");
+//        }
+//
+//        User author = usersRepository.findByUserName(userName);
+//        User author = usersRepository.findByScreenName(screenName);
+//        newReview.setAuthor(author);
+//        reviewsRepository.save(newReview);
+//    }
 
-        reviewsRepository.save(newReview);
-    }
 }
+
+
