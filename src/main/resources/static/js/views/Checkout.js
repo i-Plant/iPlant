@@ -41,13 +41,83 @@ export default function Checkout(props) {
   </div>
 
 </div>
+
+<form id="payment-form">
+                <div id="payment-element">
+                    <!-- Elements will create form elements here -->
+                </div>
+                <button id="submit">Pay now</button>
+                <div id="error-message">
+                    <!-- Display error message to your customers here -->
+                </div>
+            </form> 
+
+
     </main>
+    
     `
 }
-export function CheckoutEvent(){
+export async function CheckoutEvent() {
+    let stripe = Stripe(STRIPE_KEY, {
+        apiVersion: '2020-08-27',
+    });
+    // const publishableKey = "YOUR STRIPE KEY";
 
+    // On page load, we create a PaymentIntent on the server so that we have its clientSecret to
+    // initialize the instance of Elements below. The PaymentIntent settings configure which payment
+    // method types to display in the PaymentElement.
+    const {
+        error: backendError,
+        clientSecret
+    } = await fetch('/api/stripe/create-payment-intent').then(r => r.json());
+    if (backendError) {
+        console.log(backendError.message);
+    }
+    console.log(`Client secret returned.`);
 
-    console.log("test");
+    // Initialize Stripe Elements with the PaymentIntent's clientSecret,
+    // then mount the payment element.
+    // const clientSecret = "TEST";
+    const elements = stripe.elements({clientSecret});
+    const paymentElement = elements.create('payment');
+    paymentElement.mount('#payment-element');
+
+    // When the form is submitted...
+    const form = document.getElementById('payment-form');
+    let submitted = false;
+    form.addEventListener('submit', async (e) => {
+        console.log("submitting payment!");
+
+        e.preventDefault();
+
+        // Disable double submission of the form
+        if (submitted) {
+            return;
+        }
+        submitted = true;
+        form.querySelector('button').disabled = true;
+
+        const nameInput = document.querySelector('#name');
+
+        // Confirm the card payment given the clientSecret
+        // from the payment intent that was just created on
+        // the server.
+        const {error: stripeError} = await stripe.confirmPayment({
+            elements,
+            confirmParams: {
+                return_url: `${window.location.origin}/paymentOk`,
+            }
+        });
+
+        if (stripeError) {
+            console.log(stripeError.message);
+
+            // reenable the form.
+            submitted = false;
+            form.querySelector('button').disabled = false;
+            return;
+        }
+    });
 }
 
 // <div className="col">

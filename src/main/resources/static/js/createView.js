@@ -8,6 +8,9 @@ import {getHeaders} from "./auth.js";
  * @param URI
  */
 export default function createView(URI) {
+    if(URI.includes("paymentOk")){
+        URI = "/paymentOk";
+    }
 
     let route = router(URI);
 

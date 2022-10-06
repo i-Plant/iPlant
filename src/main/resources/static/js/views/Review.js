@@ -1,8 +1,9 @@
 export default function Review(props) {
     return `
     <header>
-        <h1>Message Board</h1>
+        <h1>Reviews</h1>
     </header>
+    
 `
 }
 export function MessageBoardEvent(){

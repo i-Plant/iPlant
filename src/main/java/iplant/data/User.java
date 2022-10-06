@@ -1,5 +1,6 @@
 package iplant.data;
 
+import com.amazonaws.services.quicksight.model.UserRole;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
@@ -54,7 +55,6 @@ public class User {
 
     @Column()
     private LocalDate createdAt;
-<<<<<<< HEAD
     @NotNull
     @Enumerated(EnumType.STRING)
     @Column
@@ -62,11 +62,4 @@ public class User {
     @OneToMany(mappedBy = "author")
     @JsonIgnoreProperties("author")
     private Collection<Review>reviews;
-=======
-
-    @OneToMany(mappedBy = "author")
-    @JsonIgnoreProperties("author")
-    private Collection<Review> reviews;
-
->>>>>>> 749ca6f85681b1cc8badf446882ccd5753d1e312
 }
