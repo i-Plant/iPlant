@@ -1,8 +1,10 @@
 package iplant.data;
 
 import lombok.*;
+import org.hibernate.validator.constraints.Currency;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -10,6 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @ToString
 @Entity
+@Table(name="Products")
 public class Product {
 
     @Id
@@ -19,12 +22,21 @@ public class Product {
     @Column(nullable = false)
     private String name;
 
-    private String category;
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column
+    private Category category;
 
+    @Currency("${price}")
     private Double price;
 
-    private Boolean petFriendly;
+    @Column
+    private String details;
 
-    private Integer quantity;
+    @Column
+    private String imageURL;
+
+//    @Column
+//    private Integer quantity;
 
 }

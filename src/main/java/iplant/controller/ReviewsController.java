@@ -1,6 +1,10 @@
 package iplant.controller;
 
+<<<<<<< HEAD
 import com.stripe.model.Review;
+=======
+import iplant.data.Review;
+>>>>>>> 749ca6f85681b1cc8badf446882ccd5753d1e312
 import iplant.data.User;
 import iplant.repository.ReviewsRepository;
 import iplant.repository.UsersRepository;
@@ -39,9 +43,17 @@ public class ReviewsController {
         if (newReview.getContent() == null || newReview.getContent().length() < 1) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Content cannot be blank!");
         }
+<<<<<<< HEAD
         User author = usersRepository.findByUserName(userName);
+=======
+        User author = usersRepository.findByScreenName(screenName);
+>>>>>>> 749ca6f85681b1cc8badf446882ccd5753d1e312
         newReview.setAuthor(author);
 
         reviewsRepository.save(newReview);
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 749ca6f85681b1cc8badf446882ccd5753d1e312
