@@ -27,13 +27,13 @@ public class OrderController {
 
         return orderRepository.findAll();
     }
-    @GetMapping(path = "/{id}")
-    public Optional<Order> fetchOrderByBuyer(@PathVariable User Buyer) {
-        Optional<Order> optionalOrder;
-        if(optionalOrder.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Order Buyer " + Buyer + " not found");
-        }
-        return optionalOrder;
-    }
+//    @GetMapping(path = "/{id}")
+//    public Optional<Order> fetchOrderByBuyer(@PathVariable User Buyer) {
+//        Optional<Order> optionalOrder;
+//        if(optionalOrder.isEmpty()) {
+//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Order Buyer " + Buyer + " not found");
+//        }
+//        return optionalOrder;
+//    }
 
 }

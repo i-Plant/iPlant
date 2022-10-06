@@ -1,40 +1,28 @@
-import fetchData from "./fetchData.js";
-import createView from "./createView.js";
+//this calls the user info from our local, or our back end wherever its at
+export function setLoggedInUserInfo() {
+    const jwt = JSON.parse(localStorage.getItem("access_token"));
+    setUserInfo(jwt);
+}
 
-/**
- * Adds a login event to allow the user to initially obtain a new OAuth2.0 token
- * On a successful response, sets the tokens into storage and redirects to the root
- */
-export default function addLoginEvent() {
-    console.log("entered addLoginEvent")
-    document.querySelector("#buttonDiv").addEventListener("click", function () {
-        let obj = {
-            username: document.querySelector("#username").value,
-            password: document.querySelector("#password").value,
-            grant_type: 'password'
-        }
-        console.log("go to login event")
-        // TODO: these are the only request params /oauth/token accepts in Spring Security
-        // TODO: need to possibly implement a random bit handshake w/ SHA256 on the password before sending
-        //      -> Alternatively, encrypt the entire request body
-        let request = {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': 'Basic ' + btoa('rest-blog-client:secret')
-            },
-            body: `grant_type=${obj.grant_type}&username=${obj.username}&password=${obj.password}&client_id=rest-blog-client`
-        };
+export function checkForLoginTokens(url) {
+    // console.log(url);
+    // access_token is given back from spring after #
+    let parts = url.split("#");
+    if(parts.length < 2)
+        return false;
 
-        fetchData(
-            {
-                route: `/oauth/token`
-            },
-            request).then((data) => {
-            setTokens(data);
-            createView("/");
-        });
-    });
+    parts = parts[1].split("&");
+    let tokens = [];
+    for (let i = 0; i < parts.length; i++) {
+        const pair = parts[i].split("=");
+        if(pair.length > 1 && (pair[0] === "access_token" || pair[0] === "refresh_token"))
+            tokens[pair[0]] = pair[1];
+    }
+    if(!tokens['access_token'])
+        return false;
+
+    setTokens(tokens);
+    return true;
 }
 
 /**
@@ -55,45 +43,62 @@ export function getHeaders() {
  * Attempts to set the access and refresh tokens needs to authenticate and authorize the client and user
  * @param responseData
  */
-export function setTokens(responseData) {
-    if (responseData) {
-        localStorage.setItem("access_token", responseData);
-        console.log("Access token set");
+export function setTokens(jwt) {
+    if(jwt) {
+        localStorage.setItem("access_token", jwt);
+        setUserInfo(jwt);
+        console.log("Access token and user info set");
     }
 }
 
 export function isLoggedIn() {
-    return !!localStorage.getItem('access_token');
+    if(localStorage.getItem('access_token')) {
+        return true;
+    } else {
+        return false;
+    }
 
 }
 
 //  returns an object with user_name and authority from the access_token
 export function getUser() {
-    const accessToken = localStorage.getItem("access_token");
-    if (!accessToken) {
-        return false;
-    }
-    const parts = accessToken.split('.');
-    const payload = parts[1];
-    const decodedPayload = atob(payload);
-    const payloadObject = JSON.parse(decodedPayload);
-    const user = {
-        userName: payloadObject.user_name,
-        role: payloadObject.authorities[0]
-    }
-    return user;
+    const userString = localStorage.getItem("user");
+    console.log(userString);
+    if(userString)
+        return JSON.parse(userString);
+    return null;
 }
 
-export function getUserRole() {
-    const accessToken = localStorage.getItem("access_token");
-    if (!accessToken) {
+// this only gets called when the user logs in (receives the JWT)
+export async function setUserInfo(jwt) {
+    if(!jwt) {
         return false;
     }
-    const parts = accessToken.split('.');
+    const parts = jwt.split('.');
     const payload = parts[1];
     const decodedPayload = atob(payload);
     const payloadObject = JSON.parse(decodedPayload);
-    return payloadObject.authorities[0];
+    // console.log(payloadObject);
+
+    const request = {
+        method: 'GET',
+        headers: getHeaders()
+    };
+    return fetch(`${BACKEND_HOST_URL}/api/users/me`, request)
+        .then((response) => {
+            return response.json();
+        }).then((data) => {
+            const user = {
+                userName: payloadObject.name,
+                role: data.role,
+                profilePic: payloadObject.picture
+            };
+            window.localStorage.setItem("user", JSON.stringify(user));
+            // console.log(user);
+            return user;
+        }).catch(error => {
+            console.log("FETCH ERROR: " + error);
+        });
 }
 
 export async function removeStaleTokens() {
@@ -105,7 +110,7 @@ export async function removeStaleTokens() {
         method: 'GET',
         headers: getHeaders()
     };
-    await fetch(`/api/users`, request)
+    await fetch(`/api/users/me`, request)
         .then((response) => {
             // if fetch error then you might be using stale tokens
             if (response.status === 401) {

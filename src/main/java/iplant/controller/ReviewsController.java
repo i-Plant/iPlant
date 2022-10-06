@@ -30,18 +30,18 @@ public class ReviewsController {
         }
         return optionalReview;
     }
-    @PostMapping("")
+//       @PostMapping("")
 //    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')");
-    public void createReview(@RequestBody Review newReview) {
-        if (newReview.getTitle() == null || newReview.getTitle().length() < 1) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Title cannot be blank!");
-        }
-        if (newReview.getContent() == null || newReview.getContent().length() < 1) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Content cannot be blank!");
-        }
-        User author = usersRepository.findByScreenName(screenName);
-        newReview.setAuthor(author);
-
-        reviewsRepository.save(newReview);
-    }
+//    public void createReview(@RequestBody Review newReview) {
+//        if (newReview.getTitle() == null || newReview.getTitle().length() < 1) {
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Title cannot be blank!");
+//        }
+//        if (newReview.getContent() == null || newReview.getContent().length() < 1) {
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Content cannot be blank!");
+//        }
+//        User author = usersRepository.findByScreenName(screenName);
+//        newReview.setAuthor(author);
+//
+//        reviewsRepository.save(newReview);
+//    }
 }

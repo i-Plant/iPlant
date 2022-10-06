@@ -2,7 +2,7 @@ import {setTokens} from '../auth.js'
 import createView from "../createView.js";
 import {isLoggedIn} from "../auth.js";
 import {getUser} from "../auth.js";
-import {getUserRole} from "../auth.js";
+
 
 export default function Login(props) {
     return `
