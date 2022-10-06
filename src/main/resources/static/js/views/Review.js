@@ -1,4 +1,4 @@
-export default function MessageBoard(props) {
+export default function Review(props) {
     return `
     <header>
         <h1>Message Board</h1>

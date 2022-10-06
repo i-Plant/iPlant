@@ -48,8 +48,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column
     private UserRole role;
-//    @OneToMany(mappedBy = "author")
-//    @JsonIgnoreProperties("author")
-//    private Collection<Post> posts;
-
+    @OneToMany(mappedBy = "author")
+    @JsonIgnoreProperties("author")
+    private Collection<Review>reviews;
 }

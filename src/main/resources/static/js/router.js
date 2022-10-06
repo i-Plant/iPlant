@@ -9,7 +9,7 @@ import Register from "./views/Register.js"
 import {RegisterEvent} from "./views/Register.js";
 
 
-import MessageBoard, {MessageBoardEvent}  from "./views/MessageBoard.js";
+import Review, {MessageBoardEvent}  from "./views/Review.js";
 import Products, {ProductsEvent} from "./views/Products.js";
 import Profile, {ProfileEvent} from "./views/Profile.js";
 import Checkout, {CheckoutEvent} from "./views/Checkout.js";
@@ -52,7 +52,7 @@ export default function router(URI) {
             viewEvent: RegisterEvent
         },
         '/messageboard': {
-            returnView: MessageBoard,
+            returnView: Review,
             state: {
                 // messages: '/api/messages'
             },
