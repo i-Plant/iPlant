@@ -36,23 +36,23 @@ public class User {
     @Column(nullable = false, length = 100)
     private String email;
 
-    @Column()
+    @Column(nullable = false)
     private String street;
 
-    @Column()
+    @Column(nullable = false)
     private String city;
 
-    @Column(length = 20)
+    @Column(length = 20, nullable = false)
     private String state;
 
-    @Column(length = 5)
+    @Column(length = 5, nullable = false)
     private Integer zipCode;
 
     @ToString.Exclude
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, length = 14)
     private String password;
 
-    @Column()
+    @Column(nullable = false)
     private LocalDate createdAt;
 
     @OneToMany(mappedBy = "author")

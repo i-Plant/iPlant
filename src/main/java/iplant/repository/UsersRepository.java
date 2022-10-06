@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 
 public interface UsersRepository extends JpaRepository<User, Long> {
-User findByScreenName(User screenName);
+//User findByScreenName(String screenName);
 
 }
