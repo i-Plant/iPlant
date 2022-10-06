@@ -19,32 +19,12 @@ function loadViewOnPageRequest() {
  * Add a listener that will change the view if a nav link is clicked.
  */
 function addListenerToNavLinks() {
-    function addListenerToNavLinks() {
-        document.addEventListener('click', e => {
-            // we want checkboxes and labels to keep their default behavior when clicked
-            // and not prevent the default
-            // console.log(e.target);
-
-            if (e.target.type && e.target.type === "checkbox") {
-                return;
-            }
-
-            // STRIPE
-            if (e.target.type && e.target.type === "submit") {
-                return;
-            }
-
-            if (e.target.matches('label')) {
-                return;
-            }
-            e.preventDefault();
-            if (e.target.dataset['link'] !== undefined) {
-                const URI = e.target.href.substring(location.origin.length);
-                createView(URI);
-            }
-        });
-    }
+    document.addEventListener('click', e => {
+        e.preventDefault();
+        if (e.target.dataset['link'] !== undefined) {
+            const URI = e.target.href.substring(location.origin.length);
+            createView(URI);
+        }
+    });
 }
-
-
 
