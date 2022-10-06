@@ -5,7 +5,7 @@ import Loading from "./views/Loading.js";
 
 import Login, {LoginEvent} from "./views/Login.js";
 //import LoginEvent from "./auth.js";
-import Register from "./views/Register.js"
+import Register from "./views/Register.js";
 import {RegisterEvent} from "./views/Register.js";
 
 
@@ -13,7 +13,7 @@ import MessageBoard, {MessageBoardEvent}  from "./views/MessageBoard.js";
 import Products, {ProductsEvent} from "./views/Products.js";
 import Profile, {ProfileEvent} from "./views/Profile.js";
 import Checkout, {CheckoutEvent} from "./views/Checkout.js";
-import PlantId, {PlantIdEvent} from "./views/PlantId.js"
+import PlantId, {PlantIdEvent} from "./views/PlantId.js";
 import Logout, {LogoutEvent} from "./views/Logout.js";
 
 
