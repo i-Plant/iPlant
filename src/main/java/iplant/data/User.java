@@ -22,7 +22,7 @@ public class User {
     private long id;
 
     @NotNull
-    @Column(nullable = false, unique = true, length = 32)
+    @Column(nullable = false, unique = true, length = 40)
     private String screenName;
 
     @Column(nullable = false, length = 100)
@@ -42,7 +42,7 @@ public class User {
     @Column()
     private String city;
 
-    @Column()
+    @Column(length = 20)
     private String state;
 
     @Column(length = 5)
@@ -57,6 +57,6 @@ public class User {
 
     @OneToMany(mappedBy = "author")
     @JsonIgnoreProperties("author")
-    private Collection<Message> messages;
+    private Collection<Review> reviews;
 
 }

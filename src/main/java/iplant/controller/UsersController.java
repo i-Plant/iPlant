@@ -2,7 +2,7 @@ package iplant.controller;
 
 import iplant.data.User;
 import iplant.misc.FieldHelper;
-import iplant.repository.UserRepository;
+import iplant.repository.UsersRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
@@ -20,7 +20,7 @@ import java.util.Optional;
 @RequestMapping(value = "/api/users", produces = "application/json")
 public class UsersController {
 
-    private UserRepository usersRepository;
+    private UsersRepository usersRepository;
 //    private PasswordEncoder passwordEncoder;
 
     @GetMapping("")
