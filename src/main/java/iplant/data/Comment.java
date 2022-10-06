@@ -1,5 +1,6 @@
 package iplant.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -20,9 +21,11 @@ public class Comment {
     private Long id;
 
     @ManyToOne
+    @JsonIgnoreProperties({"comments"})
     private Message message;
 
     @ManyToOne
+    @JsonIgnoreProperties({"messages", "password", "firstName", "lastName", "street", "city", "state", "zip"})
     private User commentor;
 
     @NotNull

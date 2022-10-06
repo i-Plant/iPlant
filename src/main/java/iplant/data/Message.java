@@ -20,7 +20,7 @@ public class Message {
     private Long id;
 
     @ManyToOne
-    @JsonIgnoreProperties({"messages", "password", "firstName", "lastName", "street", "city", "state", "zip", "role"})
+    @JsonIgnoreProperties({"messages", "password", "firstName", "lastName", "street", "city", "state", "zip"})
     private User author;
 
     @Column(nullable = false)
@@ -36,5 +36,6 @@ public class Message {
     private LocalDate createdAt;
 
     @OneToMany( mappedBy = "message")
+    @JsonIgnoreProperties({"message"})
     private Collection<Comment> comments;
 }
