@@ -55,11 +55,13 @@ public class UsersController {
     }
 
     @GetMapping("/me")
-    private Optional<User> fetchMe(User user) {
-        String userName = user.getScreenName();
+    private User fetchMe(@RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authHeader) {
+        return authBuddy.getUserFromAuthHeaderJWT(authHeader);
+
+//        String userName = user.getScreenName();
 //        User user1 =  usersRepository.findByUsername(userName);
 //        return Optional.of(user1);
-        return null;
+//        return null;
     }
 
     private Optional<User> findUserById(long id) {
