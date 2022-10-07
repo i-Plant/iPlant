@@ -1,5 +1,6 @@
 package iplant.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,6 +18,7 @@ public class OrderProduct {
     private Long id;
 
     @ManyToOne
+    @JsonIgnoreProperties({"abcd"})
     private Order order;
 
     @ManyToOne

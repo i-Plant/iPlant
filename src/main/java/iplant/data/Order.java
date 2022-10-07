@@ -21,7 +21,7 @@ public class Order {
     private Long id;
 
     @ManyToOne
-    @JsonIgnoreProperties({"messages", "password", "createdAt", "screenName"})
+    @JsonIgnoreProperties({"reviews", "password", "createdAt", "email", "firstName", "lastName", "street", "city", "state", "zipCode"})
     private User buyer;
 
     @Column(nullable = false)
