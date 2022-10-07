@@ -18,15 +18,11 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 100)
-    private String title;
-
     @Column(nullable = false, length = 1024)
     private String content;
 
     @ManyToOne
-
-    @JsonIgnoreProperties({"messages", "password", "firstName", "lastName", "street", "city", "state", "zip"})
+    @JsonIgnoreProperties({"reviews", "password", "firstName", "lastName", "street", "city", "state", "zip"})
     private User author;
 
     @Column(nullable = false)
