@@ -2,12 +2,17 @@
 package iplant.controller;
 
 import iplant.data.Order;
+import iplant.data.OrderProduct;
+import iplant.data.User;
 import iplant.repository.OrdersRepository;
+import iplant.repository.ProductsRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +22,7 @@ import java.util.Optional;
 public class OrdersController {
 
     private OrdersRepository orderRepository;
+    private ProductsRepository productsRepository;
 
     @GetMapping(path = "")
     public List<Order> getOrders() {
@@ -25,21 +31,37 @@ public class OrdersController {
     }
     @GetMapping(path = "/{id}")
     public Optional<Order> fetchOrdersByBuyer(@PathVariable Order buyer) {
-        Long userId = buyer.getId();
+        Long userId = buyer.getBuyer().getId();
         Optional<Order> optionalOrder = Optional.ofNullable(orderRepository.findByBuyer(userId));
         if(optionalOrder.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Order Buyer " + buyer.getBuyer().getScreenName() + " not found");
         }
         return optionalOrder;
     }
+    @PostMapping("/create")
     public void createOrder(@RequestBody Order newOrder) {
-        //orderId auto creates in db//
+//        set UserId as Buyer for the newOrder. If not a user set Buyer to null:
+        newOrder.setBuyer(null);
+//                if(user.isLoggedIn) {
+//                    newOrder.setBuyer(user.id);
+//                }
 
-        //set UserId as Buyer for the newOrder. If not a user set Buyer to null:
+//        create and set DateTimeStamp as createdAt to newOrder:
+        newOrder.setCreatedAt(LocalDate.now());
 
-        //create and set DateTimeStamp as createdAt to newOrder:
+//        add in item selected to the list; then save it to the newOrder:
 
-        //check that the products list has items in it, then save it to the newOrder:
+        orderRepository.save(newOrder);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteOrder(@PathVariable long id) {
 
     }
+
+    @PutMapping("/{id}")
+    public void updateOrder(@RequestBody User updatedOrder, @PathVariable long id) {
+
+    }
+
 }
