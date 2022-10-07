@@ -30,10 +30,10 @@ public class Product {
     @Currency("${price}")
     private Double price;
 
-    @Column
+    @Column(length = 1026)
     private String details;
 
-    @Column
+    @Column(unique = true)
     private String imageURL;
 
 }

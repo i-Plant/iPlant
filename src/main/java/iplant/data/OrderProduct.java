@@ -22,6 +22,6 @@ public class OrderProduct {
     @ManyToOne
     private Product item;
 
-    @Column
+    @Column(nullable = false)
     private Integer quantity;
 }

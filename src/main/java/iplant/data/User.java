@@ -1,6 +1,5 @@
 package iplant.data;
 
-import com.amazonaws.services.quicksight.model.UserRole;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
@@ -55,10 +54,7 @@ public class User {
 
     @Column(nullable = false)
     private LocalDate createdAt;
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    @Column
-    private UserRole role;
+
     @OneToMany(mappedBy = "author")
     @JsonIgnoreProperties("author")
     private Collection<Review>reviews;
