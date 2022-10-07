@@ -63,7 +63,7 @@ export function isLoggedIn() {
 //  returns an object with user_name and authority from the access_token
 export function getUser() {
     const userString = localStorage.getItem("user");
-    console.log(userString);
+    // console.log(userString);
     if(userString)
         return JSON.parse(userString);
     return null;
