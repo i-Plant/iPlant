@@ -5,7 +5,7 @@ export default function PaymentOk(props) {
         </header>
         <main>
             <div>
-                <p>Come Back</p>  
+                <p> Thanks!!! Come Back</p>  
             </div>
         </main>
     `;
