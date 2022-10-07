@@ -22,11 +22,12 @@ public class Order {
 
     @ManyToOne
     @JsonIgnoreProperties({"messages", "password", "createdAt", "screenName"})
-    private User Buyer;
+    private User buyer;
 
     @Column(nullable = false)
     private LocalDate createdAt;
 
     @OneToMany(mappedBy = "order")
+    @Column(nullable = false)
     private Collection<OrderProduct> products;
 }

@@ -36,7 +36,4 @@ public class Product {
     @Column
     private String imageURL;
 
-//    @Column
-//    private Integer quantity;
-
 }

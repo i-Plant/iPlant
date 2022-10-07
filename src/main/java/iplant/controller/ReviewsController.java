@@ -1,9 +1,14 @@
 package iplant.controller;
+
+
+import iplant.data.Order;
 import iplant.data.Review;
 import iplant.data.User;
+import iplant.misc.FieldHelper;
 import iplant.repository.ReviewsRepository;
 import iplant.repository.UsersRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -28,22 +33,57 @@ public class ReviewsController {
         }
         return optionalReview;
     }
-//    @PostMapping("")
-//    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')");
-//    public void createReview(@RequestBody Review newReview) {
-//        if (newReview.getTitle() == null || newReview.getTitle().length() < 1) {
-//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Title cannot be blank!");
-//        }
-//        if (newReview.getContent() == null || newReview.getContent().length() < 1) {
-//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Content cannot be blank!");
-//        }
-//
-//        User author = usersRepository.findByUserName(userName);
-//        User author = usersRepository.findByScreenName(screenName);
+
+
+
+
+
+
+    @PostMapping("create")
+    public void createReview(@RequestBody Review newReview) {
+        if (newReview.getContent() == null || newReview.getContent().length() < 1) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Content cannot be blank!");
+        }
+//        Long id = usersRepository
+//        Optional<User> author = usersRepository.findById(id);
 //        newReview.setAuthor(author);
-//        reviewsRepository.save(newReview);
-//    }
+
+        reviewsRepository.save(newReview);
+    }
+    @DeleteMapping("/{id}")
+    public void deleteReviewById(@PathVariable long id) {
+        reviewsRepository.deleteById(id);
+        // what to do if we find it
+        Optional<Review> optionalReview = reviewsRepository.findById(id);
+        if (optionalReview.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.EXPECTATION_FAILED,"Review was not deleted");
+        }
+        // grab the original post from the optional and check the logged in user
+//        Review originalReview = optionalReview.get();
+
+        // admin can delete anyone's post. author of the post can delete only their posts
+//        if(loggedInUser.getRole() != UserRole.ADMIN && originalPost.getAuthor().getId() != loggedInUser.getId()) {
+//            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Not your post!");
+//        }
+
+
+    }
+    @PutMapping("/{id}")
+    public void updateReview(@RequestBody Review updatedReview, @PathVariable long id) {
+        Optional<Review> optionalReview = reviewsRepository.findById(id);
+        if(optionalReview.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Post "+ id + " not found");
+        }
+
+//        if(loggedInUser.getRole() != UserRole.ADMIN && originalPost.get().getAuthor().getId() != loggedInUser.getId()) {
+//            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Not your post!");
+//        }
+        Review originalReview = optionalReview.get();
+        updatedReview.setId(id);
+
+        BeanUtils.copyProperties(updatedReview, originalReview, FieldHelper.getNullPropertyNames(updatedReview));
+
+        reviewsRepository.save(originalReview);
+    }
 
 }
-
-
