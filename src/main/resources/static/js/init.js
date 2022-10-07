@@ -26,6 +26,18 @@ function loadViewOnPageRequest() {
  */
 function addListenerToNavLinks() {
     document.addEventListener('click', e => {
+        if(e.target.type && e.target.type === "checkbox") {
+            return;
+        }
+
+        // STRIPE
+        if(e.target.type && e.target.type === "submit") {
+            return;
+        }
+
+        if(e.target.matches('label')) {
+            return;
+        }
         e.preventDefault();
         if (e.target.dataset['link'] !== undefined) {
             const URI = e.target.href.substring(location.origin.length);

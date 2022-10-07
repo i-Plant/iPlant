@@ -6,10 +6,10 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDate;
 
+@AllArgsConstructor
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString
 @Entity
 @Table(name="reviews")
@@ -25,10 +25,12 @@ public class Review {
     private String content;
 
     @ManyToOne
+
     @JsonIgnoreProperties({"messages", "password", "firstName", "lastName", "street", "city", "state", "zip"})
     private User author;
 
     @Column(nullable = false)
     private LocalDate createdAt;
+
 
 }
