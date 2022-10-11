@@ -90,6 +90,7 @@ p {
     width: 100%; /* full width */
     background-color: white;
     height: 60px;
+    z-index: 50;
 }
 
 .nav-bar .container {
