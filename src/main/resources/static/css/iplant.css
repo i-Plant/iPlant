@@ -41,8 +41,8 @@ ul, li {
 
 body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    background-color: #eee;
-    color: darkseagreen;
+    background-color: white;
+    color: #19f519;
     margin-top: 60px; /* height of nav-bar */
 }
 
@@ -90,6 +90,7 @@ p {
     width: 100%; /* full width */
     background-color: white;
     height: 60px;
+    z-index: 50;
 }
 
 .nav-bar .container {
@@ -118,7 +119,7 @@ p {
 #drop-down-cbox + label span {
     position: absolute;
     display: block;
-    background-color: #666;
+    background-color: #666666;
     width: 34px;
     height: 4px;
     border-radius: 2px;
