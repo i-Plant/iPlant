@@ -42,6 +42,7 @@ export function PlantIdEvent() {
         // let reader = new FileReader();
         // reader.onload = uploadTheFile;
         // reader.readAsDataURL(file);
+        console.log(file)
 
         let formData = new FormData();
 
@@ -61,7 +62,8 @@ export function PlantIdEvent() {
                     
                     <h1>Name</h1>
                     <h3>${data.bestMatch}</h3>
-                    <h1>${data.query.images}</>
+                    <h1>${data.query.images}</h1>
+                    <img src="${data.query.images}" alt="plant-img">
                     
                     
                     
