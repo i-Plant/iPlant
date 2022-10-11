@@ -1,4 +1,3 @@
-
 /**
  * Given an object containing all the required data for a given page, fetch all the needed data and return it as properties to pass to a view.
  * @param state

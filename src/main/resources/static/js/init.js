@@ -1,7 +1,13 @@
 import createView from './createView.js';
+import {checkForLoginTokens, setLoggedInUserInfo} from "./auth.js";
 
 
 export default function init() {
+    if(checkForLoginTokens(window.location.href)) {
+        setLoggedInUserInfo();
+        createView("/");
+        return;
+    }
     loadViewOnPageRequest();
     addListenerToNavLinks();
 }
@@ -26,6 +32,11 @@ function addListenerToNavLinks() {
 
         // STRIPE
         if(e.target.type && e.target.type === "submit") {
+            return;
+        }
+
+        // console.log(e)
+        if(e.target.type && e.target.type === "file") {
             return;
         }
 

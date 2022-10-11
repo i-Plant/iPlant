@@ -1,10 +1,13 @@
 package iplant.controller;
 
 import iplant.data.User;
+import iplant.data.UserAuthInfoDTO;
 import iplant.misc.FieldHelper;
 import iplant.repository.UsersRepository;
+import iplant.services.AuthBuddy;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -19,6 +22,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping(value = "/api/users", produces = "application/json")
 public class UsersController {
+    private AuthBuddy authBuddy;
 
     private UsersRepository usersRepository;
 //    private PasswordEncoder passwordEncoder;
@@ -36,13 +40,28 @@ public class UsersController {
         }
         return user;
     }
+    @GetMapping("/authinfo")
+    private UserAuthInfoDTO getUserAuthInfo(@RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authHeader) {
+        User loggedInUser = authBuddy.getUserFromAuthHeaderJWT(authHeader);
+
+        // use email to lookup the user's info
+        UserAuthInfoDTO userDTO = new UserAuthInfoDTO();
+        userDTO.setEmail(loggedInUser.getEmail());
+        userDTO.setRole("");
+        userDTO.setUserName(loggedInUser.getScreenName());
+        userDTO.setProfilePic("");
+
+        return userDTO;
+    }
 
     @GetMapping("/me")
-    private Optional<User> fetchMe(User user) {
-        String userName = user.getScreenName();
+    private User fetchMe(@RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authHeader) {
+        return authBuddy.getUserFromAuthHeaderJWT(authHeader);
+
+//        String userName = user.getScreenName();
 //        User user1 =  usersRepository.findByUsername(userName);
 //        return Optional.of(user1);
-        return null;
+//        return null;
     }
 
     private Optional<User> findUserById(long id) {

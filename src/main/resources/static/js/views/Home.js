@@ -1,4 +1,9 @@
+import {getUser} from "../auth.js";
+
 export default function Home(props) {
+    const loggedInUser = getUser();
+    console.log(loggedInUser);
+
     return `
         <header>
             <h1>Home Page</h1>

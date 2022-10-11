@@ -27,13 +27,13 @@ public class Product {
     @Column
     private Category category;
 
-    @Currency("${price}")
+    @Column(length = 7)
     private Double price;
 
-    @Column
+    @Column(length = 1026)
     private String details;
 
-    @Column
+    @Column(unique = true)
     private String imageURL;
 
 }
