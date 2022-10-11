@@ -10,7 +10,7 @@ export default function Products(props) {
     for (let i = 0; i <products.length; i++){
         html += `<main>
                     <div class="card" class="d-flex flex-wrap align-content-center" style="width:18rem">
-                      <img class="card-img-top" src="${products[i].imageurl}" alt="plant-image" class="images">
+                      <img class="card-img-top" src="${products[i].imageURL}" alt="plant-image" class="images">
                       <div class="card-body">
                         <h2>${products[i].name}</h2>
                         <p class="card-text">${products[i].details}</p>
