@@ -57,12 +57,30 @@ export function PlantIdEvent() {
                     alert(data.errors)
                 } else {
                     console.log(data);
+                    document.getElementById('results').innerHTML = `
+                    
+                    <h1>Name</h1>
+                    <h3>${data.bestMatch}</h3>
+                    <h1>${data.query.images}</>
+                    
+                    
+                    
+                    `
+
                 }
             });
 
     });
 }
 
+// document.addEventListener('DOMContentLoaded', () => {
+//
+//     const form = document.getElementById('myform');
+//     form.addEventListener('submit', (evt) => {
+//         evt.preventDefault();
+//         PlantIdEvent();
+//     });
+// })
 //old code
 //const  API_KEY = 'api-key=2b10JbtYGuH8jrVGLFbP9vMUe'
 //     const uploadImg = document.querySelector(".upload")
