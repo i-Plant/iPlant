@@ -14,13 +14,15 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import static iplant.data.Status.Active;
+
 @AllArgsConstructor
 @RestController
 @RequestMapping(value = "/api/order", produces = "application/json")
 public class OrdersController {
 
     private OrdersRepository orderRepository;
-    private ProductsRepository productsRepository;
+//    private ProductsRepository productsRepository;
 
     @GetMapping(path = "")
     public List<Order> getOrders() {
@@ -46,7 +48,7 @@ public class OrdersController {
 
 //        create and set DateTimeStamp as createdAt to newOrder:
         newOrder.setCreatedAt(LocalDate.now());
-        newOrder.setStatus("Active");
+        newOrder.setStatus(Active);
 
 //        add in item selected to the list; then save it to the newOrder:
 

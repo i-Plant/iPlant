@@ -30,7 +30,7 @@ public class Order {
 
     @NotNull
 //    @Enumerated(EnumType.STRING)
-    private String status;
+    private Status status;
 
     @OneToMany(mappedBy = "order")
     @Column(nullable = false)
