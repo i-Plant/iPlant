@@ -2,7 +2,7 @@ import createView from "../createView.js";
 
 export default function addToCart() {
     return `
-<body>
+<body class="body" >
  <div class="Cart-Container"></div>
 </body>
 <!--Card header-->
@@ -13,16 +13,16 @@ export default function addToCart() {
  <!--cart items-->
  <div class="Cart-Items">
  <div class="image-box">
- <img src="/assets/1.jpg" style="height:120px"/>
+ <img src="/assets/1.jpg" style="height:120px" alt="plant in a pot"/>
  </div>
  <div class="about">
  <h1 class="title">Flower Pot</h1>
  <h3 class="subtitle">Gallon size</h3>
- <img src="/assets/1.jpg" style="height:30px"/>
+ <img src="/assets/1.jpg" style="height:30px" alt="plant in a pot"/>
  </div>
  <div class="counter"></div>
  <div class="prices"></div>
- </div>
+ </div> 
  
 <!--Product counter-->
  <div class="counter">
@@ -34,12 +34,12 @@ export default function addToCart() {
 }
 
 let addItemId = 0
-export function addToCartEvent(Item) {
-    clickCart();
+export function addToCartEvent() {
+    //clickCart();
 
 }
 
-function clickCart(item) {
+function clickCart() {
     addItemId += 1;
     const cartBtn = document.getElementById("cart");
     cartBtn.addEventListener("click", function(){

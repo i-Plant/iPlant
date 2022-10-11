@@ -43,7 +43,10 @@ function addListenerToNavLinks() {
         if(e.target.matches('label')) {
             return;
         }
-        console.log(e);
+        if(event.target.dataset['passthru'] !== undefined) {
+            event.target = event.target.parentElement;
+            return;
+        }
         e.preventDefault();
         if (e.target.dataset['link'] !== undefined) {
             const URI = e.target.href.substring(location.origin.length);
