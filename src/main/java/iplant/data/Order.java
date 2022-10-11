@@ -29,7 +29,7 @@ public class Order {
     private LocalDate createdAt;
 
     @NotNull
-    @Enumerated(EnumType.STRING)
+//    @Enumerated(EnumType.STRING)
     private String status;
 
     @OneToMany(mappedBy = "order")
