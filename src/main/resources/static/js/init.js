@@ -35,6 +35,11 @@ function addListenerToNavLinks() {
             return;
         }
 
+        // console.log(e)
+        if(e.target.type && e.target.type === "file") {
+            return;
+        }
+
         if(e.target.matches('label')) {
             return;
         }

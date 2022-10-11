@@ -91,11 +91,10 @@ export default function router(URI) {
             title: 'Profile',
             viewEvent: ProfileEvent
         },
+
         '/plantId': {
             returnView: PlantId,
-            state: {
-                // plants
-            },
+            state: {},
             uri: '/plantId',
             title: 'PlantId',
             viewEvent: PlantIdEvent
