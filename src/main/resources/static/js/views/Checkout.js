@@ -120,6 +120,7 @@ export async function CheckoutEvent() {
     });
 }
 
+
 // <div className="col">
 //     <label htmlFor="inputCity" className="form-label">City</label>
 //     <input type="text" className="form-control" id="inputCity">

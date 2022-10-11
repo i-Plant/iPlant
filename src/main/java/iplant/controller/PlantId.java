@@ -12,9 +12,9 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 
 public class PlantId {
-    private static final String IMAGE1 = "../data/image_1.jpeg";
+    private static final String IMAGE1 = "src/main/resources/static/assets/image_1.jpeg";
     private static final String ORGAN1 = "flower";
-    private static final String IMAGE2 = "../data/image_2.jpeg";
+    private static final String IMAGE2 = "src/main/resources/static/assets/image_2.jpeg";
     private static final String ORGAN2 = "leaf";
 
     private static final String API_URL = "https://my-api.plantnet.org/v2/identify/all?api-key=";
