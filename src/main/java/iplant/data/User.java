@@ -58,4 +58,8 @@ public class User {
     @OneToMany(mappedBy = "author")
     @JsonIgnoreProperties("author")
     private Collection<Review>reviews;
+
+    @OneToMany(mappedBy = "buyer")
+    @JsonIgnoreProperties("buyer")
+    private Collection<Order>orders;
 }

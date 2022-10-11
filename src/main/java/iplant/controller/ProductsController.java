@@ -44,7 +44,7 @@ public class ProductsController {
 
 
     @DeleteMapping("/{id}")
-    public void deletePostById(@PathVariable long id) {
+    public void deleteProductsById(@PathVariable long id) {
 
         Optional<Product> optionalProduct = productsRepository.findById(id);
         if(optionalProduct.isEmpty()) {
@@ -61,10 +61,10 @@ public class ProductsController {
 
 
     @PutMapping("/{id}")
-    public void updatePost(@RequestBody Product updatedProduct, @PathVariable long id) {
+    public void updateProducts(@RequestBody Product updatedProduct, @PathVariable long id) {
         Optional<Product> optionalProduct = productsRepository.findById(id);
         if(optionalProduct.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Post " + id + " not found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product " + id + " not found");
         }
         Product originalProduct = optionalProduct.get();
 
@@ -76,7 +76,7 @@ public class ProductsController {
         // copy any new field values FROM updatedPost TO originalPost
         BeanUtils.copyProperties(updatedProduct, originalProduct, FieldHelper.getNullPropertyNames(updatedProduct));
 
-        productsRepository.save(originalProduct);
+        productsRepository.save(updatedProduct);
     }
 
 }

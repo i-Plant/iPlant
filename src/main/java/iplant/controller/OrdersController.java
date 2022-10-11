@@ -27,10 +27,10 @@ public class OrdersController {
 
         return orderRepository.findAll();
     }
-    @GetMapping(path = "/fetchByBuyer{id}")
-    public Optional<Order> fetchOrdersByBuyer(@PathVariable Order buyer) {
+    @GetMapping(path = "/{id}")
+    public Optional<Order> fetchOrdersById(@PathVariable Order buyer) {
         Long userId = buyer.getId();
-        Optional<Order> optionalOrder = Optional.ofNullable(orderRepository.findByBuyer(userId));
+        Optional<Order> optionalOrder = orderRepository.findById(userId);
         if(optionalOrder.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Order Buyer " + buyer.getBuyer().getScreenName() + " not found");
         }
@@ -46,6 +46,7 @@ public class OrdersController {
 
 //        create and set DateTimeStamp as createdAt to newOrder:
         newOrder.setCreatedAt(LocalDate.now());
+        newOrder.setStatus("Active");
 
 //        add in item selected to the list; then save it to the newOrder:
 

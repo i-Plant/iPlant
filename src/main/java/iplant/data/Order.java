@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Collection;
 
@@ -21,11 +22,15 @@ public class Order {
     private Long id;
 
     @ManyToOne
-    @JsonIgnoreProperties({"reviews", "password", "createdAt", "email", "firstName", "lastName", "street", "city", "state", "zipCode"})
+    @JsonIgnoreProperties({"reviews", "orders", "password", "createdAt", "email", "firstName", "lastName", "street", "city", "state", "zipCode"})
     private User buyer;
 
     @Column(nullable = false)
     private LocalDate createdAt;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private String status;
 
     @OneToMany(mappedBy = "order")
     @Column(nullable = false)

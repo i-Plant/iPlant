@@ -22,11 +22,10 @@ public class Review {
     private String content;
 
     @ManyToOne
-    @JsonIgnoreProperties({"reviews", "password", "firstName", "lastName", "street", "city", "state", "zip"})
+    @JsonIgnoreProperties({"reviews", "orders", "password", "firstName", "lastName", "street", "city", "state", "zipCode"})
     private User author;
 
     @Column(nullable = false)
     private LocalDate createdAt;
-
 
 }

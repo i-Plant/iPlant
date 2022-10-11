@@ -27,7 +27,7 @@ public class Product {
     @Column
     private Category category;
 
-    @Currency("${price}")
+    @Column(length = 7)
     private Double price;
 
     @Column(length = 1026)
