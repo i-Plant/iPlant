@@ -9,14 +9,19 @@ export default function PlantId(props) {
     </header>
     <main>
             <div>
-                <form class="upload">
+                <form class="upload" id="myForm">
                     <div class="mb-3">
                         <label data-link for="flowerFile" class="form-label">Upload plant picture</label>
                         <input data-link  name="flower" class="form-control" type="file" id="flowerFile">
-                        <input type="submit" id="uploadStuff" class="btn btn-primary">
+                        <input type="submit" id="uploadStuff" class="btn btn-primary" value="Identify">
                     </div>
                 </form>
             </div>
+            <div id="results">
+           <label for="results"  class="form-label" id="allResults">Results</label>
+            <pre id="results" style="white-space: break-spaces;">
+            </pre>
+        </div>
         </main>
 
     `
@@ -53,9 +58,9 @@ export function PlantIdEvent() {
                 } else {
                     console.log(data);
                 }
-            })
-    })
+            });
 
+    });
 }
 
 //old code
