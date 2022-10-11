@@ -1,6 +1,6 @@
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Sathu, sans-serif;
-    /*font-style: ;*/
+    font-family: 'Helvetica Neue', Tahoma, Geneva, Sathu, sans-serif;
+    color: darkseagreen;
     background: rgb(170, 169, 169);
     /*margin: 0;*/
     /*padding: 0;*/
@@ -18,8 +18,41 @@ body {
 .unit {
     margin: 25px;
     width: 200px;
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
+.unit img {
+    border-radius: 200px;
+    width: 170px;
+    height: 170px;
+    margin-bottom: 10px;
+}
+
+.unit p {
+    text-align: left;
+    font-color: black;
+    margin: 2px;
+}
+
+.wrapper {
+    font-family: 'Helvetica Neue', Tahoma, Geneva, Sathu, sans-serif;
+    color: lightsalmon;
+    width: 641px;
+    margin: 0 auto;
+}
+
+.unit p:first-of-type {
+    font-weight: bolder;
+    margin-bottom: 5px;
+}
+
+/*.unit {*/
+/*    margin: 25px;*/
+/*    width: 200px;*/
+
+/*}*/
 
 .circular--square {
     border-radius: 50%
@@ -31,6 +64,8 @@ body {
         padding: 5px 30px;
     }
     .faculties {
+        width: 80%;
+        padding: 5px 30px;
 
     }
 }
