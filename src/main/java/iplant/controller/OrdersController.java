@@ -2,7 +2,6 @@
 package iplant.controller;
 
 import iplant.data.Order;
-import iplant.data.OrderProduct;
 import iplant.data.User;
 import iplant.repository.OrdersRepository;
 import iplant.repository.ProductsRepository;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,9 +28,9 @@ public class OrdersController {
         return orderRepository.findAll();
     }
     @GetMapping(path = "/{id}")
-    public Optional<Order> fetchOrdersByBuyer(@PathVariable Order buyer) {
-        Long userId = buyer.getBuyer().getId();
-        Optional<Order> optionalOrder = Optional.ofNullable(orderRepository.findByBuyer(userId));
+    public Optional<Order> fetchOrdersById(@PathVariable Order buyer) {
+        Long userId = buyer.getId();
+        Optional<Order> optionalOrder = orderRepository.findById(userId);
         if(optionalOrder.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Order Buyer " + buyer.getBuyer().getScreenName() + " not found");
         }
@@ -48,6 +46,7 @@ public class OrdersController {
 
 //        create and set DateTimeStamp as createdAt to newOrder:
         newOrder.setCreatedAt(LocalDate.now());
+        newOrder.setStatus("Active");
 
 //        add in item selected to the list; then save it to the newOrder:
 
