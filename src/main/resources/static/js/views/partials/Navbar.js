@@ -23,6 +23,10 @@ export default function Navbar(props) {
         <li><a data-link href="/about">About Us</a></li>
         </ul>
     </div>
+     <!--For the shopping cart-->
+     <div>
+        <a data-link href=""><i style="font-size: 27px" class="fa-solid fa-cart-shopping cart-icon"></i></a>
+        </div>
 </nav>
         
         
