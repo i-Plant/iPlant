@@ -1,0 +1,9 @@
+*{
+    color: rgba(74, 112, 40, 0.93);
+}
+h1{
+    font-weight: bolder;
+}
+.form-label{
+    font-weight: bold;
+}
