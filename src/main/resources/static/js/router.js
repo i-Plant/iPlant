@@ -16,6 +16,7 @@ import Checkout, {CheckoutEvent} from "./views/Checkout.js";
 import PlantId, {PlantIdEvent} from "./views/PlantId.js";
 import Logout, {LogoutEvent} from "./views/Logout.js";
 import PaymentOk from "./views/PaymentOk.js";
+import addToCart, {addToCartEvent} from "./views/Cart.js";
 
 /**
  * Returns the route object for a specific route based on the given URI
@@ -59,6 +60,13 @@ export default function router(URI) {
             uri: '/messageboard',
             title: 'All Messages',
             viewEvent: MessageBoardEvent
+        },
+        '/cart': {
+            returnView: addToCart,
+            state: {},
+            uri: '/cart',
+            title: 'Cart',
+            viewEvent: addToCartEvent
         },
         '/checkout': {
             returnView: Checkout,

@@ -25,7 +25,7 @@ export default function Navbar(props) {
     </div>
      <!--For the shopping cart-->
      <div>
-        <a data-link href=""><i style="font-size: 27px" class="fa-solid fa-cart-shopping cart-icon"></i></a>
+        <a class="cart-icon" data-link href="/cart"><i style="font-size: 27px" id="cart" class="fa-solid fa-cart-shopping"></i></a>
         </div>
 </nav>
         
