@@ -25,7 +25,7 @@ export function PlantIdEvent() {
     const uploadImg = document.querySelector(".upload")
     uploadImg.addEventListener("submit", function (e) {
         e.preventDefault()
-        const image = '/data/media/image_1.jpeg';
+        const image = '../data/image_1.jpeg';
         let file = e.target.uploadFile.files[0]
         let form = new FormData()
         form.append('file', file)
