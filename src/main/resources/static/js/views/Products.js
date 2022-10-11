@@ -5,12 +5,13 @@ export default function Products(props) {
     <div>
         <h1>Our Plants</h1>
     </div>
+    <main>
     
    `
     for (let i = 0; i <products.length; i++){
-        html += `<main>
+        html += `
                     <div class="card" class="d-flex flex-wrap align-content-center" style="width:18rem">
-                      <img class="card-img-top" src="${products[i].imageURL}" alt="plant-image" class="images">
+                      <img class="card-img-top" src="${products[i].imageURL}" alt="plant-image" style="object-fit: fill;width: 100%; height: 250px"class="images">
                       <div class="card-body">
                         <h2>${products[i].name}</h2>
                         <p class="card-text">${products[i].details}</p>
@@ -19,10 +20,11 @@ export default function Products(props) {
                         <a href="#" class="btn btn-primary">Go somewhere</a>
                       </div>
                     </div>
-               </main>
+               
 `
     }
-    return html;
+
+    return html+= `</main>`;
 }
 //<main class="d-flex flex-wrap align-content-center" id="main">
 export function ProductsEvent(){
