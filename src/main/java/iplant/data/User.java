@@ -55,6 +55,11 @@ public class User {
     @Column(nullable = false)
     private LocalDate createdAt;
 
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column
+    private Status status;
+
     @OneToMany(mappedBy = "author")
     @JsonIgnoreProperties("author")
     private Collection<Review>reviews;
