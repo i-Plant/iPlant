@@ -52,7 +52,6 @@ export default function Checkout(props) {
                 </div>
             </form> 
 
-
     </main>
     
     `

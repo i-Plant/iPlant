@@ -17,10 +17,13 @@ export default function PlantId(props) {
                     </div>
                 </form>
             </div>
-            <div id="results">
-           <label for="results"  class="form-label" id="allResults">Results</label>
-            <pre id="results" style="white-space: break-spaces;">
-            </pre>
+           
+            <div class="card" class="d-flex flex-wrap align-content-center" style="width:18rem" id="results">
+       
+            </div>
+<!--           <label for="results"  class="form-label" id="allResults">Results</label>-->
+<!--            <pre id="results" style="white-space: break-spaces;">-->
+<!--            </pre>-->
         </div>
         </main>
 
@@ -48,8 +51,11 @@ export function PlantIdEvent() {
 
         formData.append('organs', 'flower');
         formData.append('images', file);
-        fetch(`https://my-api.plantnet.org/v2/identify/all?api-key=${API_KEY}`, {
+        fetch(`https://my-api.plantnet.org/v2/identify/all?include-related-images=true&no-reject=false&lang=en&api-key=${API_KEY}`, {
             method: 'POST',
+            // headers: {
+            //     "Content-Type": "undefined"
+            // },
             body: formData
         })
             .then(res => res.json())
@@ -59,13 +65,17 @@ export function PlantIdEvent() {
                 } else {
                     console.log(data);
                     document.getElementById('results').innerHTML = `
-                    
-                    <h1>Name</h1>
-                    <h3>${data.bestMatch}</h3>
-                    <h1>${data.query.images}</h1>
-                    <img src="${data.query.images}" alt="plant-img">
-                    
-                    
+                    <img class="card-img-top" src="${data.results[0].images[0].url.m}" alt="plant-image" class="images">
+                      <div class="card-body" style="width: 100%">
+                      <h4><i><u>${data.results[0].species.family.scientificName}</u></i></h4>
+                      <h5><strong>${data.bestMatch}</strong></h5> 
+                      <h6><small>Common Names:</small></h6>
+                      <h4>${data.results[0].species.commonNames[0]}</h4> 
+                       
+                        
+<!--                        <a href="#" class="btn btn-primary">buy</a>-->
+
+                      </div>
                     
                     `
 
@@ -74,7 +84,8 @@ export function PlantIdEvent() {
 
     });
 }
-
+//width: 100%; height: 250px pic side
+//style="object-fit: fill"
 // document.addEventListener('DOMContentLoaded', () => {
 //
 //     const form = document.getElementById('myform');
@@ -117,3 +128,6 @@ export function PlantIdEvent() {
 //  </div>
 //  </form>
 
+//<!--                         <p class="card-text">${products[i].details}</p>-->
+// <!--                         <h4>${products[i].category}</h4>-->
+// <!--                         <h5>$ ${products[i].price}</h5> -->
