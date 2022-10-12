@@ -68,9 +68,10 @@ export function PlantIdEvent() {
                     <img class="card-img-top" src="${data.results[0].images[0].url.m}" alt="plant-image" class="images">
                       <div class="card-body" style="width: 100%">
                       <h4><i><u>${data.results[0].species.family.scientificName}</u></i></h4>
-                      <h5><strong>${data.bestMatch}</strong></h5> 
+                      <h5><strong>${data.bestMatch}</strong></h5>   
                       <h6><small>Common Names:</small></h6>
                       <h4>${data.results[0].species.commonNames[0]}</h4> 
+                      <h6>${data.query.organs[0]}</h6>
                        
                         
 <!--                        <a href="#" class="btn btn-primary">buy</a>-->
