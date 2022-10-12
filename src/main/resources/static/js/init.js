@@ -29,6 +29,7 @@ function addListenerToNavLinks() {
         if(e.target.type && e.target.type === "checkbox") {
             return;
         }
+        //dark light theme
 
         // STRIPE
         if(e.target.type && e.target.type === "submit") {
@@ -37,6 +38,12 @@ function addListenerToNavLinks() {
 
         // console.log(e)
         if(e.target.type && e.target.type === "file") {
+            return;
+        }
+        if(e.target.type && e.target.type === "onclick") {
+            return;
+        }
+        if(e.target.type && e.target.type === "toggle") {
             return;
         }
 
