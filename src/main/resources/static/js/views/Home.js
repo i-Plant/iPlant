@@ -1,12 +1,12 @@
 import {getUser} from "../auth.js";
+import createView from "../createView.js";
 
 export default function Home(props) {
     const loggedInUser = getUser();
-    console.log(loggedInUser);
 
     return `
         <header>
-            <h1>Home Page</h1>
+            <h1>Welcome, ${loggedInUser.userName}</h1>
         </header>
         <main>
             <div>
@@ -16,4 +16,9 @@ export default function Home(props) {
             </div>
         </main>
     `;
+}
+//I want to display the username with a welcome message for 3 seconds after logging in
+export function welcomeHome() {
+    window.setTimeout(function () {
+    }, 3)
 }

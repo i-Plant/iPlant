@@ -1,7 +1,9 @@
-import {isLoggedIn} from "../../auth.js";
+import {getUser, isLoggedIn} from "../../auth.js";
 
 export default function Navbar(props) {
     if (isLoggedIn()) {
+        const user = getUser();
+        console.log(user.userName);
         return `
 <nav class="nav-bar">
     <div class="container">
@@ -50,7 +52,7 @@ export default function Navbar(props) {
         <li><a data-link href="/plantId">Plant Id</a></li>
 <!--        <li><a data-link href="/checkout">Checkout</a></li>-->
         <li><a data-link href="/profile">Profile</a></li>
-        <li><a data-link href="/logout">Logout</a></li>
+<!--        <li><a data-link href="/logout">Logout</a></li>-->
         <li><a data-link href="/about">About Us</a></li>
         </ul>
     </div>  
