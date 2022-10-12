@@ -46,7 +46,7 @@ export function getHeaders() {
 export function setTokens(jwt) {
     if(jwt) {
         localStorage.setItem("access_token", jwt);
-        setUserInfo(jwt);
+        setUserInfo(jwt)//intelliJ recommends a "then" statement here
         console.log("Access token and user info set");
     }
 }
@@ -84,6 +84,7 @@ export async function setUserInfo(jwt) {
         .then((response) => {
             return response.json();
         }).then((data) => {
+            console.log(data);
             const user = {
                 userName: payloadObject.name,
                 role: data.role,
