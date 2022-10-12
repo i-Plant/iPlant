@@ -42,6 +42,7 @@ export function PlantIdEvent() {
         // let reader = new FileReader();
         // reader.onload = uploadTheFile;
         // reader.readAsDataURL(file);
+        console.log(file)
 
         let formData = new FormData();
 
@@ -57,12 +58,31 @@ export function PlantIdEvent() {
                     alert(data.errors)
                 } else {
                     console.log(data);
+                    document.getElementById('results').innerHTML = `
+                    
+                    <h1>Name</h1>
+                    <h3>${data.bestMatch}</h3>
+                    <h1>${data.query.images}</h1>
+                    <img src="${data.query.images}" alt="plant-img">
+                    
+                    
+                    
+                    `
+
                 }
             });
 
     });
 }
 
+// document.addEventListener('DOMContentLoaded', () => {
+//
+//     const form = document.getElementById('myform');
+//     form.addEventListener('submit', (evt) => {
+//         evt.preventDefault();
+//         PlantIdEvent();
+//     });
+// })
 //old code
 //const  API_KEY = 'api-key=2b10JbtYGuH8jrVGLFbP9vMUe'
 //     const uploadImg = document.querySelector(".upload")

@@ -1,5 +1,5 @@
 package iplant.data;
 
 public enum Status {
-    Active, Completed, Deleted
+    Active, Inactive, Completed
 }
