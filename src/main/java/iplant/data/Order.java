@@ -7,6 +7,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 @Getter
@@ -26,13 +27,14 @@ public class Order {
     private User buyer;
 
     @Column(nullable = false)
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
 
     @NotNull
-//    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     private Status status;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
     @Column(nullable = false)
+    @JsonIgnoreProperties({"order"})
     private Collection<OrderProduct> products;
 }

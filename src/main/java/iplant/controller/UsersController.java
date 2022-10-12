@@ -108,7 +108,7 @@ public class UsersController {
     }
 
     @PutMapping("/{id}/updatePassword")
-    private void updatePassword(@PathVariable Long id, @RequestParam(required = false) String oldPassword, @Valid @Size(min = 3) @RequestParam String newPassword) {
+    private void updatePassword(@PathVariable Long id, @RequestParam(required = false) String oldPassword, @Valid @Size(min = 7) @RequestParam String newPassword) {
         User user = usersRepository.findById(id).get();
 //        if(user == null) {
 //            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User id" + id + "not found");
@@ -120,7 +120,7 @@ public class UsersController {
         }
 
         // validate new password
-        if(newPassword.length() < 3) {
+        if(newPassword.length() < 7) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "NEW password too few characters");
         }
 

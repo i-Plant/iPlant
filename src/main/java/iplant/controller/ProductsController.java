@@ -48,7 +48,7 @@ public class ProductsController {
 
         Optional<Product> optionalProduct = productsRepository.findById(id);
         if(optionalProduct.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Post id " + id + " not found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product id " + id + " not found");
         }
         // grab the original post from the optional and check the logged in user
         Product originalProduct = optionalProduct.get();
