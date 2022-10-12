@@ -19,7 +19,7 @@ export default function Navbar(props) {
         <li><a data-link href="/products">Products</a></li>
         <li><a data-link href="/messageboard">Reviews</a></li>
         <li><a data-link href="/plantId">Plant Id</a></li>
-        <li><a data-link href="/checkout">Checkout</a></li>
+<!--        <li><a data-link href="/checkout">Checkout</a></li>-->
         <li><a data-link href="/profile">Profile</a></li>
         <li><a data-link href="/logout">Logout</a></li>
         <li><a data-link href="/about">About Us</a></li>
@@ -29,7 +29,7 @@ export default function Navbar(props) {
      <div>
         <a class="cart-icon" data-link href="/cart"><i data-passthru style="font-size: 27px" id="cart" class="fa-solid fa-cart-shopping"></i></a>
         </div>
-</nav>`
+</nav>`;
   } else {
        return ` <nav class="nav-bar">
     <div class="container">
@@ -48,7 +48,7 @@ export default function Navbar(props) {
         <li><a data-link href="/login">Login</a></li>
         <li><a data-link href="/messageboard">Reviews</a></li>
         <li><a data-link href="/plantId">Plant Id</a></li>
-        <li><a data-link href="/checkout">Checkout</a></li>
+<!--        <li><a data-link href="/checkout">Checkout</a></li>-->
         <li><a data-link href="/profile">Profile</a></li>
         <li><a data-link href="/logout">Logout</a></li>
         <li><a data-link href="/about">About Us</a></li>
