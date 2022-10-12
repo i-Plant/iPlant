@@ -47,15 +47,16 @@ public class UsersController {
         // use email to lookup the user's info
         UserAuthInfoDTO userDTO = new UserAuthInfoDTO();
         userDTO.setEmail(loggedInUser.getEmail());
-        userDTO.setRole("");
+    //    userDTO.setRole("");
         userDTO.setUserName(loggedInUser.getScreenName());
-        userDTO.setProfilePic("");
+        userDTO.setProfilePic("");//how do I get the profile pic?
 
         return userDTO;
     }
 
     @GetMapping("/me")
     private User fetchMe(@RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authHeader) {
+        //using authBuddy to grab the info we need form the jwt about the user
         return authBuddy.getUserFromAuthHeaderJWT(authHeader);
 
 //        String userName = user.getScreenName();

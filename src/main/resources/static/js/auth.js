@@ -75,27 +75,12 @@ export async function setUserInfo(jwt) {
     const decodedPayload = atob(payload);
     const payloadObject = JSON.parse(decodedPayload);
     // console.log(payloadObject);
-
-    const request = {
-        method: 'GET',
-        headers: getHeaders()
+    const user = {
+        userName: payloadObject.name,
+        profilePic: payloadObject.picture
     };
-    return fetch(`${BACKEND_HOST_URL}/api/users/me`, request)
-        .then((response) => {
-            return response.json();
-        }).then((data) => {
-            console.log(data);
-            const user = {
-                userName: payloadObject.name,
-                role: data.role,
-                profilePic: payloadObject.picture
-            };
-            window.localStorage.setItem("user", JSON.stringify(user));
-            // console.log(user);
-            return user;
-        }).catch(error => {
-            console.log("FETCH ERROR: " + error);
-        });
+    window.localStorage.setItem("user", JSON.stringify(user));
+
 }
 
 export async function removeStaleTokens() {

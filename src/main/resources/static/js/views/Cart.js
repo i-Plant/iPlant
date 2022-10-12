@@ -26,9 +26,9 @@ export default function addToCart() {
  
 <!--Product counter-->
  <div class="counter">
- <div class="btn">+</div>
+ <div class="cart-btn">+</div>
  <div class="count">2</div>
- <div class="btn">-</div>
+ <div class="cart-btn">-</div>
  </div>
 `
 }

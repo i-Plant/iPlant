@@ -27,19 +27,13 @@ export function LoginEvent() {
 function handleCredentialResponse(response) {
     //write to local storage:
     const loggedInUser = response.credential;
-    console.log(loggedInUser);
+    setTokens(loggedInUser)
+    // const userName = window.localStorage.getItem("user");
+    // const profilePic = window.localStorage.getItem("profilePic");
+    // console.log(userName); //these
+    // console.log(profilePic);//were null
 
-
-    setTokens(response.credential)
-    //redirect the user to home when log in is successful
-    // if(loggedInUser) {
-    //     window.location = "http://localhost:8080/"
-    // }
-
-    // isLoggedIn;
-    // getUser;
-    // getUserRole;
-
+    //redirect the user to home when login is successful
     createView('/');
 }
 
