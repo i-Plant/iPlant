@@ -6,7 +6,7 @@ export default function Home(props) {
 
     return `
         <header>
-            <h1>Welcome, ${loggedInUser.userName}</h1>
+            <h1>Welcome</h1>
         </header>
         <main>
             <div>

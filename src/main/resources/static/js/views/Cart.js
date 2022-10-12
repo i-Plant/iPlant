@@ -33,16 +33,10 @@ export default function addToCart() {
 `
 }
 
-let addItemId = 0
+
 export function addToCartEvent() {
     //clickCart();
 
 }
 
-function clickCart() {
-    addItemId += 1;
-    const cartBtn = document.getElementById("cart");
-    cartBtn.addEventListener("click", function(){
-        createView("/cart")
-    })
-}
+
