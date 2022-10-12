@@ -2,6 +2,7 @@ package iplant.controller;
 
 import iplant.data.Order;
 import iplant.data.Product;
+import iplant.repository.OrderProductsRepository;
 import iplant.repository.OrdersRepository;
 import iplant.repository.ProductsRepository;
 import lombok.AllArgsConstructor;
@@ -16,6 +17,7 @@ import java.util.List;
 public class OrderProductsController {
 //    private ProductsRepository productsRepository;
 //    private OrdersRepository orderRepository;
+//    private OrderProductsRepository orderProductsRepository;
 //    public List<Order> getOrders() {
 //
 //        return orderRepository.findAll();

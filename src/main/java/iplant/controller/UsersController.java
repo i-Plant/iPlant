@@ -47,15 +47,16 @@ public class UsersController {
         // use email to lookup the user's info
         UserAuthInfoDTO userDTO = new UserAuthInfoDTO();
         userDTO.setEmail(loggedInUser.getEmail());
-        userDTO.setRole("");
+    //    userDTO.setRole("");
         userDTO.setUserName(loggedInUser.getScreenName());
-        userDTO.setProfilePic("");
+        userDTO.setProfilePic("");//how do I get the profile pic?
 
         return userDTO;
     }
 
     @GetMapping("/me")
     private User fetchMe(@RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authHeader) {
+        //using authBuddy to grab the info we need form the jwt about the user
         return authBuddy.getUserFromAuthHeaderJWT(authHeader);
 
 //        String userName = user.getScreenName();
@@ -107,7 +108,7 @@ public class UsersController {
     }
 
     @PutMapping("/{id}/updatePassword")
-    private void updatePassword(@PathVariable Long id, @RequestParam(required = false) String oldPassword, @Valid @Size(min = 3) @RequestParam String newPassword) {
+    private void updatePassword(@PathVariable Long id, @RequestParam(required = false) String oldPassword, @Valid @Size(min = 7) @RequestParam String newPassword) {
         User user = usersRepository.findById(id).get();
 //        if(user == null) {
 //            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User id" + id + "not found");
@@ -119,7 +120,7 @@ public class UsersController {
         }
 
         // validate new password
-        if(newPassword.length() < 3) {
+        if(newPassword.length() < 7) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "NEW password too few characters");
         }
 

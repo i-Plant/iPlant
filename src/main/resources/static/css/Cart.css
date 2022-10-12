@@ -75,7 +75,8 @@
     justify-content: space-between;
     align-items: center;
 }
-.btn{
+
+.cart-btn{
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -88,6 +89,7 @@
     font-weight: 900;
     color: #202020;
     cursor: pointer;
+
 }
 .count{
     font-size: 20px;
