@@ -10,8 +10,17 @@ export default function Navbar(props) {
             <span></span>
             <span></span>
             <span></span>
-        </label>    
-    
+        </label> 
+        
+        <label>
+<!--           light/dark mode-->
+<body>
+
+<!--light/dark mode-->
+    <div class="check">
+        <input type="checkbox">
+    </div>
+
     <h1 class="site-logo">i·Plant</h1>
     
     <ul class="main-nav small-caps">
@@ -49,7 +58,7 @@ export default function Navbar(props) {
         <li><a data-link href="/messageboard">Reviews</a></li>
         <li><a data-link href="/plantId">Plant Id</a></li>
 <!--        <li><a data-link href="/checkout">Checkout</a></li>-->
-        <li><a data-link href="/profile">Profile</a></li>
+<!--        <li><a data-link href="/profile">Profile</a></li>-->
         <li><a data-link href="/logout">Logout</a></li>
         <li><a data-link href="/about">About Us</a></li>
         </ul>
