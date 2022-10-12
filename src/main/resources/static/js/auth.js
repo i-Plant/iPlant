@@ -79,8 +79,8 @@ export async function setUserInfo(jwt) {
         userName: payloadObject.name,
         profilePic: payloadObject.picture
     };
-    window.localStorage.setItem("user", JSON.stringify(user));
 
+    window.localStorage.setItem("user", JSON.stringify(user));
 }
 
 export async function removeStaleTokens() {

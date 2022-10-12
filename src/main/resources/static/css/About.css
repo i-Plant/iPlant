@@ -15,6 +15,13 @@ body {
 
 }
 
+div img {
+    width: 550px;
+    filter: drop-shadow(0 10px 5px black);
+}
+
+
+
 .unit {
     margin: 25px;
     width: 200px;
@@ -35,6 +42,11 @@ body {
     font-color: black;
     margin: 2px;
 }
+
+/*.wrapper1 {*/
+/*    justify-content: space-evenly;*/
+/*    */
+/*}*/
 
 .wrapper {
     font-family: 'Helvetica Neue', Tahoma, Geneva, Sathu, sans-serif;
