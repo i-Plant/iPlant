@@ -53,13 +53,15 @@ export default function router(URI) {
             title: 'Register',
             viewEvent: RegisterEvent
         },
-        '/messageboard': {
+        '/reviews': {
             returnView: Review,
             state: {
-                // messages: '/api/messages'
+                reviews: {
+                    url: "/api/reviews"
+                }
             },
-            uri: '/messageboard',
-            title: 'All Messages',
+            uri: '/reviews',
+            title: 'All Reviews',
             viewEvent: MessageBoardEvent
         },
         '/cart': {
