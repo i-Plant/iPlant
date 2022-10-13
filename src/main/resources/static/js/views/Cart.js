@@ -35,7 +35,28 @@ export default function addToCart() {
 
 let addItemId = 0
 export function addToCartEvent() {
-    //clickCart();
+    function clickCounter() {
+        const addBtn = document.getElementById("add");
+        const subtractBtn = document.getElementById("subtract");
+        const count = document.getElementById("count")
+        //need to limit product value to 9
+
+        addBtn.addEventListener("click", function () {
+            // let count = 0;
+            if (count.innerHTML < 10) {//Do NOT parseInt the if conditional, i.e., if(parseInt(count.innerHTML < 10)), only the action you take below.
+                parseInt(count.innerText++);
+            }
+        })
+
+        //need to limit product value to 0
+        subtractBtn.addEventListener("click", function () {
+            if (count.innerHTML > 0) {
+                parseInt(count.innerText--);
+            }
+        })
+
+
+    }
 
 }
 
