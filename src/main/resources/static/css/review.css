@@ -6,17 +6,37 @@
     --color-text: #8297E2;
     --color-light: #EBEBFB;
 }
-.all-reviews {
-    width: 100%;
+.upper {
+    margin-top: 50px;
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-content: space-between;
+    align-items: center;
+
 }
-.single-review {
+
+.container-m {
     display: flex;
-    flex-direction: column;
+    height: 50vh;
     justify-content: center;
-    align-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding:20px;
+
 }
+
+
+.card single-review {
+    background-color: #fff;
+    padding: 15px;
+    border: none;
+    height: 250px;
+    margin-top: 10px
+}
+
+.card-text {
+    text-align: center;
+}
+
+
 

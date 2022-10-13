@@ -8,27 +8,13 @@ export default function Review(props) {
     reviews = props.reviews;
 
     return `
-        <header>
-            <h1>Reviews</h1>
-        </header>
+        
         <main>
-              
-            
-            <h3>Create a Review</h3>
-            <form>
-<!--                <div>-->
-<!--                    <label for="title">Title</label><br>-->
-<!--                    <input id="title" name="title" class="form-control" type="text" placeholder="Enter title">-->
-<!--&lt;!&ndash;                    <div class="invalid-feedback">&ndash;&gt;-->
-<!--&lt;!&ndash;                        Title cannot be blank.&ndash;&gt;-->
-<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <div class="valid-feedback">&ndash;&gt;-->
-<!--&lt;!&ndash;                        Your title is ok!&ndash;&gt;-->
-<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
-<!--                </div>-->
-                
+            <div class="upper">
+            <form>                
                 <div>
-                    <label for="content">Content</label><br>
+                    <label for="content"><h1>Create a Review</h1></label>
+                    <br>
                     <textarea id="content" class="form-control" name="content" rows="10" cols="50" placeholder="Enter content"></textarea>
 <!--                    <div class="invalid-feedback">-->
 <!--                        Content cannot be blank.-->
@@ -37,13 +23,18 @@ export default function Review(props) {
 <!--                        Content is ok!-->
 <!--                    </div>-->
                 </div>
-                
                <button data-id="0" id="saveReview" name="saveReview" class="button btn-primary">Save Post</button>
             </form>
+            </div>
             
-            <h3>Customer Reviews</h3>
-            <div>
-                ${reviewsHTML}   
+            
+            <div class="lower">
+                <h3>Customer Reviews</h3>
+                <div class="container-m">
+                    <div class="row">
+                        ${reviewsHTML}   
+                    </div>
+                </div>
             </div>
             
         </main>
@@ -55,11 +46,7 @@ export default function Review(props) {
 
 function generateReviewsHTML(reviews) {
     let reviewsHTML = `
-        <div class="all-reviews">
-<!--            <th scope="col">Title</th>-->
-            <h1>Content</h1>
-            <hr>
-           
+
         
     `;
     for (let i = 0; i < reviews.length; i++) {
@@ -71,14 +58,17 @@ function generateReviewsHTML(reviews) {
             authorName = review.author.userName;
         }
 
-        reviewsHTML += `<div class="single-review">
-            <h4>${review.content}</h4>
-            <h4>${authorName}</h4>
-            <button data-id=${review.id} class="button btn-primary editReview">Edit</button>
-            <button data-id=${review.id} class="button btn-danger deleteReview">Delete</button>
+        reviewsHTML += `
+            <div class="col-md-4 single-review">
+                <div class="card single-review">
+                    <p class="card-text">${review.content}</p>
+                    <p>${authorName}</p>
+                    <button data-id=${review.id} class="button btn-primary editReview">Edit</button>
+                    <button data-id=${review.id} class="button btn-danger deleteReview">Delete</button>
+                </div>
             </div>`;
     }
-    reviewsHTML += `</div>`;
+
     return reviewsHTML;
 }
 
