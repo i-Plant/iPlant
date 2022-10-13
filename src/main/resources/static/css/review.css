@@ -1,0 +1,22 @@
+
+:root {
+    --color-dark: #151C35;
+    --color-secondary-dark: #464C70;
+    --color-primary: #EE709D;
+    --color-text: #8297E2;
+    --color-light: #EBEBFB;
+}
+.all-reviews {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: space-between;
+}
+.single-review {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: space-between;
+}
+
