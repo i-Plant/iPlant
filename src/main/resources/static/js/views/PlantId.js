@@ -65,9 +65,7 @@ export function PlantIdEvent() {
                     <h1>${data.query.images}</h1>
                     <img src="${data.query.images}" alt="plant-img">
                     
-                    
-                    
-                    `
+                   `
 
                 }
             });
