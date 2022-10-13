@@ -65,6 +65,10 @@ export function PlantIdEvent() {
                 } else {
                     console.log(data);
                     document.getElementById('results').innerHTML = `
+
+                   
+                    
+                   
                     <img class="card-img-top" src="${data.results[0].images[0].url.m}" alt="plant-image" class="images">
                       <div class="card-body" style="width: 100%">
                       <h4><i><u>${data.results[0].species.family.scientificName}</u></i></h4>
