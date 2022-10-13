@@ -1,5 +1,4 @@
 import {getUser, isLoggedIn} from "../../auth.js";
-
 export default function Navbar(props) {
     if (isLoggedIn()) {
         const user = getUser();
@@ -70,3 +69,5 @@ export default function Navbar(props) {
  `;
     }
 }
+
+// localStorage.setItem("cart",cartArray);
