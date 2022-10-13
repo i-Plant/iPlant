@@ -65,15 +65,10 @@ export function PlantIdEvent() {
                 } else {
                     console.log(data);
                     document.getElementById('results').innerHTML = `
-<<<<<<< HEAD
+
+                   
                     
-                    <h1>Name</h1>
-                    <h3>${data.bestMatch}</h3>
-                    <h1>${data.query.images}</h1>
-                    <img src="${data.query.images}" alt="plant-img">
-                    
-                   `
-=======
+                   
                     <img class="card-img-top" src="${data.results[0].images[0].url.m}" alt="plant-image" class="images">
                       <div class="card-body" style="width: 100%">
                       <h4><i><u>${data.results[0].species.family.scientificName}</u></i></h4>
@@ -88,7 +83,6 @@ export function PlantIdEvent() {
                       </div>
                     
                     `
->>>>>>> cd42c3c3a195ed9d743bb8872f885b73c2467584
 
                 }
             });
