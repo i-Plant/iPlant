@@ -36,6 +36,7 @@ public class AuthBuddy {
         }
         String email = fields[0];
         User user = usersRepository.findByEmail(email);
+
         if(user == null) {
             System.out.println("User not found: " + email);
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized");
@@ -68,10 +69,10 @@ public class AuthBuddy {
 //        System.out.println(result.getBody());
         JsonObject jo = JsonParser.parseString(result.getBody().toString()).getAsJsonObject();
         String email = jo.get("emailAddresses").getAsJsonArray().get(0).getAsJsonObject().get("value").toString().replaceAll("\"", "");
-        String photo = jo.get("photos").getAsJsonArray().get(0).getAsJsonObject().get("url").toString().replaceAll("\"", "");
+        String userPhoto = jo.get("profilePic").getAsJsonArray().get(0).getAsJsonObject().get("url").toString().replaceAll("\"", "");
 
         fields[0] = email;
-        fields[1] = photo;
+        fields[1] = userPhoto;
         return fields;
     }
 

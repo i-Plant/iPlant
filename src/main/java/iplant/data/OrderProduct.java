@@ -18,7 +18,7 @@ public class OrderProduct {
     private Long id;
 
     @ManyToOne
-    @JsonIgnoreProperties({"abcd"})
+    @JsonIgnoreProperties({"products", "buyer"})
     private Order order;
 
     @ManyToOne
