@@ -31,7 +31,7 @@ let shoppingCart = document.getElementById("shopping-cart");
 let productsAPI = "api/products";
 
 
-//add all the product items as a total sum of items to be displayed in the cart badge
+//add all the product items as a total sum of items to be displayed where needed, i.e., the cart badge, the total sum,
 function calculation() {
     let cartIcon = document.getElementById("cart-amount");
     cartIcon.innerHTML = basket.map((x) => x.item).reduce((x, y) => x+y, 0);
@@ -41,8 +41,8 @@ let generateCartItems = () => {
     if (basket.length !== 0) {
         return shoppingCart.innerHTML = basket.map((x) => {
             let {id, item} = x;
-
-            let search = products.find((y) => y.id === id) || []; //if you find it, cool, if not return an empty array; Also, y.id is the id from the database
+            //I need to access the products database here
+            let search = productsAPI.find((y) => y.id === id) || []; //if you find it, cool, if not return an empty array; Also, y.id is the id from the database
             let {img, name, price} = search; //lets destructure so I don't have type: search.img, or search.price, or search.name.
             return `
             <div class="cart-item">
