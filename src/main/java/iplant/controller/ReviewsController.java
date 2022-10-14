@@ -1,8 +1,7 @@
 package iplant.controller;
 
 import iplant.data.Review;
-import iplant.data.User;
-import iplant.misc.FieldHelper;
+import iplant.repository.misc.FieldHelper;
 import iplant.repository.ReviewsRepository;
 import iplant.repository.UsersRepository;
 import lombok.AllArgsConstructor;

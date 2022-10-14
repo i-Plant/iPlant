@@ -7,7 +7,6 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Collection;
 
 @Getter
@@ -27,7 +26,7 @@ public class Order {
     private User buyer;
 
     @Column(nullable = false)
-    private LocalDateTime createdAt;
+    private LocalDate createdAt;
 
     @NotNull
     @Enumerated(EnumType.STRING)

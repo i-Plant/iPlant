@@ -1,7 +1,7 @@
 package iplant.controller;
 
 import iplant.data.Product;
-import iplant.misc.FieldHelper;
+import iplant.repository.misc.FieldHelper;
 import iplant.repository.ProductsRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -53,7 +53,6 @@ public class ProductsController {
         // grab the original post from the optional and check the logged in user
         Product originalProduct = optionalProduct.get();
 
-        // admin can delete anyone's post. author of the post can delete only their posts
 
 
         productsRepository.deleteById(id);

@@ -2,7 +2,7 @@ package iplant.controller;
 
 import iplant.data.User;
 import iplant.data.UserAuthInfoDTO;
-import iplant.misc.FieldHelper;
+import iplant.repository.misc.FieldHelper;
 import iplant.repository.UsersRepository;
 import iplant.services.AuthBuddy;
 import lombok.AllArgsConstructor;
@@ -18,6 +18,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import static iplant.data.Status.Inactive;
+
 @AllArgsConstructor
 @RestController
 @RequestMapping(value = "/api/users", produces = "application/json")
@@ -29,7 +31,7 @@ public class UsersController {
 
     @GetMapping("")
     public List<User> fetchUsers() {
-      return usersRepository.findAll();
+        return usersRepository.fetchActiveUsers();
     }
 
     @GetMapping("/{id}")
@@ -82,11 +84,12 @@ public class UsersController {
        usersRepository.save(newUser);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteUserById(@PathVariable long id) {
-        usersRepository.deleteById(id);
+    @PutMapping("/{id}/deactivate")
+    public void deactivateUser(@PathVariable long id){
+        Optional<User> activeUser = usersRepository.findById(id);
+        activeUser.get().setStatus(Inactive);
+        usersRepository.save(activeUser.get());
     }
-
     @PutMapping("/{id}")
     public void updateUser(@RequestBody User updatedUser, @PathVariable long id) {
         // get the original record from the db

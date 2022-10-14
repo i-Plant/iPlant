@@ -2,13 +2,8 @@
 package iplant.controller;
 
 import iplant.data.Order;
-import iplant.data.Product;
-import iplant.data.User;
-import iplant.misc.FieldHelper;
-import iplant.repository.OrderProductsRepository;
+import iplant.repository.misc.FieldHelper;
 import iplant.repository.OrdersRepository;
-import iplant.repository.ProductsRepository;
-import iplant.repository.UsersRepository;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -17,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,17 +20,18 @@ import static iplant.data.Status.Active;
 @AllArgsConstructor
 @NoArgsConstructor
 @RestController
-@RequestMapping(value = "/api/order", produces = "application/json")
+@RequestMapping(value = "/api/orders", produces = "application/json")
 public class OrdersController {
 
     private OrdersRepository orderRepository;
-//    private ProductsRepository productsRepository;
-    private OrderProductsRepository orderProductsRepository;
 
     @GetMapping(path = "")
     public List<Order> getOrders() {
-
-        return orderRepository.findAll();
+        List<Order> flemflam = orderRepository.findAll();
+        if (flemflam.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Orders can not be found");
+        }
+        return flemflam;
     }
 
     @GetMapping(path = "/{id}")
@@ -54,11 +49,11 @@ public class OrdersController {
 //        set UserId as Buyer for the newOrder. If not a user set Buyer to null:
         newOrder.setBuyer(null);
 //                if(isLoggedIn()) {
-//                    newOrder.setBuyer(id);
+//                    newOrder.setBuyer(user);
 //                }
 
 //        create and set DateTimeStamp as createdAt to newOrder:
-        newOrder.setCreatedAt(LocalDateTime.now());
+        newOrder.setCreatedAt(LocalDate.now());
         newOrder.setStatus(Active);
 
 //        add in item selected to the list; then save it to the newOrder:
@@ -86,7 +81,7 @@ public class OrdersController {
         Order originalOrder = orderOptional.get();
         BeanUtils.copyProperties(updatedOrder, originalOrder, FieldHelper.getNullPropertyNames(updatedOrder));
         originalOrder.setId(id);
-        originalOrder.setCreatedAt(LocalDateTime.now());
+        originalOrder.setCreatedAt(LocalDate.now());
 
         orderRepository.save(originalOrder);
     }

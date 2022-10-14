@@ -1,0 +1,3 @@
+INSERT INTO users (city, created_at, email, first_name, last_name, password, screen_name, state, street, zip_code, status)
+VALUES ('Shawpoinky', 20221010, 'justin.quinn09@gmail.com', 'Justin', 'Quinn', 'np', 'Universe', 'Connecticut', '128 Borring Lane', 73026, 'Active'),
+('New York', 20221010, 'Bob.Smalles@you.com', 'Bob', 'Smalles', 'Gks82BR5kdl', 'HelloW0rld', 'New York', '1234 New Street', 12345, 'Inactive')
