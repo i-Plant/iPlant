@@ -18,6 +18,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import static iplant.data.Status.Active;
 import static iplant.data.Status.Inactive;
 
 @AllArgsConstructor
@@ -67,11 +68,6 @@ public class UsersController {
 //        return null;
     }
 
-    private Optional<User> findUserById(long id) {
-        // didn't find it so do something
-        return usersRepository.findById(id);
-    }
-
     @PostMapping("/create")
     public void createUser(@RequestBody User newUser) {
 
@@ -79,7 +75,7 @@ public class UsersController {
        String plainTextPassword = newUser.getPassword();
 //       String encryptedPassword = passwordEncoder.encode(plainTextPassword);
        newUser.setPassword(plainTextPassword);
-
+        newUser.setStatus(Active);
        newUser.setCreatedAt(LocalDate.now());
        usersRepository.save(newUser);
     }

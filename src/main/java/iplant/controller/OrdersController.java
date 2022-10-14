@@ -7,6 +7,7 @@ import iplant.repository.OrdersRepository;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -22,14 +23,14 @@ import static iplant.data.Status.Active;
 @RestController
 @RequestMapping(value = "/api/orders", produces = "application/json")
 public class OrdersController {
-
+    @Autowired
     private OrdersRepository orderRepository;
 
     @GetMapping(path = "")
     public List<Order> getOrders() {
-        List<Order> flemflam = orderRepository.findAll();
+        List<Order> flemflam = orderRepository.fetchActiveOrders();
         if (flemflam.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Orders can not be found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No Active Orders");
         }
         return flemflam;
     }
