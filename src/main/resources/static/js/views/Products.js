@@ -1,3 +1,5 @@
+import createView from "../createView.js";
+
 let products = [];
 export default function Products(props) {
     products = props.products
@@ -10,14 +12,15 @@ export default function Products(props) {
    `
     for (let i = 0; i <products.length; i++){
         html += `
-                    <div class="card" class="d-flex flex-wrap align-content-center" style="width:18rem">
+                    <div class="card" class="d-flex flex-wrap align-content-center" style="width:18rem; z-index: 20">
                       <img class="card-img-top" src="${products[i].imageURL}" alt="plant-image" style="object-fit: fill;width: 100%; height: 250px"class="images">
                       <div class="card-body">
                         <h2>${products[i].name}</h2>
                         <p class="card-text">${products[i].details}</p>
                         <h4>${products[i].category}</h4>
                         <h5>$ ${products[i].price}</h5> 
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <a data-link href="/cart" class="btn btn-primary">Add to Cart</a>
+                            <a 
                       </div>
                     </div>
                
@@ -26,10 +29,18 @@ export default function Products(props) {
 
     return html+= `</main>`;
 }
-//<main class="d-flex flex-wrap align-content-center" id="main">
+
+let cart = [];
 export function ProductsEvent(){
+    const addToCartButtons = document.querySelectorAll(".addToCartBtn");
+
+    for(let i = 0; i < addToCartButtons.length; i++) {
+        addToCartButtons.addEventListener("click", function(e) {
+        });
+    }
 
 }
+
 
 
 // <main>

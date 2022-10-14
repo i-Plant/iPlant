@@ -2,8 +2,6 @@ import {getUser, isLoggedIn} from "../../auth.js";
 
 export default function Navbar(props) {
     if (isLoggedIn()) {
-        const user = getUser();
-        console.log(user.userName);
         return `
 <nav class="nav-bar">
     <div class="container">
@@ -27,10 +25,7 @@ export default function Navbar(props) {
         <li><a data-link href="/about">About Us</a></li>
         </ul>
     </div>
-     <!--For the shopping cart-->
-     <div>
-        <a class="cart-icon" data-link href="/cart"><i data-passthru style="font-size: 27px" id="cart" class="fa-solid fa-cart-shopping"></i></a>
-        </div>
+   
 </nav>`;
   } else {
        return ` <nav class="nav-bar">
