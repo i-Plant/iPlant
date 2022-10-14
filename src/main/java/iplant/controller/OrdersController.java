@@ -68,7 +68,6 @@ public class OrdersController {
         if (optionalOrder.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Order # " + id + " not found");
         } else {
-
             orderRepository.deleteById(id);
         }
     }

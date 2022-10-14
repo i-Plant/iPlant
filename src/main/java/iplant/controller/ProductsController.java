@@ -9,6 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,8 +25,13 @@ public class ProductsController {
 
     @GetMapping(path = "")
     public List<Product> getProducts() {
+        NumberFormat formatter = new DecimalFormat("#0.00");
+List<Product> newPrices = productsRepository.findAll();
+        for (int i = 0; i < newPrices.size(); i++) {
+            newPrices.get(i).setPrice(Double.parseDouble(formatter.format(newPrices.get(i).getPrice())));
 
-        return productsRepository.findAll();
+        }
+        return newPrices;
     }
 
     @GetMapping(path = "/{id}")

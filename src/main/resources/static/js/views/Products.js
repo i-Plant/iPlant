@@ -1,6 +1,19 @@
 let products = [];
 export default function Products(props) {
     products = props.products
+    console.log(props.products)
+    function afterDecimal(num) {
+        if (Number.isInteger(num)) {
+            return 0;
+        }
+
+        return num.toString().split('.')[1].length;
+    }
+    for(var i = 0; i < props.products.length; i++){
+        if (afterDecimal(props.products[i].price) === 1 ){
+            props.products[i].price = "" + props.products[i].price + "0";
+        }
+    }
    let html = `
     <div>
         <h1>Our Plants</h1>
@@ -16,7 +29,7 @@ export default function Products(props) {
                         <h2>${products[i].name}</h2>
                         <p class="card-text">${products[i].details}</p>
                         <h4>${products[i].category}</h4>
-                        <h5>$ ${products[i].price}</h5> 
+                        <div>$ ${products[i].price}</div>
                         <a href="#" class="btn btn-primary">Go somewhere</a>
                       </div>
                     </div>

@@ -27,7 +27,7 @@ public class Product {
     @Column
     private Category category;
 
-    @Column(length = 7)
+    @Column(length = 8)
     private Double price;
 
     @Column(length = 1026)
