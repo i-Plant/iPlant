@@ -64,7 +64,11 @@ export default function router(URI) {
         },
         '/cart': {
             returnView: addToCart,
-            state: {},
+            state: {
+                orders: {
+                    url: "api/order"
+                }
+            },
             uri: '/cart',
             title: 'Cart',
             viewEvent: addToCartEvent
@@ -73,7 +77,7 @@ export default function router(URI) {
             returnView: Checkout,
             state: {
                 products: {
-                    url: "/api/checkout"
+                    url: "/api/cart"
                 }
             },
             uri: '/checkout',

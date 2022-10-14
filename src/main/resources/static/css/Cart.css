@@ -4,9 +4,12 @@
 .body {
     font-family: sans-serif;
 }
+i {
+    cursor: pointer;
+}
 .cart {
     position: absolute;
-    top: 15%;
+    top: 10%;
     right: 3%;
     color: #fff;
     font-size: 30px;
@@ -26,7 +29,8 @@
     text-align: center;
     margin-bottom: 20px;
 }
-.products {
+.products,
+.checkout, .removeAll {
     background-color: #212529;
     color: white;
     border: none;
@@ -35,6 +39,13 @@
     cursor: pointer;
     margin-top: 10px;
 }
+.checkout {
+    background-color: green;
+}
+.removeAll {
+    background-color: red;
+}
+
 .bi-x-lg {
     color: red;
     font-weight: bold;
@@ -69,6 +80,7 @@
     border: 4px;
     padding: 3px 6px;
 }
+
 
 /*.body{*/
 /*    margin: 0;*/

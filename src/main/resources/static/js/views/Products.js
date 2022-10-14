@@ -4,6 +4,14 @@ let products = [];
 export default function Products(props) {
     products = props.products
    let html = `
+<!--For the shopping cart icon-->
+     <div class="cart">
+        <a data-link href="/cart"><i data-passthru id="cart" class="fa-solid fa-cart-shopping"></i></a>
+        <div class="cart-amount">0</div>
+     </div>
+
+<div id='label' class='text-center'></div>
+<div class="shopping-cart" id="shopping-cart"></div>
     <div>
         <h1>Our Plants</h1>
     </div>
@@ -30,14 +38,9 @@ export default function Products(props) {
     return html+= `</main>`;
 }
 
-let cart = [];
+let basket = [];
 export function ProductsEvent(){
-    const addToCartButtons = document.querySelectorAll(".addToCartBtn");
 
-    for(let i = 0; i < addToCartButtons.length; i++) {
-        addToCartButtons.addEventListener("click", function(e) {
-        });
-    }
 
 }
 
