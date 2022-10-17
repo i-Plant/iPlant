@@ -23,7 +23,7 @@ export default function Review(props) {
 <!--                        Content is ok!-->
 <!--                    </div>-->
                 </div>
-               <button data-id="0" id="saveReview" name="saveReview" class="button btn-primary">Save Post</button>
+               <button data-id="0" id="saveReview" name="saveReview" class="button btn-primary">Save Review</button>
             </form>
             </div>
             
@@ -55,16 +55,16 @@ function generateReviewsHTML(reviews) {
 
         let authorName = "";
         if(review.author) {
-            authorName = review.author.userName;
+            authorName = review.author.screenName;
         }
 
         reviewsHTML += `
-            <div class="col-md-4 single-review">
+            <div class="col-4 single-review">
                 <div class="card single-review">
                     <p class="card-text">${review.content}</p>
                     <p>${authorName}</p>
-                    <button data-id=${review.id} class="button btn-primary editReview">Edit</button>
-                    <button data-id=${review.id} class="button btn-danger deleteReview">Delete</button>
+                    <button data-id=${review.id} class="button editReview">Edit</button>
+                    <button data-id=${review.id} class="button deleteReview">Delete</button>
                 </div>
             </div>`;
     }
@@ -130,6 +130,7 @@ function setupEditHandlers() {
             const reviewId = parseInt(this.getAttribute("data-id"));
 
             loadReviewIntoForm(reviewId);
+
         });
     }
 }
@@ -148,8 +149,9 @@ function loadReviewIntoForm(reviewId) {
     // titleField.value = review.title;
     contentField.value = review.content;
 
-    const saveButton = document.querySelector("#savePost");
+    const saveButton = document.querySelector("#saveReview");
     saveButton.setAttribute("data-id", reviewId);
+    console.log(saveButton);
 }
 
 function fetchReviewById(reviewId) {
@@ -157,6 +159,7 @@ function fetchReviewById(reviewId) {
         if(reviews[i].id === reviewId) {
             return reviews[i];
         }
+        console.log(reviews[i]);
 
     }
     // didn't find it so return something falsy
@@ -203,7 +206,9 @@ function setupSaveHandler() {
     const saveButton = document.querySelector("#saveReview");
     saveButton.addEventListener("click", function(event) {
         const reviewId = parseInt(this.getAttribute("data-id"));
+        console.log(reviewId)
         saveReview(reviewId);
+
     });
 }
 
@@ -223,6 +228,7 @@ function saveReview(reviewId) {
         // title: titleField.value,
         content: contentField.value
     }
+    console.log(review)
 
     // make the request
     const request = {
@@ -231,12 +237,15 @@ function saveReview(reviewId) {
         body: JSON.stringify(review)
     }
     let url = REVIEW_API_BASE_URL;
+    console.log(request);
+
 
     // if we are updating a post, change the request and the url
     if(reviewId > 0) {
         request.method = "PUT";
         url += `/${reviewId}`;
     }
+    console.log(request);
 
     fetch(url, request)
         .then(function(response) {
@@ -245,7 +254,7 @@ function saveReview(reviewId) {
                 console.log(response.statusText);
                 return;
             }
-            CreateView("/reviews");
+            // CreateView("/reviews");
 
         })
 }
