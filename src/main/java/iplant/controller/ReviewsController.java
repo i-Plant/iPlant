@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,7 +39,7 @@ public class ReviewsController {
 
 
 
-    @PostMapping("create")
+    @PostMapping("")
     public void createReview(@RequestBody Review newReview) {
         if (newReview.getContent() == null || newReview.getContent().length() < 1) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Content cannot be blank!");
@@ -46,6 +47,7 @@ public class ReviewsController {
 //        Long id = usersRepository
 //        Optional<User> author = usersRepository.findById(id);
 //        newReview.setAuthor(author);
+        newReview.setCreatedAt(LocalDate.now());
 
         reviewsRepository.save(newReview);
     }

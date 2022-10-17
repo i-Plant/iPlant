@@ -58,6 +58,7 @@ return cardsHTML;
  basket = JSON.parse(localStorage.getItem("data")) || [];
  console.log(basket);
 
+
  export function addToCartEvent() {
      // calculation();
      // totalAmount();
@@ -67,37 +68,41 @@ return cardsHTML;
 
  }
 function addIncremenetDecrementHandlers() {
-     const incrementBtns = document.querySelectorAll(".increment-Btn")
+    const incrementBtns = document.querySelectorAll(".increment-Btn")
     const decrementBtns = document.querySelectorAll(".decrement-Btn")
 
-    for(let i = 0; i < incrementBtns.length; i++) {
+    for (let i = 0; i < incrementBtns.length; i++) {
         incrementBtns[i].addEventListener("click", function () {
             const productId = this.getAttribute("data-id")
             increment(productId);
         })
-    }
 
-}
- let label = document.getElementById("label");
- let shoppingCart = document.getElementById("shopping-cart");
- //I want to target these products and create an array for the cart that is displayed in the cart view
- let productsAPI = BACKEND_HOST_URL+ "/api/orders";
+        //
+        // //need to limit product value to 0
+        // subtractBtn.addEventListener("click", function () {
+        //     if (count.innerHTML > 0) {
+        //         parseInt(count.innerText--);
+    }
+    let label = document.getElementById("label");
+    let shoppingCart = document.getElementById("shopping-cart");
+    //I want to target these products and create an array for the cart that is displayed in the cart view
+    let productsAPI = BACKEND_HOST_URL + "/api/orders";
 
 
 //Add all the product items as a total sum of items to be displayed where needed, i.e., the cart badge, the total sum,
- function calculation() {
-     let cartCounter = document.getElementById("cart-amount");
-     cartCounter.innerHTML = basket.map((x) => x.item).reduce((x, y) => x+y, 0);
- }
+    function calculation() {
+        let cartCounter = document.getElementById("cart-amount");
+        cartCounter.innerHTML = basket.map((x) => x.item).reduce((x, y) => x + y, 0);
+    }
 
- let generateCartItems = () => {
-     if (basket.length !== 0) {
-         return shoppingCart.innerHTML = basket.map((x) => {
-             let {id, item} = x;
-             //I need to access the products database here
-             let search = productsAPI.find((y) => y.id === id) || []; //if you find it, cool, if not return an empty array; Also, y.id is the id from the database
-             let {img, name, price} = search; //lets destructure so I don't have type: search.img, or search.price, or search.name.
-             return `
+    let generateCartItems = () => {
+        if (basket.length !== 0) {
+            return shoppingCart.innerHTML = basket.map((x) => {
+                let {id, item} = x;
+                //I need to access the products database here
+                let search = productsAPI.find((y) => y.id === id) || []; //if you find it, cool, if not return an empty array; Also, y.id is the id from the database
+                let {img, name, price} = search; //lets destructure so I don't have type: search.img, or search.price, or search.name.
+                return `
              <div class="cart-item">
                  <img width="100" src=${img} alt=""
              <div class="details">
@@ -120,93 +125,94 @@ function addIncremenetDecrementHandlers() {
              <h3>${item * price}</h3>
              </div>
              `;
-         })
-             .join("")
-     }else{
-         shoppingCart.innerHTML = ``;
-         label.innerHTML = `
+            })
+                .join("")
+        } else {
+            shoppingCart.innerHTML = ``;
+            label.innerHTML = `
              <h2>Cart is Empty</h2>
              <a data-link href="/products">
                  <button data-link class="products">Back to shopping</button>
              </a>
              `;
-     }
- }
+        }
+    }
 
- function increment(id) {
-    console.log(basket);
-}
- // let increment = (id) => {
- //     let search = basket.find((x) => x.props.orders.id === props.orders.id);
- //     //if the product is already in the basket, dont push the entire object, rather increment only the item#
- //     if(search === undefined){basket.push({
- //         id: props.orders.id,
- //         item: 1,
- //     })
- //     } else {
- //         search.item += 1;
- //     }
- //     //saving the increment to local storage immediately; same is done to decrement.
- //     update(props.orders.id);
- //     //rerender the cart after the updates
- //     generateCartItems();
- //     localStorage.setItem("data", JSON.stringify(basket));
- // }
+    function increment(id) {
+        console.log(basket);
+    }
 
- let decrement = (id) => {
-     let search = basket.find((x) => x.id === selectedItem.id);
-     //if the product is not in the basket, don't decrement anymore.
-     if (search === undefined) return
-     else if (search.item === 0) return;
-     else {
-         search.item -= 1;
-     }
-     update(selectedItem.id);
-     //while there are no items do not display
-     basket = basket.filter((x) => x.item !== 0);
+    // let increment = (id) => {
+    //     let search = basket.find((x) => x.props.orders.id === props.orders.id);
+    //     //if the product is already in the basket, dont push the entire object, rather increment only the item#
+    //     if(search === undefined){basket.push({
+    //         id: props.orders.id,
+    //         item: 1,
+    //     })
+    //     } else {
+    //         search.item += 1;
+    //     }
+    //     //saving the increment to local storage immediately; same is done to decrement.
+    //     update(props.orders.id);
+    //     //rerender the cart after the updates
+    //     generateCartItems();
+    //     localStorage.setItem("data", JSON.stringify(basket));
+    // }
 
-     generateCartItems();
-     localStorage.setItem("data", JSON.stringify(basket));
- }
- let update = (id) => {
-     let search = basket.find((x) => x.id === id);
-     document.getElementById("id").innerHTML = search.item;
+    let decrement = (id) => {
+        let search = basket.find((x) => x.id === selectedItem.id);
+        //if the product is not in the basket, don't decrement anymore.
+        if (search === undefined) return
+        else if (search.item === 0) return;
+        else {
+            search.item -= 1;
+        }
+        update(selectedItem.id);
+        //while there are no items do not display
+        basket = basket.filter((x) => x.item !== 0);
 
-     calculation();
-     totalAmount();
- }
- let removeItem = (id) => {
-     console.log(id.id);
-     basket = basket.filter((x) =>x.id !== id.id);
+        generateCartItems();
+        localStorage.setItem("data", JSON.stringify(basket));
+    }
+    let update = (id) => {
+        let search = basket.find((x) => x.id === id);
+        document.getElementById("id").innerHTML = search.item;
 
-     generateCartItems();
-     totalAmount();
-     calculation();
-     localStorage.setItem("data", JSON.stringify(basket));
- }
+        calculation();
+        totalAmount();
+    }
+    let removeItem = (id) => {
+        console.log(id.id);
+        basket = basket.filter((x) => x.id !== id.id);
 
- let clearCart = () => {
-     //clearing the basket by making it equal to an empty array
-     basket = []
-     generateCartItems();
-     calculation();
-     localStorage.setItem("data", JSON.stringify(basket));
- }
+        generateCartItems();
+        totalAmount();
+        calculation();
+        localStorage.setItem("data", JSON.stringify(basket));
+    }
 
- let totalAmount = () => {
-     if(basket.length !== 0){
-         let amount = basket.map((x) =>{
-             let {item, id} = x;
-             let search = productsAPI.find((y) => y.id === id) || [];
-             return item * search.price;
-         }).reduce((x,y) =>x+y, 0);
-         label.innerHTML = `
+    let clearCart = () => {
+        //clearing the basket by making it equal to an empty array
+        basket = []
+        generateCartItems();
+        calculation();
+        localStorage.setItem("data", JSON.stringify(basket));
+    }
+
+    let totalAmount = () => {
+        if (basket.length !== 0) {
+            let amount = basket.map((x) => {
+                let {item, id} = x;
+                let search = productsAPI.find((y) => y.id === id) || [];
+                return item * search.price;
+            }).reduce((x, y) => x + y, 0);
+            label.innerHTML = `
          <h2>Total Bill: $ ${amount}</h2>
          <button class="checkout">Checkout</button>
          <button onclick="clearCart()" class="removeAll">Clear Cart</button>
          `;
-     }
+        }
 
- }
+    }
 
-
+}

@@ -1,0 +1,63 @@
+
+:root {
+    --color-dark: #151C35;
+    --color-secondary-dark: #464C70;
+    --color-primary: #EE709D;
+    --color-text: #8297E2;
+    --color-light: #EBEBFB;
+}
+.upper {
+    margin-top: 50px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.row.review {
+    margin-top: 600px;
+    padding: 10px;
+}
+
+.container-m {
+    display: flex;
+    height: 50vh;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding:20px;
+
+}
+
+
+.card.single-review {
+    background-color: #fff;
+    padding: 15px;
+    height: 250px;
+    margin-top: 10px;
+    border: solid #4A7028ED;
+
+}
+
+.card-text {
+    text-align: center;
+}
+
+
+.user-image img {
+    border: 3px solid #4A7028ED;
+    padding: 2px;
+    height: 60px;
+    width: 60px;
+
+}
+
+img.rounded-circle {
+    display: flex;
+    align-content: flex-start;
+    justify-content: flex-start;
+
+}
+
+
