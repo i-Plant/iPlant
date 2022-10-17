@@ -11,7 +11,6 @@ export default function addToCart(props) {
             continue;
         } else {
             myOrder = basket[i];
-            // basket = myOrder;
         }
         let products = myOrder.products;
         for (let j = 0; j < myOrder.products.length; j++) {
@@ -61,8 +60,8 @@ export function addToCartEvent() {
     // clearCart();
     // update();
     addIncremenetDecrementHandlers();
-
 }
+
 function addIncremenetDecrementHandlers() {
     const incrementBtns = document.querySelectorAll(".increment-Btn")
     const decrementBtns = document.querySelectorAll(".decrement-Btn")

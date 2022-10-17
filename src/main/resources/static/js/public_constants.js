@@ -1,6 +1,7 @@
 
- // const GOOGLE_CLIENT_ID = '909908356091-jqa0i9r2adu6am96k5d43ms5lktiiboi.apps.googleusercontent.com'
- // const GOOGLE_CLIENT_SECRET = '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'
 const BACKEND_HOST_URL = "http://localhost:8080"
+<<<<<<< HEAD
+=======
  const REVIEW_API_BASE_URL = "http://localhost:8080/api/reviews";
 
+>>>>>>> fe9cb4a3ed6795f27f7bdff634bb0eaddbf935fb

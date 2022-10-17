@@ -3,12 +3,19 @@ import createView from "../createView.js";
 let products = [];
 export default function Products(props) {
     products = props.products
-    let html = `
-<!--For the shopping cart icon-->
-     <div class="cart">
-        <a data-link href="/cart"><i data-passthru id="cart" class="fa-solid fa-cart-shopping"></i></a>
-        <div class="cart-amount">0</div>
-     </div>
+    // console.log(props.products)
+    function afterDecimal(num) {
+        if (Number.isInteger(num)) {
+            return 0;
+        }
+        return num.toString().split('.')[1].length;
+    }
+    for(var i = 0; i < props.products.length; i++){
+        if (afterDecimal(props.products[i].price) === 1 ){
+            props.products[i].price = "" + props.products[i].price + "0";
+        }
+    }
+   let html = `
 <div id='label' class='text-center'></div>
 <div class="shopping-cart" id="shopping-cart"></div>
     <div>
@@ -47,5 +54,5 @@ export function ProductsEvent(){
             console.log(cartArray);
         })
     }
-
 }
+

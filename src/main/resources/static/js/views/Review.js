@@ -37,24 +37,20 @@ function generateAddReviewHTML() {
 
     addHTML = `<h3>Add a review</h3>
             <form>
-              
-               
                 <div>
                     <label for="content">Content</label><br>
                     <textarea id="content" class="form-control" name="content" rows="5" cols="50" placeholder="Enter content"></textarea>
-                   
                 </div>
-             
                 <button data-id="0" id="saveReview" name="saveReview" type="button" class="my-button button btn-primary">Save Review</button>
             </form>`;
-
     return addHTML;
 }
 
 
 function generateReviewsHTML(reviews) {
     let reviewsHTML = `
-        
+    
+    
     `;
     for (let i = 0; i < reviews.length; i++) {
         const review = reviews[i];
