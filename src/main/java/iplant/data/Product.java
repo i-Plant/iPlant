@@ -1,7 +1,6 @@
 package iplant.data;
 
 import lombok.*;
-import org.hibernate.validator.constraints.Currency;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

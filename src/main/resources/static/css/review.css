@@ -28,9 +28,7 @@
     margin-bottom: 20px;
     padding:20px;
 
-<<<<<<< HEAD
 }
-
 
 .card.single-review {
     background-color: #fff;
@@ -38,33 +36,12 @@
     height: 250px;
     margin-top: 10px;
     border: solid #4A7028ED;
-
 }
 
 .card-text {
     text-align: center;
 }
 
-
-=======
-}
-
-
-.card.single-review {
-    background-color: #fff;
-    padding: 15px;
-    height: 250px;
-    margin-top: 10px;
-    border: solid #4A7028ED;
-
-}
-
-.card-text {
-    text-align: center;
-}
-
-
->>>>>>> ca637da57cd8977c416c63748d7f8fca4fcf71ed
 .user-image img {
     border: 3px solid #4A7028ED;
     padding: 2px;
@@ -79,8 +56,3 @@ img.rounded-circle {
     justify-content: flex-start;
 
 }
-<<<<<<< HEAD
-=======
-
-
->>>>>>> ca637da57cd8977c416c63748d7f8fca4fcf71ed

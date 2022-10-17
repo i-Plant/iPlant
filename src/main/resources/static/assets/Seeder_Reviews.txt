@@ -1,5 +1,5 @@
-INSERT INTO order_products (content, created_at, author_id)
-VALUES ('I loved it my new APPLE tree.', 2022-10-10, 1)
-('test run', 2022-10-10, 2)
-('Roger manual test', 2022-10-13, 2)
-('Smart Water makes you smarter', 2022-10-13, 2)
+INSERT INTO order_products (content, created_at, author_id, item_id)
+VALUES ('I loved it my new APPLE tree.', 2022-10-10, 1, null),
+('test run', 2022-10-10, 2, null),
+('Roger manual test', 2022-10-13, 2, 12),
+('Smart Water makes you smarter', 2022-10-13, 2, 3)
