@@ -6,25 +6,22 @@ export default function Review(props) {
     const reviewsHTML = generateReviewsHTML(props.reviews);
     // save this for loading edits later
     reviews = props.reviews;
+    const addReviewHTML = generateAddReviewHTML();
 
     return `
         
         <main>
             <div class="upper">
-            <form>                
-                <div>
-                    <label for="content"><h1>Create a Review</h1></label>
-                    <br>
-                    <textarea id="content" class="form-control" name="content" rows="10" cols="50" placeholder="Enter content"></textarea>
-<!--                    <div class="invalid-feedback">-->
-<!--                        Content cannot be blank.-->
-<!--                    </div>-->
-<!--                    <div class="valid-feedback">-->
-<!--                        Content is ok!-->
-<!--                    </div>-->
-                </div>
-               <button data-id="0" id="saveReview" name="saveReview" class="button btn-primary">Save Review</button>
-            </form>
+            ${addReviewHTML}
+<!--            <form>                -->
+<!--                <div>-->
+<!--                    <label for="content"><h1>Create a Review</h1></label>-->
+<!--                    <br>-->
+<!--                    <textarea id="content" class="form-control" name="content" rows="10" cols="50" placeholder="Enter content"></textarea>-->
+
+<!--                </div>-->
+<!--               <button data-id="0" id="saveReview" name="saveReview" class="button btn-primary">Save Review</button>-->
+<!--            </form>-->
             </div>
             
             
@@ -41,6 +38,28 @@ export default function Review(props) {
   
     
 `
+}
+
+
+function generateAddReviewHTML() {
+    let addHTML = ``;
+
+    addHTML = `<h3>Add a review</h3>
+            <form>
+              
+               
+                <div>
+                    <label for="content">Content</label><br>
+                    <textarea id="content" class="form-control" name="content" rows="5" cols="50" placeholder="Enter content"></textarea>
+                   
+                </div>
+                
+          
+                
+                <button data-id="0" id="saveReview" name="saveReview" type="button" class="my-button button btn-primary">Save Review</button>
+            </form>`;
+
+    return addHTML;
 }
 
 
@@ -254,7 +273,7 @@ function saveReview(reviewId) {
                 console.log(response.statusText);
                 return;
             }
-            // CreateView("/reviews");
+            CreateView("/reviews");
 
         })
 }
