@@ -1,15 +1,16 @@
 package iplant.controller;
 
 import iplant.data.Review;
-import iplant.repository.misc.FieldHelper;
 import iplant.repository.ReviewsRepository;
 import iplant.repository.UsersRepository;
+import iplant.repository.misc.FieldHelper;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,12 +33,7 @@ public class ReviewsController {
         return optionalReview;
     }
 
-
-
-
-
-
-    @PostMapping("create")
+    @PostMapping("")
     public void createReview(@RequestBody Review newReview) {
         if (newReview.getContent() == null || newReview.getContent().length() < 1) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Content cannot be blank!");
@@ -45,6 +41,7 @@ public class ReviewsController {
 //        Long id = usersRepository
 //        Optional<User> author = usersRepository.findById(id);
 //        newReview.setAuthor(author);
+        newReview.setCreatedAt(LocalDate.now());
 
         reviewsRepository.save(newReview);
     }

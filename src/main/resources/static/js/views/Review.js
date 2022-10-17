@@ -6,44 +6,23 @@ export default function Review(props) {
     const reviewsHTML = generateReviewsHTML(props.reviews);
     // save this for loading edits later
     reviews = props.reviews;
+    const addReviewHTML = generateAddReviewHTML();
 
     return `
-        <header>
-            <h1>Reviews</h1>
-        </header>
+        
         <main>
-              
+            <div class="upper">
+            ${addReviewHTML}
+            </div>
             
-            <h3>Create a Review</h3>
-            <form>
-<!--                <div>-->
-<!--                    <label for="title">Title</label><br>-->
-<!--                    <input id="title" name="title" class="form-control" type="text" placeholder="Enter title">-->
-<!--&lt;!&ndash;                    <div class="invalid-feedback">&ndash;&gt;-->
-<!--&lt;!&ndash;                        Title cannot be blank.&ndash;&gt;-->
-<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <div class="valid-feedback">&ndash;&gt;-->
-<!--&lt;!&ndash;                        Your title is ok!&ndash;&gt;-->
-<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
-<!--                </div>-->
-                
-                <div>
-                    <label for="content">Content</label><br>
-                    <textarea id="content" class="form-control" name="content" rows="10" cols="50" placeholder="Enter content"></textarea>
-<!--                    <div class="invalid-feedback">-->
-<!--                        Content cannot be blank.-->
-<!--                    </div>-->
-<!--                    <div class="valid-feedback">-->
-<!--                        Content is ok!-->
-<!--                    </div>-->
+            <div class="lower">
+               
+                <div class="container-m">
+                    <div class="row review">
+                        <h3 class="text-center">Customer Reviews</h3>
+                        ${reviewsHTML}   
+                    </div>
                 </div>
-                
-               <button data-id="0" id="saveReview" name="saveReview" class="button btn-primary">Save Post</button>
-            </form>
-            
-            <h3>Customer Reviews</h3>
-            <div>
-                ${reviewsHTML}   
             </div>
             
         </main>
@@ -53,13 +32,28 @@ export default function Review(props) {
 }
 
 
+function generateAddReviewHTML() {
+    let addHTML = ``;
+
+    addHTML = `<h3>Add a review</h3>
+            <form>
+              
+               
+                <div>
+                    <label for="content">Content</label><br>
+                    <textarea id="content" class="form-control" name="content" rows="5" cols="50" placeholder="Enter content"></textarea>
+                   
+                </div>
+             
+                <button data-id="0" id="saveReview" name="saveReview" type="button" class="my-button button btn-primary">Save Review</button>
+            </form>`;
+
+    return addHTML;
+}
+
+
 function generateReviewsHTML(reviews) {
     let reviewsHTML = `
-        <div class="all-reviews">
-<!--            <th scope="col">Title</th>-->
-            <h1>Content</h1>
-            <hr>
-           
         
     `;
     for (let i = 0; i < reviews.length; i++) {
@@ -68,17 +62,24 @@ function generateReviewsHTML(reviews) {
 
         let authorName = "";
         if(review.author) {
-            authorName = review.author.userName;
+            authorName = review.author.screenName;
         }
 
-        reviewsHTML += `<div class="single-review">
-            <h4>${review.content}</h4>
-            <h4>${authorName}</h4>
-            <button data-id=${review.id} class="button btn-primary editReview">Edit</button>
-            <button data-id=${review.id} class="button btn-danger deleteReview">Delete</button>
+        reviewsHTML += `
+            <div class="col-4 single-review">
+                <div class="card single-review">
+                    <p class="card-text">${review.content}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="user-about"> <span class="font-weight-bold d-block">${authorName}</span> 
+                        </div>
+                        <div class="user-image"> <img src="../assets/iplant-logo.png" class="rounded-circle"  alt="i-plant logo"> </div>
+                    </div>
+                    <button data-id=${review.id} class="button editReview">Edit</button>
+                    <button data-id=${review.id} class="button deleteReview">Delete</button>
+                </div>
             </div>`;
     }
-    reviewsHTML += `</div>`;
+
     return reviewsHTML;
 }
 
@@ -140,6 +141,7 @@ function setupEditHandlers() {
             const reviewId = parseInt(this.getAttribute("data-id"));
 
             loadReviewIntoForm(reviewId);
+
         });
     }
 }
@@ -158,8 +160,9 @@ function loadReviewIntoForm(reviewId) {
     // titleField.value = review.title;
     contentField.value = review.content;
 
-    const saveButton = document.querySelector("#savePost");
+    const saveButton = document.querySelector("#saveReview");
     saveButton.setAttribute("data-id", reviewId);
+    console.log(saveButton);
 }
 
 function fetchReviewById(reviewId) {
@@ -167,6 +170,7 @@ function fetchReviewById(reviewId) {
         if(reviews[i].id === reviewId) {
             return reviews[i];
         }
+        console.log(reviews[i]);
 
     }
     // didn't find it so return something falsy
@@ -213,7 +217,9 @@ function setupSaveHandler() {
     const saveButton = document.querySelector("#saveReview");
     saveButton.addEventListener("click", function(event) {
         const reviewId = parseInt(this.getAttribute("data-id"));
+        console.log(reviewId)
         saveReview(reviewId);
+
     });
 }
 
@@ -233,6 +239,7 @@ function saveReview(reviewId) {
         // title: titleField.value,
         content: contentField.value
     }
+    console.log(review)
 
     // make the request
     const request = {
@@ -241,12 +248,15 @@ function saveReview(reviewId) {
         body: JSON.stringify(review)
     }
     let url = REVIEW_API_BASE_URL;
+    console.log(request);
+
 
     // if we are updating a post, change the request and the url
     if(reviewId > 0) {
         request.method = "PUT";
         url += `/${reviewId}`;
     }
+    console.log(request);
 
     fetch(url, request)
         .then(function(response) {
@@ -259,4 +269,3 @@ function saveReview(reviewId) {
 
         })
 }
-
