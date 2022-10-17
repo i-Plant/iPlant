@@ -38,7 +38,7 @@ export default function Products(props) {
     return html+= `</main>`;
 }
 
-let basket = [];
+
 export function ProductsEvent(){
 
 

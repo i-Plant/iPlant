@@ -12,6 +12,7 @@ import iplant.repository.UsersRepository;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -26,17 +27,20 @@ import static iplant.data.Status.Active;
 @AllArgsConstructor
 @NoArgsConstructor
 @RestController
-@RequestMapping(value = "/api/order", produces = "application/json")
+@RequestMapping(value = "/api/orders", produces = "application/json")
 public class OrdersController {
-
+    @Autowired
     private OrdersRepository orderRepository;
-//    private ProductsRepository productsRepository;
+
     private OrderProductsRepository orderProductsRepository;
 
     @GetMapping(path = "")
     public List<Order> getOrders() {
-
-        return orderRepository.findAll();
+        List<Order> flemflam = orderRepository.fetchActiveOrders();
+        if (flemflam.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No Active Orders");
+        }
+        return flemflam;
     }
 
     @GetMapping(path = "/{id}")
@@ -58,7 +62,7 @@ public class OrdersController {
 //                }
 
 //        create and set DateTimeStamp as createdAt to newOrder:
-        newOrder.setCreatedAt(LocalDateTime.now());
+        newOrder.setCreatedAt(LocalDate.now());
         newOrder.setStatus(Active);
 
 //        add in item selected to the list; then save it to the newOrder:
@@ -86,7 +90,7 @@ public class OrdersController {
         Order originalOrder = orderOptional.get();
         BeanUtils.copyProperties(updatedOrder, originalOrder, FieldHelper.getNullPropertyNames(updatedOrder));
         originalOrder.setId(id);
-        originalOrder.setCreatedAt(LocalDateTime.now());
+        originalOrder.setCreatedAt(LocalDate.now());
 
         orderRepository.save(originalOrder);
     }

@@ -8,7 +8,8 @@ i {
     cursor: pointer;
 }
 .cart {
-    position: absolute;
+    position: fixed;
+    /*position: absolute;*/
     top: 10%;
     right: 3%;
     color: #fff;

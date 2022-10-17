@@ -65,9 +65,9 @@ export default function router(URI) {
         '/cart': {
             returnView: addToCart,
             state: {
-                orders: {
-                    url: "api/order"
-                }
+                orders:{//this should be orders but testing with products right now
+                    url: '/api/orders'//I get a status 500 and null with 'api/orders'. I cannot pull orders into the page until the orders are actually created
+                }                      //Needed to add @Autowired annotation above the private ordersRepository field.
             },
             uri: '/cart',
             title: 'Cart',
@@ -77,7 +77,7 @@ export default function router(URI) {
             returnView: Checkout,
             state: {
                 products: {
-                    url: "/api/cart"
+                    url: '/api/checkout'
                 }
             },
             uri: '/checkout',
@@ -88,7 +88,7 @@ export default function router(URI) {
             returnView: Products,
             state: {
                 products: {
-                    url: "/api/products"
+                    url: '/api/products'
                 }
             },
             uri: '/products',
