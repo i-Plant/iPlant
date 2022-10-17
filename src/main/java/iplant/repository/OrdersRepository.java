@@ -2,7 +2,12 @@ package iplant.repository;
 
 import iplant.data.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 public interface OrdersRepository extends JpaRepository<Order, Long>{
-//    Order findByBuyer(Long id);
+    @Query(value = "select * from orders where status = 'Active'", nativeQuery = true)
+    List<Order> fetchActiveOrders();
+
 }

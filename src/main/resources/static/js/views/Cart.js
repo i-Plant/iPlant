@@ -1,69 +1,218 @@
-import createView from "../createView.js";
+//I need to display the carts in Jalopy
+//I need to push to a new array (basket) and display those cards in the cart(basket) when I add them
+let basket = [];
+export default function addToCart(props) {
+    basket = props.orders
+    console.log(basket);
 
-export default function addToCart() {
-    return `
-<body class="body" >
- <div class="Cart-Container"></div>
-</body>
-<!--Card header-->
-<div class="Header">
- <h3 class="Heading">Shopping Cart</h3>
- <h5 class="Action">Remove all</h5>
- </div>
- <!--cart items-->
- <div class="Cart-Items">
- <div class="image-box">
- <img src="/assets/1.jpg" style="height:120px" alt="plant in a pot"/>
- </div>
- <div class="about">
- <h1 class="title">Flower Pot</h1>
- <h3 class="subtitle">Gallon size</h3>
- <img src="/assets/1.jpg" style="height:30px" alt="plant in a pot"/>
- </div>
- <div class="counter"></div>
- <div class="prices"></div>
- </div> 
- 
-<!--Product counter-->
- <div class="counter">
- <div class="cart-btn">+</div>
- <div class="count">2</div>
- <div class="cart-btn">-</div>
- </div>
-`
+    let myOrder;
+    for (let i = 0; i < basket.length; i++) {
+        if (basket[i].buyer.id !== 1) {
+            continue;
+        } else {
+            myOrder = basket[i];
+            // basket = myOrder;
+        }
+        let products = myOrder.products;
+        for (let j = 0; j < myOrder.products.length; j++) {
+
+            let cardsHTML = `
+            <div class="cart-item">                
+                 <img src="${products[j].item.imageURL}" alt="A plant">
+            <div class="details">
+
+            <div class="title-price-x">
+                <h4 class="title-price">
+                    <!--product name-->
+                    <p>${products[j].item.name}</p>-->
+                    <p class="cart-item-price">${products[j].item.price}</p>-->
+                </h4>-->
+                <i onclick="removeItem(${products[j]})" class="fa-solid fa-x"></i>-->
+            </div>-->
+
+            <div class="buttons">-->
+                <i data-id="${products[j].id}" class="fa-solid fa-minus decrement-Btn"></i>-->
+                <div id={id} class="quantity">${products[j].quantity}</div>            -->
+                <i data-id="(${products[j].id})" class="fa-solid fa-plus increment-Btn"></i>-->
+            </div>-->
+
+            <h3>${products[j].quantity * products[j].item.price}</h3>-->
+            </div>-->
+            `;
+
+            cardsHTML += `
+ <!--For the shopping cart icon-->
+     <div class="cart">
+        <a data-link href="/cart"><i data-passthru id="cart" class="fa-solid fa-cart-shopping"></i></a>
+        <div class="cart-amount">0</div>
+     </div>
+
+     <div id='label' class='text-center'></div>
+     <div class="shopping-cart" id="shopping-cart"></div>
+     `;
+return cardsHTML;
+        }
+    }
 }
+//I need to fill the  basket from the backend (orders), not localStorage because Jalopy sucks!
+ basket = JSON.parse(localStorage.getItem("data")) || [];
+ console.log(basket);
 
-let addItemId = 0
-export function addToCartEvent() {
-    function clickCounter() {
-        const addBtn = document.getElementById("add");
-        const subtractBtn = document.getElementById("subtract");
-        const count = document.getElementById("count")
-        //need to limit product value to 9
 
-        addBtn.addEventListener("click", function () {
-            // let count = 0;
-            if (count.innerHTML < 10) {//Do NOT parseInt the if conditional, i.e., if(parseInt(count.innerHTML < 10)), only the action you take below.
-                parseInt(count.innerText++);
-            }
+ export function addToCartEvent() {
+     // calculation();
+     // totalAmount();
+     // clearCart();
+     // update();
+     addIncremenetDecrementHandlers();
+
+ }
+function addIncremenetDecrementHandlers() {
+    const incrementBtns = document.querySelectorAll(".increment-Btn")
+    const decrementBtns = document.querySelectorAll(".decrement-Btn")
+
+    for (let i = 0; i < incrementBtns.length; i++) {
+        incrementBtns[i].addEventListener("click", function () {
+            const productId = this.getAttribute("data-id")
+            increment(productId);
         })
 
-        //need to limit product value to 0
-        subtractBtn.addEventListener("click", function () {
-            if (count.innerHTML > 0) {
-                parseInt(count.innerText--);
-            }
-        })
+        //
+        // //need to limit product value to 0
+        // subtractBtn.addEventListener("click", function () {
+        //     if (count.innerHTML > 0) {
+        //         parseInt(count.innerText--);
+    }
+    let label = document.getElementById("label");
+    let shoppingCart = document.getElementById("shopping-cart");
+    //I want to target these products and create an array for the cart that is displayed in the cart view
+    let productsAPI = BACKEND_HOST_URL + "/api/orders";
 
+
+//Add all the product items as a total sum of items to be displayed where needed, i.e., the cart badge, the total sum,
+    function calculation() {
+        let cartCounter = document.getElementById("cart-amount");
+        cartCounter.innerHTML = basket.map((x) => x.item).reduce((x, y) => x + y, 0);
+    }
+
+    let generateCartItems = () => {
+        if (basket.length !== 0) {
+            return shoppingCart.innerHTML = basket.map((x) => {
+                let {id, item} = x;
+                //I need to access the products database here
+                let search = productsAPI.find((y) => y.id === id) || []; //if you find it, cool, if not return an empty array; Also, y.id is the id from the database
+                let {img, name, price} = search; //lets destructure so I don't have type: search.img, or search.price, or search.name.
+                return `
+             <div class="cart-item">
+                 <img width="100" src=${img} alt=""
+             <div class="details">
+
+             <div class="title-price-x">
+                 <h4 class="title-price">
+                     <!--product name-->
+                     <p>${name}</p>
+                     <p class="cart-item-price">${price}</p>
+                 </h4>
+                 <i onclick="removeItem(${id})" class="fa-solid fa-x"></i>
+             </div>
+
+             <div class="buttons">
+                 <i onclick="decrement(${id})" class="fa-solid fa-minus"></i>
+                 <div id=${id} class="quantity">${item}</div>
+                 <i onclick="increment(${id})" class="fa-solid fa-plus"></i>
+             </div>
+
+             <h3>${item * price}</h3>
+             </div>
+             `;
+            })
+                .join("")
+        } else {
+            shoppingCart.innerHTML = ``;
+            label.innerHTML = `
+             <h2>Cart is Empty</h2>
+             <a data-link href="/products">
+                 <button data-link class="products">Back to shopping</button>
+             </a>
+             `;
+        }
+    }
+
+    function increment(id) {
+        console.log(basket);
+    }
+
+    // let increment = (id) => {
+    //     let search = basket.find((x) => x.props.orders.id === props.orders.id);
+    //     //if the product is already in the basket, dont push the entire object, rather increment only the item#
+    //     if(search === undefined){basket.push({
+    //         id: props.orders.id,
+    //         item: 1,
+    //     })
+    //     } else {
+    //         search.item += 1;
+    //     }
+    //     //saving the increment to local storage immediately; same is done to decrement.
+    //     update(props.orders.id);
+    //     //rerender the cart after the updates
+    //     generateCartItems();
+    //     localStorage.setItem("data", JSON.stringify(basket));
+    // }
+
+    let decrement = (id) => {
+        let search = basket.find((x) => x.id === selectedItem.id);
+        //if the product is not in the basket, don't decrement anymore.
+        if (search === undefined) return
+        else if (search.item === 0) return;
+        else {
+            search.item -= 1;
+        }
+        update(selectedItem.id);
+        //while there are no items do not display
+        basket = basket.filter((x) => x.item !== 0);
+
+        generateCartItems();
+        localStorage.setItem("data", JSON.stringify(basket));
+    }
+    let update = (id) => {
+        let search = basket.find((x) => x.id === id);
+        document.getElementById("id").innerHTML = search.item;
+
+        calculation();
+        totalAmount();
+    }
+    let removeItem = (id) => {
+        console.log(id.id);
+        basket = basket.filter((x) => x.id !== id.id);
+
+        generateCartItems();
+        totalAmount();
+        calculation();
+        localStorage.setItem("data", JSON.stringify(basket));
+    }
+
+    let clearCart = () => {
+        //clearing the basket by making it equal to an empty array
+        basket = []
+        generateCartItems();
+        calculation();
+        localStorage.setItem("data", JSON.stringify(basket));
+    }
+
+    let totalAmount = () => {
+        if (basket.length !== 0) {
+            let amount = basket.map((x) => {
+                let {item, id} = x;
+                let search = productsAPI.find((y) => y.id === id) || [];
+                return item * search.price;
+            }).reduce((x, y) => x + y, 0);
+            label.innerHTML = `
+         <h2>Total Bill: $ ${amount}</h2>
+         <button class="checkout">Checkout</button>
+         <button onclick="clearCart()" class="removeAll">Clear Cart</button>
+         `;
+        }
 
     }
 
-}
-
-function clickCart() {
-    addItemId += 1;
-    const cartBtn = document.getElementById("cart");
-    cartBtn.addEventListener("click", function(){
-        createView("/cart")
-    })
 }
