@@ -38,7 +38,8 @@ function generateAddReviewHTML() {
     addHTML = `<h3>Add a review</h3>
             <form>
                 <div>
-                    <label for="content">Content</label><br>
+                    <div class="itemnamebox">Item: <select><option>Tomato Seeds</option><option> </option></select></div>
+                    <label for="content">Content</label> 
                     <textarea id="content" class="form-control" name="content" rows="5" cols="50" placeholder="Enter content"></textarea>
                 </div>
                 <button data-id="0" id="saveReview" name="saveReview" type="button" class="my-button button btn-primary">Save Review</button>
@@ -57,8 +58,8 @@ function generateReviewsHTML(reviews) {
 
 
         let authorName = "";
-        if(review.author) {
-            authorName = review.author.screenName;
+        if(review.item) {
+            authorName = review.item.name;
         }
 
         reviewsHTML += `
