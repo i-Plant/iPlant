@@ -13,22 +13,13 @@ export default function Review(props) {
         <main>
             <div class="upper">
             ${addReviewHTML}
-<!--            <form>                -->
-<!--                <div>-->
-<!--                    <label for="content"><h1>Create a Review</h1></label>-->
-<!--                    <br>-->
-<!--                    <textarea id="content" class="form-control" name="content" rows="10" cols="50" placeholder="Enter content"></textarea>-->
-
-<!--                </div>-->
-<!--               <button data-id="0" id="saveReview" name="saveReview" class="button btn-primary">Save Review</button>-->
-<!--            </form>-->
             </div>
             
-            
             <div class="lower">
-                <h3>Customer Reviews</h3>
+               
                 <div class="container-m">
-                    <div class="row">
+                    <div class="row review">
+                        <h3 class="text-center">Customer Reviews</h3>
                         ${reviewsHTML}   
                     </div>
                 </div>
@@ -53,9 +44,7 @@ function generateAddReviewHTML() {
                     <textarea id="content" class="form-control" name="content" rows="5" cols="50" placeholder="Enter content"></textarea>
                    
                 </div>
-                
-          
-                
+             
                 <button data-id="0" id="saveReview" name="saveReview" type="button" class="my-button button btn-primary">Save Review</button>
             </form>`;
 
@@ -81,7 +70,11 @@ function generateReviewsHTML(reviews) {
             <div class="col-4 single-review">
                 <div class="card single-review">
                     <p class="card-text">${review.content}</p>
-                    <p>${authorName}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="user-about"> <span class="font-weight-bold d-block">${authorName}</span> 
+                        </div>
+                        <div class="user-image"> <img src="../assets/iplant-logo.png" class="rounded-circle"  alt="i-plant logo"> </div>
+                    </div>
                     <button data-id=${review.id} class="button editReview">Edit</button>
                     <button data-id=${review.id} class="button deleteReview">Delete</button>
                 </div>
