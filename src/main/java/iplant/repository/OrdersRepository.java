@@ -1,6 +1,7 @@
 package iplant.repository;
 
 import iplant.data.Order;
+import iplant.data.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

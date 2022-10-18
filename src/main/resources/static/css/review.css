@@ -8,28 +8,32 @@
 }
 .upper {
     margin-top: 50px;
-    margin-bottom: 20px;
+    margin-bottom: 200px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .row.review {
-    margin-top: 600px;
+    margin-top: 10px;
     padding: 10px;
-}
-
-.container-m {
     display: flex;
     height: 50vh;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
     margin-bottom: 20px;
-    padding:20px;
-
 }
 
+/*.container-m {*/
+/*    display: flex;*/
+/*    height: 50vh;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    margin-top: 20px;*/
+/*    margin-bottom: 20px;*/
+/*    padding:20px;*/
+
+/*}*/
 
 .card.single-review {
     background-color: #fff;
@@ -37,13 +41,11 @@
     height: 250px;
     margin-top: 10px;
     border: solid #4A7028ED;
-
 }
 
 .card-text {
     text-align: center;
 }
-
 
 .user-image img {
     border: 3px solid #4A7028ED;
@@ -59,5 +61,3 @@ img.rounded-circle {
     justify-content: flex-start;
 
 }
-
-

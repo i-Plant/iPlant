@@ -37,39 +37,40 @@ function generateAddReviewHTML() {
 
     addHTML = `<h3>Add a review</h3>
             <form>
-              
-               
                 <div>
-                    <label for="content">Content</label><br>
+                    <label for="item">Product:</label>
+                    <textarea id="item" name="item" placeholder="Enter product name"></textarea>
+                    <label for="content">Content</label> 
                     <textarea id="content" class="form-control" name="content" rows="5" cols="50" placeholder="Enter content"></textarea>
-                   
                 </div>
-             
                 <button data-id="0" id="saveReview" name="saveReview" type="button" class="my-button button btn-primary">Save Review</button>
             </form>`;
-
     return addHTML;
 }
 
 
 function generateReviewsHTML(reviews) {
     let reviewsHTML = `
-
-        
+    
+    
     `;
     for (let i = 0; i < reviews.length; i++) {
         const review = reviews[i];
 
 
         let authorName = "";
-        if(review.author) {
-            authorName = review.author.screenName;
+        if(review.item) {
+            authorName = review.item.name;
         }
+
+
 
         reviewsHTML += `
             <div class="col-4 single-review">
                 <div class="card single-review">
                     <p class="card-text">${review.content}</p>
+                    <label for="name">Product Name:</label>
+                    <p>${review.item}</p>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="user-about"> <span class="font-weight-bold d-block">${authorName}</span> 
                         </div>
@@ -99,26 +100,26 @@ export function MessageBoardEvent(){
 }
 
 function setupValidationHandlers() {
-    // let input = document.querySelector("#title");
-    // input.addEventListener("keyup", validateFields);
-    let input = document.querySelector("#content");
+    let input = document.querySelector("#item");
+    input.addEventListener("keyup", validateFields);
+    input = document.querySelector("#content");
     input.addEventListener("keyup", validateFields);
 }
 
 
 function validateFields() {
     let isValid = true;
-    // let input = document.querySelector("#title");
-    // if(input.value.trim().length < 1) {
-    //     input.classList.add("is-invalid");
-    //     input.classList.remove("is-valid");
-    //     isValid = false;
-    // } else {
-    //     input.classList.add("is-valid");
-    //     input.classList.remove("is-invalid");
-    // }
+    let input = document.querySelector("#item");
+    if(input.value.trim().length < 1) {
+        input.classList.add("is-invalid");
+        input.classList.remove("is-valid");
+        isValid = false;
+    } else {
+        input.classList.add("is-valid");
+        input.classList.remove("is-invalid");
+    }
 
-    let input = document.querySelector("#content");
+    input = document.querySelector("#content");
     if(input.value.trim().length < 1) {
         input.classList.add("is-invalid");
         input.classList.remove("is-valid");
@@ -156,9 +157,9 @@ function loadReviewIntoForm(reviewId) {
     }
 
     // load the post data into the form
-    // const titleField = document.querySelector("#title");
+    const itemField = document.querySelector("#item");
     const contentField = document.querySelector("#content");
-    // titleField.value = review.title;
+    itemField.value = review.item;
     contentField.value = review.content;
 
     const saveButton = document.querySelector("#saveReview");
@@ -227,7 +228,7 @@ function setupSaveHandler() {
 
 function saveReview(reviewId) {
     // get the title and content for the new/updated post
-    // const titleField = document.querySelector("#title");
+    const itemField = document.querySelector("#item");
     const contentField = document.querySelector("#content");
 
     // don't allow save if title or content are invalid
@@ -237,7 +238,7 @@ function saveReview(reviewId) {
 
     // make the new/updated post object
     const review = {
-        // title: titleField.value,
+        item: itemField.value,
         content: contentField.value
     }
     console.log(review)
@@ -270,4 +271,3 @@ function saveReview(reviewId) {
 
         })
 }
-

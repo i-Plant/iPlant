@@ -1,10 +1,9 @@
 package iplant.controller;
 
 import iplant.data.Review;
-import iplant.data.User;
-import iplant.misc.FieldHelper;
 import iplant.repository.ReviewsRepository;
 import iplant.repository.UsersRepository;
+import iplant.repository.misc.FieldHelper;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
@@ -34,11 +33,6 @@ public class ReviewsController {
         return optionalReview;
     }
 
-
-
-
-
-
     @PostMapping("")
     public void createReview(@RequestBody Review newReview) {
         if (newReview.getContent() == null || newReview.getContent().length() < 1) {
@@ -47,7 +41,9 @@ public class ReviewsController {
 //        Long id = usersRepository
 //        Optional<User> author = usersRepository.findById(id);
 //        newReview.setAuthor(author);
+
         newReview.setCreatedAt(LocalDate.now());
+        newReview.setItem(newReview.getItem());
 
         reviewsRepository.save(newReview);
     }

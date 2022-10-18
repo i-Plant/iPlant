@@ -19,6 +19,9 @@ public class Review {
     private Long id;
 
     @Column(nullable = false, length = 1024)
+    private String item;
+
+    @Column(nullable = false, length = 1024)
     private String content;
 
     @ManyToOne
