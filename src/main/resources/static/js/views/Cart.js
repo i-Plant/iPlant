@@ -23,7 +23,7 @@ export default function addToCart(props) {
                 <h4 class="title-price">
                     <!--product name-->
                     <p>${products[j].item.name}</p>-->
-                    <p class="cart-item-price">${products[j].item.price}</p>-->
+                    <p class="cart-item-price">${(products[j].item.price).toFixed(2)}</p>-->
                 </h4>-->
                 <i onclick="removeItem(${products[j]})" class="fa-solid fa-x"></i>-->
             </div>-->
@@ -32,7 +32,7 @@ export default function addToCart(props) {
                 <div id={id} class="quantity">${products[j].quantity}</div>            -->
                 <i data-id="(${products[j].id})" class="fa-solid fa-plus increment-Btn"></i>-->
             </div>-->
-            <h3>${products[j].quantity * products[j].item.price}</h3>-->
+            <h3>${(products[j].quantity * products[j].item.price).toFixed(2)}</h3>-->
             </div>-->
             `;
 
