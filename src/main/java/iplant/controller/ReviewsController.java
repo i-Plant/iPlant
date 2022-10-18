@@ -41,7 +41,9 @@ public class ReviewsController {
 //        Long id = usersRepository
 //        Optional<User> author = usersRepository.findById(id);
 //        newReview.setAuthor(author);
+
         newReview.setCreatedAt(LocalDate.now());
+        newReview.setItem(newReview.getItem());
 
         reviewsRepository.save(newReview);
     }

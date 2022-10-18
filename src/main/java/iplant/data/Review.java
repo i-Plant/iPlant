@@ -18,9 +18,8 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JsonIgnoreProperties({"reviews"})
-    private Product item;
+    @Column(nullable = false, length = 1024)
+    private String item;
 
     @Column(nullable = false, length = 1024)
     private String content;
