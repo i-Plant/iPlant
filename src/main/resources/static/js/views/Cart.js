@@ -1,20 +1,25 @@
 //I need to display the carts in Jalopy
 //I need to push to a new array (basket) and display those cards in the cart(basket) when I add them
 let basket = [];
+let products;
 export default function addToCart(props) {
     basket = props.orders
     console.log(basket);
 
+
     let myOrder;
     for (let i = 0; i < basket.length; i++) {
+
         if (basket[i].buyer.id !== 1) {
             continue;
         } else {
             myOrder = basket[i];
             // basket = myOrder;
         }
-        let products = myOrder.products;
-        for (let j = 0; j < myOrder.products.length; j++) {
+
+        products = myOrder.products;
+
+        for (let j = 0; j < products.length; j++) {
 
             let cardsHTML = `
             <div class="cart-item">                
@@ -25,15 +30,18 @@ export default function addToCart(props) {
                 <h4 class="title-price">
                     <!--product name-->
                     <p>${products[j].item.name}</p>-->
-                    <p class="cart-item-price">${products[j].item.price}</p>-->
+                    <p class="cart-item-price">${(products[j].item.price).toFixed(2)}</p>-->
+            
+                 
+
                 </h4>-->
-                <i onclick="removeItem(${products[j]})" class="fa-solid fa-x"></i>-->
+                <i onclick="removeItem(${products[j].id})" class="fa-solid fa-x"></i>-->
             </div>-->
 
             <div class="buttons">-->
                 <i data-id="${products[j].id}" class="fa-solid fa-minus decrement-Btn"></i>-->
-                <div id={id} class="quantity">${products[j].quantity}</div>            -->
-                <i data-id="(${products[j].id})" class="fa-solid fa-plus increment-Btn"></i>-->
+                <div data-id="${products[j].id}" class="quantity">${products[j].quantity}</div>            -->
+                <i data-id="${products[j].id}" class="fa-solid fa-plus increment-Btn"></i>-->
             </div>-->
 
             <h3>${products[j].quantity * products[j].item.price}</h3>-->
@@ -44,13 +52,13 @@ export default function addToCart(props) {
  <!--For the shopping cart icon-->
      <div class="cart">
         <a data-link href="/cart"><i data-passthru id="cart" class="fa-solid fa-cart-shopping"></i></a>
-        <div class="cart-amount">0</div>
+        <div class="cart-amount">${products[j].quantity}</div>
      </div>
 
      <div id='label' class='text-center'></div>
      <div class="shopping-cart" id="shopping-cart"></div>
      `;
-return cardsHTML;
+            return cardsHTML;
         }
     }
 }
@@ -64,30 +72,33 @@ return cardsHTML;
      // totalAmount();
      // clearCart();
      // update();
-     addIncremenetDecrementHandlers();
+     addIncrementDecrementHandlers();
 
  }
-function addIncremenetDecrementHandlers() {
+function addIncrementDecrementHandlers() {
     const incrementBtns = document.querySelectorAll(".increment-Btn")
     const decrementBtns = document.querySelectorAll(".decrement-Btn")
 
+    console.log(incrementBtns);
+    console.log(decrementBtns);
+
     for (let i = 0; i < incrementBtns.length; i++) {
-        incrementBtns[i].addEventListener("click", function () {
-            const productId = this.getAttribute("data-id")
+        console.log(incrementBtns[i]);
+        incrementBtns[i].addEventListener("click", function(e) {
+            const productId = this.getAttribute("data-id");
+            const itemQuantity = document.querySelector(".quantity");
+            console.log(itemQuantity.innerHTML);
+            itemQuantity.innerHTML++;
             increment(productId);
-        })
 
-        //
-        // //need to limit product value to 0
-        // subtractBtn.addEventListener("click", function () {
-        //     if (count.innerHTML > 0) {
-        //         parseInt(count.innerText--);
+        });
+        // increment(productId);
     }
-    let label = document.getElementById("label");
-    let shoppingCart = document.getElementById("shopping-cart");
-    //I want to target these products and create an array for the cart that is displayed in the cart view
-    let productsAPI = BACKEND_HOST_URL + "/api/orders";
+    // for (let i = 0; i < decrementBtns.length; i++) {
+    //     decrementBtns.addEventListener("click", decrement);
+    // }
 
+}
 
 //Add all the product items as a total sum of items to be displayed where needed, i.e., the cart badge, the total sum,
     function calculation() {
@@ -96,6 +107,10 @@ function addIncremenetDecrementHandlers() {
     }
 
     let generateCartItems = () => {
+        let label = document.getElementById("label");
+        let shoppingCart = document.getElementById("shopping-cart");
+        //I want to target these products and create an array for the cart that is displayed in the cart view
+        let productsAPI = BACKEND_HOST_URL + "/api/orders";
         if (basket.length !== 0) {
             return shoppingCart.innerHTML = basket.map((x) => {
                 let {id, item} = x;
@@ -138,8 +153,25 @@ function addIncremenetDecrementHandlers() {
         }
     }
 
-    function increment(id) {
-        console.log(basket);
+    function increment(productId) {
+     let bucket;
+
+        for(let i=0; i < products.length; i++) {
+         if(products[i].id == productId) {
+
+             bucket = products[i];
+         }
+     }
+        bucket.quantity++;
+
+    }
+
+    function decrement(e) {
+        const productId = this.getAttribute("data-id")
+        if (productId.innerHTML > 0) {
+            parseInt(productId.innerText--);
+
+        }
     }
 
     // let increment = (id) => {
@@ -158,25 +190,25 @@ function addIncremenetDecrementHandlers() {
     //     generateCartItems();
     //     localStorage.setItem("data", JSON.stringify(basket));
     // }
-
-    let decrement = (id) => {
-        let search = basket.find((x) => x.id === selectedItem.id);
-        //if the product is not in the basket, don't decrement anymore.
-        if (search === undefined) return
-        else if (search.item === 0) return;
-        else {
-            search.item -= 1;
-        }
-        update(selectedItem.id);
-        //while there are no items do not display
-        basket = basket.filter((x) => x.item !== 0);
-
-        generateCartItems();
-        localStorage.setItem("data", JSON.stringify(basket));
-    }
+//I want decrement to remove quantity of items and then complete;ly remove the card when it reaches 0
+    // let decrement = (id) => {
+    //     let search = basket.find((x) => x.id === selectedItem.id);
+    //     //if the product is not in the basket, don't decrement anymore.
+    //     if (search === undefined) return
+    //     else if (search.item === 0) return;
+    //     else {
+    //         search.item -= 1;
+    //     }
+    //     update(selectedItem.id);
+    //     //while there are no items do not display
+    //     basket = basket.filter((x) => x.item !== 0);
+    //
+    //     generateCartItems();
+    //     localStorage.setItem("data", JSON.stringify(basket));
+    // }
     let update = (id) => {
         let search = basket.find((x) => x.id === id);
-        document.getElementById("id").innerHTML = search.item;
+        document.querySelector("#id").innerHTML = search.item;
 
         calculation();
         totalAmount();
@@ -215,4 +247,4 @@ function addIncremenetDecrementHandlers() {
 
     }
 
-}
+

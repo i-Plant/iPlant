@@ -3,7 +3,11 @@ import createView from "../createView.js";
 let products = [];
 export default function Products(props) {
     products = props.products
-   let html = `
+    console.log(props.products)
+    //This function displays the float decimal to display two places after decimal
+
+
+        let html = `
 <!--For the shopping cart icon-->
      <div class="cart">
         <a data-link href="/cart"><i data-passthru id="cart" class="fa-solid fa-cart-shopping"></i></a>
@@ -16,10 +20,10 @@ export default function Products(props) {
         <h1>Our Plants</h1>
     </div>
     <main>
-    
-   `
-    for (let i = 0; i < products.length; i++){
-        html += `
+   
+`
+        for (let i = 0; i < products.length; i++) {
+            html += `
                     <div class="card" class="d-flex flex-wrap align-content-center" style="width:18rem; z-index: 20">
 
                       <img class="card-img-top" src="${products[i].imageURL}" alt="plant-image" style="object-fit: fill;width: 100%; height: 250px"class="images">
@@ -27,17 +31,18 @@ export default function Products(props) {
                         <h2>${products[i].name}</h2>
                         <p class="card-text">${products[i].details}</p>
                         <h4>${products[i].category}</h4>
-                        <h5>$ ${products[i].price}</h5> 
+                        <h5>$ ${(products[i].price).toFixed(2)}</h5> 
                         <h1>${products[i].id}</h1>
                         <button data-id="${products[i].id}" class="btn btn-primary addToCart">Add to Cart</button>
                       </div>
                     </div> 
 `
-    }
+        }
 
-    return html+= `</main>`;
+
+        return html += `</main>`;
 }
-
+//This pushes items from products into a cart array. I can use this
 export function ProductsEvent(){
     let cartArray = [];
     let addToCart = document.querySelectorAll(".addToCart");
