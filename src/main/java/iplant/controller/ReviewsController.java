@@ -1,10 +1,9 @@
 package iplant.controller;
 
 import iplant.data.Review;
-import iplant.data.User;
-import iplant.misc.FieldHelper;
 import iplant.repository.ReviewsRepository;
 import iplant.repository.UsersRepository;
+import iplant.repository.misc.FieldHelper;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
@@ -33,11 +32,6 @@ public class ReviewsController {
         }
         return optionalReview;
     }
-
-
-
-
-
 
     @PostMapping("")
     public void createReview(@RequestBody Review newReview) {

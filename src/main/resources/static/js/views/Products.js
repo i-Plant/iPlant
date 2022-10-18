@@ -3,13 +3,19 @@ import createView from "../createView.js";
 let products = [];
 export default function Products(props) {
     products = props.products
+    // console.log(props.products)
+    function afterDecimal(num) {
+        if (Number.isInteger(num)) {
+            return 0;
+        }
+        return num.toString().split('.')[1].length;
+    }
+    for(var i = 0; i < props.products.length; i++){
+        if (afterDecimal(props.products[i].price) === 1 ){
+            props.products[i].price = "" + props.products[i].price + "0";
+        }
+    }
    let html = `
-<!--For the shopping cart icon-->
-     <div class="cart">
-        <a data-link href="/cart"><i data-passthru id="cart" class="fa-solid fa-cart-shopping"></i></a>
-        <div class="cart-amount">0</div>
-     </div>
-
 <div id='label' class='text-center'></div>
 <div class="shopping-cart" id="shopping-cart"></div>
     <div>
@@ -21,7 +27,6 @@ export default function Products(props) {
     for (let i = 0; i < products.length; i++){
         html += `
                     <div class="card" class="d-flex flex-wrap align-content-center" style="width:18rem; z-index: 20">
-
                       <img class="card-img-top" src="${products[i].imageURL}" alt="plant-image" style="object-fit: fill;width: 100%; height: 250px"class="images">
                       <div class="card-body">
                         <h2>${products[i].name}</h2>
@@ -49,8 +54,5 @@ export function ProductsEvent(){
             console.log(cartArray);
         })
     }
-
 }
-
-
 
