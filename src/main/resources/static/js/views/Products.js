@@ -26,17 +26,29 @@ export default function Products(props) {
    `
     for (let i = 0; i < products.length; i++){
         html += `
-                    <div class="card" class="d-flex flex-wrap align-content-center" style="width:18rem; z-index: 20">
-                      <img class="card-img-top" src="${products[i].imageURL}" alt="plant-image" style="object-fit: fill;width: 100%; height: 250px"class="images">
-                      <div class="card-body">
-                        <h2>${products[i].name}</h2>
-                        <p class="card-text">${products[i].details}</p>
-                        <h4>${products[i].category}</h4>
-                        <h5>$ ${products[i].price}</h5> 
-                        <h1>${products[i].id}</h1>
-                        <button data-id="${products[i].id}" class="btn btn-primary addToCart">Add to Cart</button>
-                      </div>
-                    </div> 
+
+              <div class="flip-card">
+    <div class="flip-card-inner">
+        <div class="flip-card-front">
+             <img class="card-img-top" src="${products[i].imageURL}" alt="plant-image">
+            <div class="plantName">
+             <h6 class="nameTitle">${products[i].name}</h6>
+             <h5 class="nameTitle">$ ${products[i].price}</h5>
+             </div>
+        </div>
+        
+        <div class="flip-card-back">
+            <p class="card-info">
+                  
+                <h6 class="products-card-text">${products[i].details}</h6>
+                 <h4>${products[i].category}</h4>
+            </p>
+             <button data-id="${products[i].id}" class="btn btn-primary addToCart">Add to Cart</button>
+        </div> 
+    </div>
+</div>     
+
+                   
 `
     }
 

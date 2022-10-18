@@ -1,8 +1,87 @@
 main{
     display: flex;
-    width: auto;
-    margin: 1em;
+    width: 90%;
+    margin: 4em;
     justify-content: space-evenly;
     flex-wrap: wrap;
     align-content: flex-start;
+    font-family: 'Lusitana', serif;
+}
+.card{
+    align-content:space-evenly;
+    flex-wrap: wrap;
+    width: 18rem;
+    z-index: 20;
+    height: auto;
+}
+.card-img-top{
+    object-fit: fill;
+    width: 100%;
+    height: 250px;
+    /*padding: 15px;*/
+    /*border-radius: 16px;*/
+    opacity: 0.9;
+}
+.products-card-text{
+    text-align: center;
+    /*color: rgba(32, 36, 40, 0.69);*/
+}
+.plantName{
+    padding: 18px 18px 18px 9px;
+    text-align: left;
+    margin-right: 10px;
+    font-weight: bold;
+    color: rgba(32, 36, 40, 0.69);
+}
+.nameTitle{
+    color: rgba(32, 51, 26, 0.8);
+    font-weight: bold;
+}
+.flip-card {
+    background-color: transparent;
+    width: 300px;
+    height: 360px;
+    margin: .5em;
+    perspective: 1000px; /* Remove this if you don't want the 3D effect */
+}
+
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+    position: relative;
+    width: 300px;
+    height: auto;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Position the front and back side */
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+}
+
+/* Style the front side (fallback if image is missing) */
+.flip-card-front {
+    height: auto;
+    background-color: rgb(238, 237, 237);
+    border: solid rgba(211, 211, 211, 0.26);
+    border-radius: 2px;
+
+}
+
+/* Style the back side */
+.flip-card-back {
+    height: auto;
+    background-color: #e4f1d7;
+    color: white;
+    transform: rotateY(180deg);
 }
