@@ -11,7 +11,6 @@ export default function addToCart(props) {
             continue;
         } else {
             myOrder = basket[i];
-            // basket = myOrder;
         }
         let products = myOrder.products;
         for (let j = 0; j < myOrder.products.length; j++) {
@@ -20,7 +19,6 @@ export default function addToCart(props) {
             <div class="cart-item">                
                  <img src="${products[j].item.imageURL}" alt="A plant">
             <div class="details">
-
             <div class="title-price-x">
                 <h4 class="title-price">
                     <!--product name-->
@@ -29,13 +27,11 @@ export default function addToCart(props) {
                 </h4>-->
                 <i onclick="removeItem(${products[j]})" class="fa-solid fa-x"></i>-->
             </div>-->
-
             <div class="buttons">-->
                 <i data-id="${products[j].id}" class="fa-solid fa-minus decrement-Btn"></i>-->
                 <div id={id} class="quantity">${products[j].quantity}</div>            -->
                 <i data-id="(${products[j].id})" class="fa-solid fa-plus increment-Btn"></i>-->
             </div>-->
-
             <h3>${products[j].quantity * products[j].item.price}</h3>-->
             </div>-->
             `;
@@ -46,27 +42,26 @@ export default function addToCart(props) {
         <a data-link href="/cart"><i data-passthru id="cart" class="fa-solid fa-cart-shopping"></i></a>
         <div class="cart-amount">0</div>
      </div>
-
      <div id='label' class='text-center'></div>
      <div class="shopping-cart" id="shopping-cart"></div>
      `;
-return cardsHTML;
+            return cardsHTML;
         }
     }
 }
 //I need to fill the  basket from the backend (orders), not localStorage because Jalopy sucks!
- basket = JSON.parse(localStorage.getItem("data")) || [];
- console.log(basket);
+basket = JSON.parse(localStorage.getItem("data")) || [];
+console.log(basket);
 
 
- export function addToCartEvent() {
-     // calculation();
-     // totalAmount();
-     // clearCart();
-     // update();
-     addIncremenetDecrementHandlers();
+export function addToCartEvent() {
+    // calculation();
+    // totalAmount();
+    // clearCart();
+    // update();
+    addIncremenetDecrementHandlers();
+}
 
- }
 function addIncremenetDecrementHandlers() {
     const incrementBtns = document.querySelectorAll(".increment-Btn")
     const decrementBtns = document.querySelectorAll(".decrement-Btn")
@@ -106,7 +101,6 @@ function addIncremenetDecrementHandlers() {
              <div class="cart-item">
                  <img width="100" src=${img} alt=""
              <div class="details">
-
              <div class="title-price-x">
                  <h4 class="title-price">
                      <!--product name-->
@@ -115,13 +109,11 @@ function addIncremenetDecrementHandlers() {
                  </h4>
                  <i onclick="removeItem(${id})" class="fa-solid fa-x"></i>
              </div>
-
              <div class="buttons">
                  <i onclick="decrement(${id})" class="fa-solid fa-minus"></i>
                  <div id=${id} class="quantity">${item}</div>
                  <i onclick="increment(${id})" class="fa-solid fa-plus"></i>
              </div>
-
              <h3>${item * price}</h3>
              </div>
              `;
