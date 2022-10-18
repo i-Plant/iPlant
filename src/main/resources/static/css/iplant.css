@@ -16,7 +16,12 @@ form > * {
 a {
     text-decoration: none;
     color: inherit;
+ }
+
+a:hover{
+    color: #cbe385;
 }
+
 
 ul, li {
     list-style: none;
@@ -33,14 +38,14 @@ ul, li {
     content: " ";
     clear: both;
     height: 0;
+    font-family: 'Lusitana', serif;
 }
 
-
+/*font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;*/
 /* --- Typography --- */
 
 
 body {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-color: white;
     color: #19f519;
     margin-top: 60px; /* height of nav-bar */
@@ -89,14 +94,15 @@ p {
     top: 0;
     width: 100%; /* full width */
     background-color: white;
-    height: 60px;
+    height: 100px;
     z-index: 50;
 }
 
 .nav-bar .container {
     display: flex;
     align-items: center; /* vertically center */
-    height: 100%;
+    height: 100px;
+    align-content: space-evenly;
 }
 
 /* Hide checkbox that controls Mobile Nav Button*/
@@ -168,6 +174,7 @@ p {
     display: flex;
     justify-content: space-around; /* evenly space items */
     align-items: center; /* center vertically */
+    margin: 10px;
 }
 
 .main-nav li {
@@ -231,7 +238,7 @@ p {
         height: calc(100vh - 60px); /* take full vertical viewport height, -60px for nav-bar */
         overflow: hidden;
         position: absolute;
-        top: 60px;
+        top: 80px;
         line-height: normal;
         left: 0;
         width: 100%;
