@@ -1,4 +1,4 @@
-package iplant.misc;
+package iplant.repository.misc;
 
 
 import org.springframework.beans.BeanWrapper;
