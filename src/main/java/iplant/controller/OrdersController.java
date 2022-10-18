@@ -2,13 +2,8 @@
 package iplant.controller;
 
 import iplant.data.Order;
-import iplant.data.Product;
-import iplant.data.User;
-import iplant.misc.FieldHelper;
-import iplant.repository.OrderProductsRepository;
+import iplant.repository.misc.FieldHelper;
 import iplant.repository.OrdersRepository;
-import iplant.repository.ProductsRepository;
-import iplant.repository.UsersRepository;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -18,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,8 +25,6 @@ import static iplant.data.Status.Active;
 public class OrdersController {
     @Autowired
     private OrdersRepository orderRepository;
-
-    private OrderProductsRepository orderProductsRepository;
 
     @GetMapping(path = "")
     public List<Order> getOrders() {
@@ -58,7 +50,7 @@ public class OrdersController {
 //        set UserId as Buyer for the newOrder. If not a user set Buyer to null:
         newOrder.setBuyer(null);
 //                if(isLoggedIn()) {
-//                    newOrder.setBuyer(id);
+//                    newOrder.setBuyer(user);
 //                }
 
 //        create and set DateTimeStamp as createdAt to newOrder:
@@ -76,7 +68,6 @@ public class OrdersController {
         if (optionalOrder.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Order # " + id + " not found");
         } else {
-
             orderRepository.deleteById(id);
         }
     }

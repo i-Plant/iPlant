@@ -1,0 +1,5 @@
+INSERT INTO orders(created_at, buyer_id, status)
+VALUES (20221011, 2, 'Completed'),
+(20221011, 1, 'Completed'),
+(20221012, 2, 'Active'),
+(20221012, 1, 'Active')

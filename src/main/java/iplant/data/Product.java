@@ -1,7 +1,6 @@
 package iplant.data;
 
 import lombok.*;
-import org.hibernate.validator.constraints.Currency;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -27,7 +26,7 @@ public class Product {
     @Column
     private Category category;
 
-    @Column(length = 7)
+    @Column(length = 8)
     private Double price;
 
     @Column(length = 1026)
