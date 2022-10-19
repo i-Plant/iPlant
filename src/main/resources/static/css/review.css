@@ -36,19 +36,41 @@
 /*}*/
 
 .card.single-review {
-    background-color: #fff;
+    background-color: #495771;
     padding: 15px;
-    height: 250px;
-    margin-top: 10px;
-    border: solid #4A7028ED;
+    height: 300px;
+    width: 350px;
+    margin-top: 15px;
+    border: solid #fff;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
 }
 
 .card-text {
     text-align: center;
+    color: #fff;
+    font-size: 17px;
+
+}
+
+button.editReview {
+    background-color: #fff;
+    color: #495771;
+}
+
+button.deleteReview {
+    background-color: #fff;
+    color: #495771;
+}
+
+.review-list {
+    color: #fff;
+    font-size: 20px;
 }
 
 .user-image img {
-    border: 3px solid #4A7028ED;
+    border: 3px solid #fff;
     padding: 2px;
     height: 60px;
     width: 60px;
