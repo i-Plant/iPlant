@@ -2,7 +2,7 @@ import {getUser, isLoggedIn} from "../../auth.js";
 export default function Navbar(props) {
     if (isLoggedIn()) {
         return `
-<nav class="nav-bar" xmlns="http://www.w3.org/1999/html">
+<nav class="nav-bar" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
     <div class="container">
         <input type="checkbox" id="drop-down-cbox"/>
         <label for="drop-down-cbox">
@@ -20,16 +20,17 @@ export default function Navbar(props) {
         <input type="checkbox">
     </div>
 
-    <a data-link href="/"><h1 class="site-logo">i·Plant</h1></a>
+    <h1 class="site-logo"><a data-link href="/">i·Plant</a></h1>
     
     <ul class="main-nav small-caps"> 
         <li><a data-link href="/products">Products</a></li>
         <li><a data-link href="/reviews">Reviews</a></li>
         <li><a data-link href="/plantId">Plant Id</a></li>
         <li><a data-link href="/checkout">Checkout</a></li>
-        <li><a data-link href="/logout">Logout</a></li>
         <li><a data-link href="/about">About Us</a></li>
-        </ul>
+<!--        <li><a data-link href="/logout">Logout</a></li>-->
+    </ul>
+    <a data-link href="/logout" class="logOut">Logout</a>
     </div>
    
 </nav>`;
@@ -42,18 +43,19 @@ export default function Navbar(props) {
         <span></span>
         <span></span>
     </label>    
-    
- <a data-link href="/"><h1 class="site-logo">i·Plant</h1></a>
+
+ <h1 class="site-logo"><a data-link href="/">i·Plant</a></h1>
     
     <ul class="main-nav small-caps">
         <li><a data-link href="/products">Products</a></li>
-        <li><a data-link href="/login">Login</a></li>
         <li><a data-link href="/reviews">Reviews</a></li>
-<!--        <li><a data-link href="/plantId">Plant Id</a></li>-->
+<!--    <li><a data-link href="/plantId">Plant Id</a></li>-->
         <li><a data-link href="/checkout">Checkout</a></li>
         <li><a data-link href="/about">About Us</a></li>
+<!--          <li><a data-link href="/login">Login</a></li>-->
     </ul>
-    </div>  
+    <a data-link href="/login" class="logIn">Login</a>
+    </div> 
 </nav>
  `;
     }

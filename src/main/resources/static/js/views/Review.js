@@ -8,6 +8,7 @@ export default function Review(props) {
     const reviewsHTML = generateReviewsHTML(props.reviews);
     // save this for loading edits later
     reviews = props.reviews;
+
     const addReviewHTML = generateAddReviewHTML();
 
     return `
@@ -70,31 +71,33 @@ function generateReviewsHTML(reviews) {
             authorName = review.item.name;
         }
 
+
         if (isLoggedIn()) {
             reviewsHTML += `
-            <div class="col-4 single-review">
+            <div class="col-sm-4 single-review">
                 <div class="card single-review">
                     <p class="card-text">${review.content}</p>
-                    <label for="name">Product Name:</label>
-                    <p>${review.item}</p>
+                    <label for="name" class="card-text">Product Name:</label>
+                    <p class="review-list">${review.item}</p>
                     <div class="d-flex justify-content-between align-items-center">
-                        <div class="user-about"> <span class="font-weight-bold d-block">${authorName}</span> 
+                        <div class="user-about"> <span class="font-weight-bold d-block"></span> 
                         </div>
                         <div class="user-image"> <img src="../assets/iplant-logo.png" class="rounded-circle"  alt="i-plant logo"> </div>
+                        <button data-id=${review.id} class="button editReview">Edit</button>
+                        <button data-id=${review.id} class="button deleteReview">Delete</button>
                     </div>
-                    <button data-id=${review.id} class="button editReview">Edit</button>
-                    <button data-id=${review.id} class="button deleteReview">Delete</button>
+                   
                 </div>
             </div>`;
         } else {
             reviewsHTML += `
-            <div class="col-4 single-review">
+            <div class="col-sm-4 single-review">
                 <div class="card single-review">
                     <p class="card-text">${review.content}</p>
-                    <label for="name">Product Name:</label>
-                    <p>${review.item}</p>
+                    <label for="name" class="card-text">Product Name:</label>
+                    <p class="review-list">${review.item}</p>
                     <div class="d-flex justify-content-between align-items-center">
-                        <div class="user-about"> <span class="font-weight-bold d-block">${authorName}</span> 
+                        <div class="user-about"> <span class="font-weight-bold d-block"></span> 
                         </div>
                         <div class="user-image"> <img src="../assets/iplant-logo.png" class="rounded-circle"  alt="i-plant logo"> </div>
                     </div>

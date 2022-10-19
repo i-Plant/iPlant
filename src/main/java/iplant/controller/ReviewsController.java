@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin
 @AllArgsConstructor
 @RestController
 @RequestMapping(value = "/api/reviews", produces = "application/json")
