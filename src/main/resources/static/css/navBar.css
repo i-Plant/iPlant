@@ -78,6 +78,7 @@ p {
     text-transform: uppercase;
     letter-spacing: 0.8rem;
     margin: 0 1rem;
+    align-self: center;
 }
 
 /* --- Elements --- */
@@ -99,9 +100,17 @@ p {
 
 .nav-bar .container {
     display: flex;
-    align-items: center; /* vertically center */
+    align-items: unset;/* vertically center */
     height: 100px;
     align-content: space-evenly;
+}
+.logIn{
+    padding-top: 20px;
+    padding-right: 10px;
+}
+.logOut{
+    padding-top: 20px;
+    padding-right: 10px;
 }
 
 /* Hide checkbox that controls Mobile Nav Button*/
@@ -284,5 +293,6 @@ p {
     .main-nav li > ul li span {
         background-color: #eee;
     }
+
 
 }

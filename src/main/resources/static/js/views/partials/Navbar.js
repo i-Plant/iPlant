@@ -27,9 +27,10 @@ export default function Navbar(props) {
         <li><a data-link href="/reviews">Reviews</a></li>
         <li><a data-link href="/plantId">Plant Id</a></li>
         <li><a data-link href="/checkout">Checkout</a></li>
-        <li><a data-link href="/logout">Logout</a></li>
         <li><a data-link href="/about">About Us</a></li>
-        </ul>
+<!--        <li><a data-link href="/logout">Logout</a></li>-->
+    </ul>
+    <a data-link href="/logout" class="logOut">Logout</a>
     </div>
    
 </nav>`;
@@ -47,13 +48,14 @@ export default function Navbar(props) {
     
     <ul class="main-nav small-caps">
         <li><a data-link href="/products">Products</a></li>
-        <li><a data-link href="/login">Login</a></li>
         <li><a data-link href="/reviews">Reviews</a></li>
-<!--        <li><a data-link href="/plantId">Plant Id</a></li>-->
+<!--    <li><a data-link href="/plantId">Plant Id</a></li>-->
         <li><a data-link href="/checkout">Checkout</a></li>
         <li><a data-link href="/about">About Us</a></li>
+<!--          <li><a data-link href="/login">Login</a></li>-->
     </ul>
-    </div>  
+    <a data-link href="/login" class="logIn">Login</a>
+    </div> 
 </nav>
  `;
     }
