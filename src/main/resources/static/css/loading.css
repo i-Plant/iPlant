@@ -9,9 +9,9 @@
     }
     20% {
         transform: scale(1);
-        color: hotpink;
-        -webkit-text-stroke: 3px red;
-        filter: drop-shadow(0 0 1px black) drop-shadow(0 0 1px black) drop-shadow(0 0 3px red) drop-shadow(0 0 5px red) hue-rotate(10turn);
+        color: rgba(84, 116, 53, 0.93);
+        -webkit-text-stroke: 3px #A2C979FF;
+        filter: drop-shadow(0 0 1px black) drop-shadow(0 0 1px black) drop-shadow(0 0 3px #8DB758FF) drop-shadow(0 0 5px #8DB758FF) hue-rotate(10turn);
     }
     50% {
         transform: scale(.5);
