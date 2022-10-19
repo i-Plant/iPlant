@@ -6,16 +6,14 @@ export default function Home(props) {
     //key for username is loggedInUser.userName
     //for profile pic is loggedInUser.profilePic
     return `
-        <header>
-            <h1>Welcome</h1>
-        </header>
-        <main>
+        <body class="homeBody">
+        <h1 class="homeLogo">Logo here</h1>
             <div>
                 <p>
-                    This is the home page text.
+                    i·Plant corp
                 </p>    
             </div>
-        </main>
+        </body>
     `;
 }
 //I want to display the username with a welcome message for 3 seconds after logging in
