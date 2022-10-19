@@ -2,7 +2,7 @@ import {getUser, isLoggedIn} from "../../auth.js";
 export default function Navbar(props) {
     if (isLoggedIn()) {
         return `
-<nav class="nav-bar" xmlns="http://www.w3.org/1999/html">
+<nav class="nav-bar" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
     <div class="container">
         <input type="checkbox" id="drop-down-cbox"/>
         <label for="drop-down-cbox">
@@ -20,7 +20,7 @@ export default function Navbar(props) {
         <input type="checkbox">
     </div>
 
-    <a data-link href="/"><h1 class="site-logo">i·Plant</h1></a>
+    <h1 class="site-logo"><a data-link href="/">i·Plant</a></h1>
     
     <ul class="main-nav small-caps"> 
         <li><a data-link href="/products">Products</a></li>
@@ -42,8 +42,8 @@ export default function Navbar(props) {
         <span></span>
         <span></span>
     </label>    
-    
- <a data-link href="/"><h1 class="site-logo">i·Plant</h1></a>
+
+ <h1 class="site-logo"><a data-link href="/">i·Plant</a></h1>
     
     <ul class="main-nav small-caps">
         <li><a data-link href="/products">Products</a></li>

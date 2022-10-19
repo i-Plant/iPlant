@@ -48,9 +48,8 @@ ul, li {
 body {
     background-color: white;
     color: #19f519;
-    margin-top: 60px; /* height of nav-bar */
+    margin-top: 60px;
 }
-
 p {
     line-height: 1.4;
 }
