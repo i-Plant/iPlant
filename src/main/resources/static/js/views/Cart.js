@@ -77,9 +77,7 @@ function addIncrementDecrementHandlers() {
     const incrementBtns = document.querySelectorAll(".increment-Btn")
     const decrementBtns = document.querySelectorAll(".decrement-Btn")
 
-    console.log(incrementBtns);
-    console.log(decrementBtns);
-
+    //looping through the increment buttons
     for (let i = 0; i < incrementBtns.length; i++) {
         console.log(incrementBtns[i]);
         incrementBtns[i].addEventListener("click", function(e) {
@@ -90,14 +88,21 @@ function addIncrementDecrementHandlers() {
             increment(productId);
 
         });
-        // increment(productId);
+
     }
-    // for (let i = 0; i < decrementBtns.length; i++) {
-    //     decrementBtns.addEventListener("click", decrement);
-    // }
+    //looping through the decrement buttons
+    for (let i = 0; i < incrementBtns.length; i++) {
+        decrementBtns[i].addEventListener("click", function(e) {
+            const productId = this.getAttribute("data-id");
+            const itemQuantity = document.querySelector(".quantity");
+            itemQuantity.innerHTML--;
+            decrement(productId);
+
+        });
+
+    }
 
 }
-
 //Add all the product items as a total sum of items to be displayed where needed, i.e., the cart badge, the total sum,
     function calculation() {
         let cartCounter = document.getElementById("cart-amount");
@@ -148,25 +153,27 @@ function addIncrementDecrementHandlers() {
         }
     }
 
+    let bucket;
     function increment(productId) {
-     let bucket;
 
         for(let i=0; i < products.length; i++) {
-         if(products[i].id == productId) {
+             if(products[i].id == productId) {
 
-             bucket = products[i];
-         }
+                 bucket = products[i];
+             }
      }
         bucket.quantity++;
 
     }
 
     function decrement(e) {
-        const productId = this.getAttribute("data-id")
-        if (productId.innerHTML > 0) {
-            parseInt(productId.innerText--);
+        for(let i=0; i < products.length; i++) {
+            if(products[i].id == productId) {
 
+                bucket = products[i];
+            }
         }
+        bucket.quantity--;
     }
 
     // let increment = (id) => {
