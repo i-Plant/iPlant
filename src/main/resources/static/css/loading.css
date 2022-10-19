@@ -1,6 +1,7 @@
 :root {
     --effect: hover 2.5s linear infinite;
 }
+
 @keyframes hover {
     0% {
         transform: scale(.5);
