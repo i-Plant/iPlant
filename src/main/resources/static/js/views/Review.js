@@ -92,7 +92,7 @@ function generateReviewsHTML(reviews) {
                 <div class="card single-review">
                     <p class="card-text">${review.content}</p>
                     <label for="name">Product Name:</label>
-                    <p>${review.item}</p>
+                    <p class"review-list">${review.item}</p>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="user-about"> <span class="font-weight-bold d-block">${authorName}</span> 
                         </div>
