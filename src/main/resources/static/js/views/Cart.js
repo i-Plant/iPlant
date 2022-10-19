@@ -6,7 +6,6 @@ export default function addToCart(props) {
     basket = props.orders
     console.log(basket);
 
-
     let myOrder;
     for (let i = 0; i < basket.length; i++) {
 
@@ -16,17 +15,19 @@ export default function addToCart(props) {
             myOrder = basket[i];
         }
 
-        products = myOrder.products;
-
+        let products = myOrder.products;
         for (let j = 0; j < products.length; j++) {
 
+
             let cardsHTML = `
+            <div class="container cart-container">
             <div class="cart-item">                
-                 <img src="${products[j].item.imageURL}" alt="A plant">
+                 <img src="${products[j].item.imageURL}" alt="A plant" style="width:45%" >
             <div class="details">
             <div class="title-price-x">
                 <h4 class="title-price">
                     <!--product name-->
+
                     <p>${products[j].item.name}</p>-->
                     <p class="cart-item-price">${(products[j].item.price).toFixed(2)}</p>-->
             
@@ -42,6 +43,21 @@ export default function addToCart(props) {
             </div>-->
             <h3>${products[j].quantity * products[j].item.price}</h3>-->
             </div>-->
+
+                    <p>${products[j].item.name}</p>
+                    <p class="cart-item-price">$${(products[j].item.price).toFixed(2)}</p>
+                </h4>
+                <i onclick="removeItem(${products[j]})" class="fa-solid fa-x"></i>
+            </div>
+            <div class="cart-buttons">
+                <i data-id="${products[j].id}" class="fa-solid fa-minus decrement-Btn"></i>
+                <div id={id} class="quantity">$${products[j].quantity}</div>            
+                <i data-id="(${products[j].id})" class="fa-solid fa-plus increment-Btn"></i>
+            </div>
+            <h3>$${(products[j].quantity * products[j].item.price).toFixed(2)}</h3>
+            </div>
+            </div>
+
             `;
 
             cardsHTML += `
@@ -53,7 +69,7 @@ export default function addToCart(props) {
      <div id='label' class='text-center'></div>
      <div class="shopping-cart" id="shopping-cart"></div>
      `;
-            return cardsHTML;
+            return cardsHTML += `</div>`;
         }
     }
 }
