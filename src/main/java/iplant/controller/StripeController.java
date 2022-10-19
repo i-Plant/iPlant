@@ -7,11 +7,13 @@ import com.stripe.model.PaymentIntent;
 import com.stripe.param.PaymentIntentCreateParams;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+@CrossOrigin
 @RestController
 @RequestMapping(value ="/api/stripe", produces = "application/json")
 public class StripeController {

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin
 @AllArgsConstructor
 @RestController
 @RequestMapping(value = "/api/products", produces = "application/json")

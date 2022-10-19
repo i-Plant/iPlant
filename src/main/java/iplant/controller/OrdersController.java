@@ -18,6 +18,7 @@ import java.util.Optional;
 
 import static iplant.data.Status.Active;
 
+@CrossOrigin
 @AllArgsConstructor
 @NoArgsConstructor
 @RestController
