@@ -81,7 +81,8 @@ main{
 /* Style the back side */
 .flip-card-back {
     height: auto;
-    background-color: #e4f1d7;
-    color: white;
+    background-color: rgb(238, 237, 237);
+    border: solid rgba(211, 211, 211, 0.26);
+    border-radius: 2px;
     transform: rotateY(180deg);
 }

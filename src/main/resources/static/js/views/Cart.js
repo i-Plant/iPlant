@@ -46,6 +46,17 @@ export default function addToCart(props) {
             
         `;
 
+            <div class="cart-buttons">
+                <i data-id="${products[j].id}" class="fa-solid fa-minus decrement-Btn"></i>
+                <div id={id} class="quantity">${products[j].quantity}</div>            
+                <i data-id="(${products[j].id})" class="fa-solid fa-plus increment-Btn"></i>
+            </div>
+            <h3>$${(products[j].quantity * products[j].item.price).toFixed(2)}</h3>
+            </div>
+            </div>
+            `;
+
+
         }
        cardsHTML += `
  <!--For the shopping cart icon-->
