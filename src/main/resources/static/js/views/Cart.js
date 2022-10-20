@@ -14,80 +14,69 @@ export default function addToCart(props) {
         } else {
             myOrder = basket[i];
         }
-
-        let products = myOrder.products;
+        let cardsHTML = `
+        <div class="container cart-container">`;
+        products = myOrder.products;
         for (let j = 0; j < products.length; j++) {
-
-
-            let cardsHTML = `
-            <div class="container cart-container">
-            <div class="cart-item">                
-                 <img src="${products[j].item.imageURL}" alt="A plant" style="width:45%" >
-            <div class="details">
-            <div class="title-price-x">
-                <h4 class="title-price">
-                    <!--product name-->
-
-                    <p>${products[j].item.name}</p>-->
-                    <p class="cart-item-price">${(products[j].item.price).toFixed(2)}</p>-->
-            
-                 
-
-                </h4>-->
-                <i onclick="removeItem(${products[j].id})" class="fa-solid fa-x"></i>-->
-            </div>-->
-            <div class="buttons">-->
-                <i data-id="${products[j].id}" class="fa-solid fa-minus decrement-Btn"></i>-->
-                <div data-id="${products[j].id}" class="quantity">${products[j].quantity}</div>            -->
-                <i data-id="${products[j].id}" class="fa-solid fa-plus increment-Btn"></i>-->
-            </div>-->
-            <h3>${products[j].quantity * products[j].item.price}</h3>-->
-            </div>-->
-
-                    <p>${products[j].item.name}</p>
-                    <p class="cart-item-price">$${(products[j].item.price).toFixed(2)}</p>
-                </h4>
-                <i onclick="removeItem(${products[j]})" class="fa-solid fa-x"></i>
-            </div>
-            <div class="cart-buttons">
-                <i data-id="${products[j].id}" class="fa-solid fa-minus decrement-Btn"></i>
-                <div id={id} class="quantity">$${products[j].quantity}</div>            
-                <i data-id="(${products[j].id})" class="fa-solid fa-plus increment-Btn"></i>
-            </div>
-            <h3>$${(products[j].quantity * products[j].item.price).toFixed(2)}</h3>
-            </div>
-            </div>
-
-            `;
+            //Here, should I push to an array to store all items?
 
             cardsHTML += `
+            
+            <div class="cart-item">                
+                 <img src="${products[j].item.imageURL}" alt="A plant" style="width:35%" >
+                 <div class="details">
+                    <div class="title-price-x">
+                        <h4 class="title-price">
+                            <!--product name-->
+                            <h5>${products[j].item.name}</h5>
+                            <p class="cart-item-price">$ ${(products[j].item.price).toFixed(2)}</p>
+                        </h5>
+                        <i id="removeItem" style="margin-bottom: 25px" class="fa-solid fa-x"></i>
+                    </div>   
+                    <div class="cart-buttons">
+                        <i data-id="${products[j].id}" class="fa-solid fa-minus decrement-Btn"></i>
+                        <div data-id="${products[j].id}" class="quantity">${products[j].quantity}
+                        </div>     
+                        <i data-id="${products[j].id}" class="fa-solid fa-plus increment-Btn"></i>
+                    </div>   
+                    <!--This multiplies the item quantity by the price of the item-->
+                    <h3>$ ${(products[j].item.price).toFixed(2) * products[j].quantity}</h3>                                          
+                </div>
+            </div>
+            
+        `;
+
+        }
+       cardsHTML += `
  <!--For the shopping cart icon-->
      <div class="cart">
         <a data-link href="/cart"><i data-passthru id="cart" class="fa-solid fa-cart-shopping"></i></a>
-        <div class="cart-amount">${products[j].quantity}</div>
+        <div class="cart-amount">${products.quantity}</div>
      </div>
+     
      <div id='label' class='text-center'></div>
      <div class="shopping-cart" id="shopping-cart"></div>
      `;
-            return cardsHTML += `</div>`;
-        }
+   //     cardsHTML += `</div>`;
+        return cardsHTML;
     }
+
+
 }
 //I need to fill the  basket from the backend (orders), not localStorage because Jalopy sucks!
-basket = JSON.parse(localStorage.getItem("data")) || [];
-console.log(basket);
-
+// basket = JSON.parse(localStorage.getItem("data")) || [];
+// console.log(basket);
 
 
  export function addToCartEvent() {
-     // calculation();
-     // totalAmount();
-     // clearCart();
+    //  calculation();
+    //  totalAmount();
      // update();
+      clearCart();
      addIncrementDecrementHandlers();
 
  }
-
+let productId;
 function addIncrementDecrementHandlers() {
 
     const incrementBtns = document.querySelectorAll(".increment-Btn")
@@ -97,7 +86,7 @@ function addIncrementDecrementHandlers() {
     for (let i = 0; i < incrementBtns.length; i++) {
         console.log(incrementBtns[i]);
         incrementBtns[i].addEventListener("click", function(e) {
-            const productId = this.getAttribute("data-id");
+            productId = this.getAttribute("data-id");
             const itemQuantity = document.querySelector(".quantity");
             console.log(itemQuantity.innerHTML);
             itemQuantity.innerHTML++;
@@ -109,7 +98,7 @@ function addIncrementDecrementHandlers() {
     //looping through the decrement buttons
     for (let i = 0; i < incrementBtns.length; i++) {
         decrementBtns[i].addEventListener("click", function(e) {
-            const productId = this.getAttribute("data-id");
+            productId = this.getAttribute("data-id");
             const itemQuantity = document.querySelector(".quantity");
             itemQuantity.innerHTML--;
             decrement(productId);
@@ -121,20 +110,20 @@ function addIncrementDecrementHandlers() {
 }
 //Add all the product items as a total sum of items to be displayed where needed, i.e., the cart badge, the total sum,
     function calculation() {
-        let cartCounter = document.getElementById("cart-amount");
+        let cartCounter = document.querySelector(".cart-amount");
         cartCounter.innerHTML = basket.map((x) => x.item).reduce((x, y) => x + y, 0);
     }
-
+    //This function regenerates the cart and makes changes to cart in real time so we dont have to refresh the page
     let generateCartItems = () => {
-        let label = document.getElementById("label");
-        let shoppingCart = document.getElementById("shopping-cart");
+        let label = document.querySelector(".label");
+        let shoppingCart = document.querySelector(".shopping-cart");
         //I want to target these products and create an array for the cart that is displayed in the cart view
-        let productsAPI = BACKEND_HOST_URL + "/api/orders";
+        let cartOrder = BACKEND_HOST_URL + "/api/orders";
         if (basket.length !== 0) {
             return shoppingCart.innerHTML = basket.map((x) => {
                 let {id, item} = x;
                 //I need to access the products database here
-                let search = productsAPI.find((y) => y.id === id) || []; //if you find it, cool, if not return an empty array; Also, y.id is the id from the database
+                let search = cartOrder.find((y) => y.id === id) || []; //if you find it, cool, if not return an empty array; Also, y.id is the id from the database
                 let {img, name, price} = search; //lets destructure so I don't have type: search.img, or search.price, or search.name.
                 return `
              <div class="cart-item">
@@ -146,7 +135,7 @@ function addIncrementDecrementHandlers() {
                      <p>${name}</p>
                      <p class="cart-item-price">${price}</p>
                  </h4>
-                 <i onclick="removeItem(${id})" class="fa-solid fa-x"></i>
+                 <i class="fa-solid fa-x removeItem"></i>
              </div>
              <div class="buttons">
                  <i onclick="decrement(${id})" class="fa-solid fa-minus"></i>
@@ -169,6 +158,7 @@ function addIncrementDecrementHandlers() {
         }
     }
 
+    //increment and decrement functions
     let bucket;
     function increment(productId) {
 
@@ -182,7 +172,7 @@ function addIncrementDecrementHandlers() {
 
     }
 
-    function decrement(e) {
+    function decrement() {
         for(let i=0; i < products.length; i++) {
             if(products[i].id == productId) {
 
@@ -191,7 +181,7 @@ function addIncrementDecrementHandlers() {
         }
         bucket.quantity--;
     }
-
+//TODO: this function works with front end storage.
     // let increment = (id) => {
     //     let search = basket.find((x) => x.props.orders.id === props.orders.id);
     //     //if the product is already in the basket, dont push the entire object, rather increment only the item#
@@ -224,7 +214,9 @@ function addIncrementDecrementHandlers() {
     //     generateCartItems();
     //     localStorage.setItem("data", JSON.stringify(basket));
     // }
-    let update = (id) => {
+
+
+    let update = (productId) => {
         let search = basket.find((x) => x.id === id);
         document.querySelector("#id").innerHTML = search.item;
 
@@ -244,9 +236,9 @@ function addIncrementDecrementHandlers() {
     let clearCart = () => {
         //clearing the basket by making it equal to an empty array
         basket = []
-        generateCartItems();
-        calculation();
-        localStorage.setItem("data", JSON.stringify(basket));
+        // generateCartItems();
+        // calculation();
+        // localStorage.setItem("data", JSON.stringify(basket));
     }
 
     let totalAmount = () => {

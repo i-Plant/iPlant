@@ -8,9 +8,9 @@
 i {
     cursor: pointer;
 }
+/*For the cart icon*/
 .cart {
     position: fixed;
-    /*position: absolute;*/
     top: 10%;
     right: 3%;
     color: #fff;
@@ -18,6 +18,7 @@ i {
     padding: 5px;
     border-radius: 4px;
 }
+/*for the badge counter on the cart icon*/
 .cart-amount {
     position: absolute;
     top: 0;
@@ -49,32 +50,18 @@ i {
 
 }
 
-.bi-x-lg {
+.fa-x {
     color: red;
     font-weight: bold;
 }
-/*Style rules for shopping cart*/
+/*Style rules for cart items*/
 .shopping-cart {
     display: grid;
     grid-template-columns: repeat(1, 320px);
     justify-content: center;
     gap: 15px;
 }
-
-.bi-x-lg {
-    color: red;
-    font-weight: bold;
-}
-/*Style rules for shopping cart*/
-.shopping-cart {
-    display: grid;
-    grid-template-columns: repeat(1, 320px);
-    justify-content: center;
-    gap: 15px;
-}
-
-/*Style rules for cart item*/
-.cart-container{
+.cart-container {
     margin-top: 120px;
 }
 .cart-item {
@@ -84,57 +71,29 @@ i {
     max-width: 30em;
     border: 4px solid black;
     border-radius: 5px;
+    /*padding: 5px !important;*/
+    margin: 10px auto;
+
+
 }
 .cart-buttons{
     display: flex;
 
 }
+/*For the item title and the delete button for the item*/
 .title-price-x {
-    width: 195px;
+    width: 310px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+
 }
 .title-price {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
 
 }
-
-/*.body{*/
-/*    margin: 0;*/
-/*    padding: 0;*/
-/*    background: linear-gradient(to bottom right, #E3F0FF, #FAFCFF);*/
-/*    height: 100vh;*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*}*/
-
-
-/*.image-box{*/
-/*    width: 15%;*/
-/*    text-align: center;*/
-/*}*/
-/*.about{*/
-/*    height: 100%;*/
-/*}*/
-/*.title{*/
-/*    padding-top: 5px;*/
-/*    line-height: 10px;*/
-/*    font-size: 32px;*/
-/*    font-family: 'Open Sans';*/
-/*    font-weight: 800;*/
-/*    color: #202020;*/
-/*}*/
-/*.subtitle{*/
-/*    line-height: 10px;*/
-/*    font-size: 18px;*/
-/*    font-family: 'Open Sans';*/
-/*    font-weight: 600;*/
-/*    color: #909090;*/
-/*}*/
 /*product counter CSS*/
 .counter{
     width: 15%;
@@ -158,100 +117,4 @@ i {
     padding: 3px 6px;
 
 }
-
-
-/*.body{*/
-/*    margin: 0;*/
-/*    padding: 0;*/
-/*    background: linear-gradient(to bottom right, #E3F0FF, #FAFCFF);*/
-/*    height: 100vh;*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*}*/
-
-
-/*.image-box{*/
-/*    width: 15%;*/
-/*    text-align: center;*/
-/*}*/
-/*.about{*/
-/*    height: 100%;*/
-/*}*/
-/*.title{*/
-/*    padding-top: 5px;*/
-/*    line-height: 10px;*/
-/*    font-size: 32px;*/
-/*    font-family: 'Open Sans';*/
-/*    font-weight: 800;*/
-/*    color: #202020;*/
-/*}*/
-/*.subtitle{*/
-/*    line-height: 10px;*/
-/*    font-size: 18px;*/
-/*    font-family: 'Open Sans';*/
-/*    font-weight: 600;*/
-/*    color: #909090;*/
-/*}*/
-/*!*product counter CSS*!*/
-/*.counter{*/
-/*    width: 15%;*/
-/*    display: flex;*/
-/*    justify-content: space-between;*/
-/*    align-items: center;*/
-/*}*/
-
-/*.btn {*/
-/*     width: 40px;*/
-/*     height: 40px;*/
-/*     border-radius: 50%;*/
-/*     background-color: #d9d9d9;*/
-/*     display: flex;*/
-/*     justify-content: center;*/
-/*     align-items: center;*/
-/*     font-size: 20px;*/
-/*     font-family: 'Open Sans';*/
-/*     font-weight: 900;*/
-/*     color: #202020;*/
-/*     cursor: pointer;*/
-
-/*}*/
-/*.cart-btn {*/
-/*    width: 40px;*/
-/*    height: 40px;*/
-/*    border-radius: 50%;*/
-/*    background-color: #d9d9d9;*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*    font-size: 20px;*/
-/*    font-family: 'Open Sans';*/
-/*    font-weight: 900;*/
-/*    color: #202020;*/
-/*    cursor: pointer;*/
-
-/*}*/
-
-/*.count{*/
-/*    font-size: 20px;*/
-/*    font-family: 'Open Sans';*/
-/*    font-weight: 900;*/
-/*    color: #202020;*/
-/*}*/
-
-
-/*.cart-btn{*/
-/*    width: 40px;*/
-/*    height: 40px;*/
-/*    border-radius: 50%;*/
-/*    background-color: #d9d9d9;*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*    font-size: 20px;*/
-/*    font-family: 'Open Sans';*/
-/*    font-weight: 900;*/
-/*    color: #202020;*/
-/*    cursor: pointer;*/
-/*}*/
 
