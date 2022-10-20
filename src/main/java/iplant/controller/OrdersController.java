@@ -2,6 +2,8 @@
 package iplant.controller;
 
 import iplant.data.Order;
+import iplant.data.OrderProduct;
+import iplant.repository.OrderProductsRepository;
 import iplant.repository.misc.FieldHelper;
 import iplant.repository.OrdersRepository;
 import lombok.AllArgsConstructor;
@@ -26,6 +28,8 @@ import static iplant.data.Status.Active;
 public class OrdersController {
     @Autowired
     private OrdersRepository orderRepository;
+    @Autowired
+    private OrderProductsRepository orderProductsRepository;
 
     @GetMapping(path = "")
     public List<Order> getOrders() {
@@ -86,5 +90,30 @@ public class OrdersController {
 
         orderRepository.save(originalOrder);
     }
-@PostMapping("/order_id")
+    @PostMapping("/{orderId}/products/")
+    public OrderProduct addProductToOrder(@RequestBody OrderProduct newProductToOrder, @PathVariable Long orderId){
+if(orderId == 0)
+{
+    Order newOrder = new Order();
+    newOrder.setBuyer(null);
+    newOrder.setCreatedAt(LocalDate.now());
+    newOrder.setStatus(Active);
+    newOrder = orderRepository.save(newOrder);
+    newProductToOrder.setOrder(newOrder);
+    orderId = newOrder.getId();
+}
+        newProductToOrder.getOrder().setId(orderId);
+        newProductToOrder.setQuantity(1);
+        newProductToOrder = orderProductsRepository.save(newProductToOrder);
+        return newProductToOrder;
+    }
+
+    @PutMapping("/{orderId}/products/{orderProductId}")
+    public void updateProductInOrder(@RequestBody OrderProduct newQuantity){
+
+    }
+    @DeleteMapping("/{orderId}/products/{orderProductId}")
+    public void deleteProductInOrder(@RequestBody OrderProduct newQuantity){
+
+    }
 }
