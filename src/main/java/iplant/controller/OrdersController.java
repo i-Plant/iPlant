@@ -37,7 +37,7 @@ public class OrdersController {
     }
 
     @GetMapping(path = "/{id}")
-    public Optional<Order> fetchOrdersById(@PathVariable long id) {
+    public Optional<Order> fetchOrderById(@PathVariable long id) {
 
         Optional<Order> optionalOrder = orderRepository.findById(id);
         if (optionalOrder.isEmpty()) {
@@ -86,5 +86,5 @@ public class OrdersController {
 
         orderRepository.save(originalOrder);
     }
-
+@PostMapping("/order_id")
 }
