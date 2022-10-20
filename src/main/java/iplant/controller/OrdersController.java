@@ -33,11 +33,11 @@ public class OrdersController {
 
     @GetMapping(path = "")
     public List<Order> getOrders() {
-        List<Order> flemflam = orderRepository.fetchActiveOrders();
-        if (flemflam.isEmpty()) {
+        List<Order> activeOrders = orderRepository.fetchActiveOrders();
+        if (activeOrders.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No Active Orders");
         }
-        return flemflam;
+        return activeOrders;
     }
 
     @GetMapping(path = "/{id}")
@@ -108,12 +108,34 @@ if(orderId == 0)
         return newProductToOrder;
     }
 
-    @PutMapping("/{orderId}/products/{orderProductId}")
-    public void updateProductInOrder(@RequestBody OrderProduct newQuantity){
-
+    @PutMapping("/products/{id}/quantity-decrement")
+    public void decrementProductInOrder(@PathVariable Long id){
+        Optional<OrderProduct> originalProduct = orderProductsRepository.findById(id);
+        if(originalProduct.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "OrderProducts "+ id + " not found");
+        }
+//        System.out.println(originalProduct.get().getQuantity());
+        originalProduct.get().setQuantity((originalProduct.get().getQuantity()) - 1);
+//        System.out.println(originalProduct.get().getQuantity());
+        orderProductsRepository.save(originalProduct.get());
     }
-    @DeleteMapping("/{orderId}/products/{orderProductId}")
-    public void deleteProductInOrder(@RequestBody OrderProduct newQuantity){
 
+    @PutMapping("/products/{id}/quantity-increment")
+    public void incrementProductInOrder(@PathVariable Long id){
+        Optional<OrderProduct> originalProduct = orderProductsRepository.findById(id);
+        if(originalProduct.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "OrderProducts "+ id + " not found");
+        }
+        System.out.println(originalProduct.get().getQuantity());
+        originalProduct.get().setQuantity((originalProduct.get().getQuantity()) + 1);
+        System.out.println(originalProduct.get().getQuantity());
+        orderProductsRepository.save(originalProduct.get());
     }
+
+    @DeleteMapping("/products/{id}")
+    public void deleteProductInOrder(@PathVariable long id){
+        System.out.println();
+        orderProductsRepository.deleteById(id);
+    }
+
 }
