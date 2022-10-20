@@ -2,6 +2,8 @@
 package iplant.controller;
 
 import iplant.data.Order;
+import iplant.data.OrderProduct;
+import iplant.repository.OrderProductsRepository;
 import iplant.repository.misc.FieldHelper;
 import iplant.repository.OrdersRepository;
 import lombok.AllArgsConstructor;
@@ -26,18 +28,20 @@ import static iplant.data.Status.Active;
 public class OrdersController {
     @Autowired
     private OrdersRepository orderRepository;
+    @Autowired
+    private OrderProductsRepository orderProductsRepository;
 
     @GetMapping(path = "")
     public List<Order> getOrders() {
-        List<Order> flemflam = orderRepository.fetchActiveOrders();
-        if (flemflam.isEmpty()) {
+        List<Order> activeOrders = orderRepository.fetchActiveOrders();
+        if (activeOrders.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No Active Orders");
         }
-        return flemflam;
+        return activeOrders;
     }
 
     @GetMapping(path = "/{id}")
-    public Optional<Order> fetchOrdersById(@PathVariable long id) {
+    public Optional<Order> fetchOrderById(@PathVariable long id) {
 
         Optional<Order> optionalOrder = orderRepository.findById(id);
         if (optionalOrder.isEmpty()) {
@@ -85,6 +89,53 @@ public class OrdersController {
         originalOrder.setCreatedAt(LocalDate.now());
 
         orderRepository.save(originalOrder);
+    }
+    @PostMapping("/{orderId}/products/")
+    public OrderProduct addProductToOrder(@RequestBody OrderProduct newProductToOrder, @PathVariable Long orderId){
+if(orderId == 0)
+{
+    Order newOrder = new Order();
+    newOrder.setBuyer(null);
+    newOrder.setCreatedAt(LocalDate.now());
+    newOrder.setStatus(Active);
+    newOrder = orderRepository.save(newOrder);
+    newProductToOrder.setOrder(newOrder);
+    orderId = newOrder.getId();
+}
+        newProductToOrder.getOrder().setId(orderId);
+        newProductToOrder.setQuantity(1);
+        newProductToOrder = orderProductsRepository.save(newProductToOrder);
+        return newProductToOrder;
+    }
+
+    @PutMapping("/products/{id}/quantity-decrement")
+    public void decrementProductInOrder(@PathVariable Long id){
+        Optional<OrderProduct> originalProduct = orderProductsRepository.findById(id);
+        if(originalProduct.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "OrderProducts "+ id + " not found");
+        }
+//        System.out.println(originalProduct.get().getQuantity());
+        originalProduct.get().setQuantity((originalProduct.get().getQuantity()) - 1);
+//        System.out.println(originalProduct.get().getQuantity());
+        orderProductsRepository.save(originalProduct.get());
+    }
+
+    @PutMapping("/products/{id}/quantity-increment")
+    public void incrementProductInOrder(@PathVariable Long id){
+        Optional<OrderProduct> originalProduct = orderProductsRepository.findById(id);
+        if(originalProduct.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "OrderProducts "+ id + " not found");
+        }
+        System.out.println(originalProduct.get().getQuantity());
+        originalProduct.get().setQuantity((originalProduct.get().getQuantity()) + 1);
+        System.out.println(originalProduct.get().getQuantity());
+        orderProductsRepository.save(originalProduct.get());
+    }
+
+    @DeleteMapping("/products/{id}")
+    public void deleteProductInOrder(@PathVariable long id){
+        System.out.println();
+        orderProductsRepository.deleteById(id);
     }
 
 }
