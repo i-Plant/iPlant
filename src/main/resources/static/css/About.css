@@ -1,3 +1,4 @@
+
 /*@import url('https://fonts.googleapis.com/css?family=Raleway');*/
 
 /*div {*/
@@ -311,3 +312,250 @@
 
 /*    }*/
 /*}*/
+
+*,
+*::before,
+*::after{
+    box-sizing: border-box;
+
+}
+
+html{
+    font-family: sans-serif;
+    line-height: 1.15;
+}
+
+body{
+    font-family: 'lato', sans-serif;
+    color: #454545;
+    font-weight: 300;
+    background: #ffffff;
+}
+
+a{
+    color: #333333;
+    font-weight: 400;
+    outline: none;
+    text-decoration: none;
+    transition: 0.5s;
+}
+a:hover,
+a:focus{
+    outline: none;
+    text-decoration: none;
+}
+
+p{
+    padding: 0;
+    margin: 0 0 15px 0;
+    color: #454545;
+    font-weight: 300;
+}
+
+.section-title h1,
+.about-name h2,
+.about-line h3,
+.about-email h4 {
+    padding: 0;
+    margin: 0 0 15px 0;
+    color: #333333;
+    font-weight: 700;
+}
+
+.about-container{
+    flex-direction: row;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.section-title{
+    flex: 0 0 100%;
+    max-width: 200%;
+    margin-bottom: 80px;
+    margin-top: 110px;
+    text-align: center;
+}
+
+.section-title h1{
+    display: inline-block;
+    font-size: 35px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #000000;
+    margin: 0 0 5px;
+    position: relative;
+}
+
+.about-us-title ::before{
+    content: '';
+    left: 0;
+    position: absolute;
+    height: 3px;
+    right: 32%;
+    background-color: #50c5fc;
+    bottom: -5px;
+}
+
+.about-container .about-us-title h1::before{
+    left: 30%;
+}
+
+.about-row{
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.about-column{
+    /*flex-wrap: wrap;*/
+    /*display: flex;*/
+    position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+
+.about-team{
+    margin-bottom: 30px;
+}
+
+.about-team .team-img{
+    width: 160px;
+    height: auto;
+    border-radius: 100%;
+    border: 20px solid #f3f4fa;
+}
+
+.about-team .team-img img{
+    width: 160px;
+    height: auto;
+    border-radius: 100%;
+    border: 20px solid #f3f4fa;
+}
+
+.about-us-name strong{
+
+    font-size: 85px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.about-team .team-content h4 {
+    font-size: 25px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    font-style: italic;
+    margin-bottom: 0;
+}
+
+.about-team .team-content p{
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22px;
+}
+
+.about-team .team-social{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 35px;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, .6);
+    transition: all .3s;
+    font-size: 2px;
+    z-index: 1;
+    opacity: 0;
+}
+
+/*.about-team .team-social a{*/
+/*    display: inline-block;*/
+/*    width: 40px;*/
+/*    height: 40px;*/
+/*    margin-right: 5px;*/
+/*    padding: 11px 0 10px 0;*/
+/*    font-size: 16px;*/
+/*    font-weight: 300;*/
+/*    line-height: 16px;*/
+/*    text-align: center;*/
+/*    color: #ffffff;*/
+/*    border-radius: 10px;*/
+/*    transition: all .3s;*/
+/*    margin-top: 50px;*/
+/*}*/
+
+.about-team .team-social a.social-tw{
+    background: #00acee;
+}
+
+.about-team .team-social a.social-fb{
+    background: #3b5998;
+}
+
+.about-team .team-social a.social-li{
+    background: #0e76a8;
+}
+
+.about-team .team-social a.social-in{
+    background: #3f729b;
+}
+
+.about-team .team-social a.social-yt{
+    background: #c4302b;
+}
+
+.about-team .team-social a.last-child{
+    margin-right: 0;
+}
+
+.about-team .team-social a{
+    margin-top: 0;
+}
+
+.about-team .team-social a.hover{
+    background: #222222;
+}
+
+/*Mobile Responsive*/
+
+@media (min-width: 576px){
+    .about-container{
+        max-width: 540px;
+    }
+    .about-column{
+        max-width: 50%;
+    }
+}
+@media (min-width: 768px) {
+    .about-container{
+        max-width: 720px;
+    }
+    .about-column{
+        max-width: 33.333333%;
+    }
+}
+@media (min-width: 992px) {
+    .about-container{
+        max-width: 960px;
+    }
+    .about-column{
+        max-width: 25%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .about-container{
+        max-width: 1140px;
+    }
+
+}
+
