@@ -15,6 +15,9 @@ export default function addToCart(props) {
             myOrder = basket[i];
         }
         let cardsHTML = `
+        <!--For the checkout button-->
+        <a data-link href="/checkout" id="checkout-btn"><i data-passthru class="fa-solid fa-dollar-sign">Checkout</i></a>
+         
         <div class="container cart-container">`;
         products = myOrder.products;
         for (let j = 0; j < products.length; j++) {
@@ -40,29 +43,19 @@ export default function addToCart(props) {
                         <i data-id="${products[j].id}" class="fa-solid fa-plus increment-Btn"></i>
                     </div>   
                     <!--This multiplies the item quantity by the price of the item-->
-                    <h3>$ ${(products[j].item.price).toFixed(2) * products[j].quantity}</h3>                                          
+                    <h3>$ ${(products[j].item.price).toFixed(2) * products[j].quantity}</h3>      
+                              
                 </div>
             </div>
             
         `;
-
-            <div class="cart-buttons">
-                <i data-id="${products[j].id}" class="fa-solid fa-minus decrement-Btn"></i>
-                <div id={id} class="quantity">${products[j].quantity}</div>            
-                <i data-id="(${products[j].id})" class="fa-solid fa-plus increment-Btn"></i>
-            </div>
-            <h3>$${(products[j].quantity * products[j].item.price).toFixed(2)}</h3>
-            </div>
-            </div>
-            `;
-
 
         }
        cardsHTML += `
  <!--For the shopping cart icon-->
      <div class="cart">
         <a data-link href="/cart"><i data-passthru id="cart" class="fa-solid fa-cart-shopping"></i></a>
-        <div class="cart-amount">${products.quantity}</div>
+        <div class="cart-amount">${products[i].quantity}</div>
      </div>
      
      <div id='label' class='text-center'></div>
@@ -146,7 +139,8 @@ function addIncrementDecrementHandlers() {
                      <p>${name}</p>
                      <p class="cart-item-price">${price}</p>
                  </h4>
-                 <i class="fa-solid fa-x removeItem"></i>
+                 <!--Id like to remove the entire product card when I click this "X"  -->
+                 <i onclick="removeItem()" class="fa-solid fa-x"></i>
              </div>
              <div class="buttons">
                  <i onclick="decrement(${id})" class="fa-solid fa-minus"></i>

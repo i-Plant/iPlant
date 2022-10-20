@@ -11,7 +11,7 @@ i {
 /*For the cart icon*/
 .cart {
     position: fixed;
-    top: 10%;
+    top: 15%;
     right: 3%;
     color: #fff;
     font-size: 30px;
@@ -119,4 +119,15 @@ i {
     padding: 3px 6px;
 
 }
+#checkout-btn {
+    width: 10%;
+    font-family: "American Typewriter", sans-serif;
+    position: fixed;
+    margin: 1% 2%
+}
+.remove-item {
+    visibility: hidden;
+}
+
+
 

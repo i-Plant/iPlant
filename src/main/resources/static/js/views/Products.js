@@ -1,4 +1,6 @@
 import createView from "../createView.js";
+import {getHeaders} from "../auth.js";
+import CreateView from "../createView.js";
 
 let products = [];
 export default function Products(props) {
@@ -8,7 +10,7 @@ export default function Products(props) {
 <!--For the shopping cart icon-->
      <div class="cart">
         <a data-link href="/cart"><i data-passthru id="cart" class="fa-solid fa-cart-shopping"></i></a>
-        <div class="cart-amount">0</div>
+        <div class="cart-amount"></div>
      </div>
      `;
 
@@ -54,6 +56,7 @@ export default function Products(props) {
 export function ProductsEvent(){
     pushToCart();
 }
+
 let cartArray = [];
 function pushToCart() {
 
@@ -69,6 +72,27 @@ function pushToCart() {
     }
     //I need to change the counter in the cart when I add a product to the cart
 }
+function setupValidationHandlers() {
+    let checkout = document.querySelector("")
+    checkout.addEventListener("click", validateOrder);
+
+}
+//If cart is empty do NOT allow checkout button --> checkout page and inform the user
+function validateOrder() {
+    let isValid = true;
+    let completeCheckout = document.querySelector("#checkout-btn");
+    if(completeCheckout.length < 1) {
+        completeCheckout.classList.add("order is-invalid");
+        completeCheckout.classList.remove("is-valid");
+        isValid = false;
+    } else {
+       completeCheckout.classList.add("is-valid");
+        completeCheckout.classList.remove("order is-invalid");
+    }
+
+    return isValid;
+}
+
 // function sortProductsByName(a, b) {
 //     // Use toUpperCase() to ignore character casing
 //     const nameA = a.name.toUpperCase();
@@ -82,3 +106,40 @@ function pushToCart() {
 //     }
 //     return comparison;
 // }
+function saveOrder(orderId) {
+    // get the order-id for the new order
+    const item = document.querySelector("#item");
+
+    // don't allow checkout if cart is empty
+    if (!validateOrder()) {
+        return;
+    }
+
+    // make the new order?
+    const order = {
+        item: item
+    }
+    console.log(order)
+
+    // make the request
+    const request = {
+        method: "POST",
+        headers: getHeaders(),
+        body: JSON.stringify(order)
+    }
+    let url = BACKEND_HOST_URL + "/api/orders/${order-id}/products";
+    console.log(request);
+
+    fetch(url, request)
+        .then(function (response) {
+            if (response.status !== 200) {
+                console.log("fetch returned bad status code: " + response.status);
+                console.log(response.statusText);
+
+                //I don't want to redirect to the cart page
+                //          CreateView("/cart");
+            }
+
+        })
+}
+
