@@ -48,7 +48,7 @@ export default function addToCart(props) {
                         <i data-id="${products[j].id}" class="fa-solid fa-plus increment-Btn"></i>
                     </div>   
                     <!--This multiplies the item quantity by the price of the item-->
-                    <h3>$ ${(products[j].item.price).toFixed(2) * products[j].quantity}</h3>      
+                    <h3 >$ <span class="price">${(products[j].item.price).toFixed(2) * products[j].quantity}</span></h3>      
                               
                 </div>
             </div>
@@ -95,22 +95,56 @@ function addIncrementDecrementHandlers() {
     for (let i = 0; i < incrementBtns.length; i++) {
         console.log(incrementBtns[i]);
         incrementBtns[i].addEventListener("click", function(e) {
-            productId = this.getAttribute("data-id");
+            let orderProductId = this.getAttribute("data-id");
             const itemQuantity = document.querySelector(".quantity");
-            console.log(itemQuantity.innerHTML);
+            const itemPrice = document.querySelector(".price");
+            let quan= itemQuantity.innerHTML;
+            let price= itemPrice.innerHTML/quan;
+           // quan++
+            console.log(price);
             itemQuantity.innerHTML++;
-            increment(productId);
+            itemPrice.innerHTML = price * quan ;
+            increment(orderProductId);
+            const request = {
+                method: "PUT",
+                headers: getHeaders(),
+            }
+            let url = BACKEND_HOST_URL + "/api/orders/products/" + `${orderProductId}`+ "/quantity-increment";
+            console.log(url);
+            fetch(url, request)
+                .then(function(response) {
+                    if(response.status !== 200) {
+                        console.log("fetch returned bad status code: " + response.status);
+                        console.log(response.statusText);
+                    }
+
+                })
+
 
         });
 
     }
     //looping through the decrement buttons
-    for (let i = 0; i < incrementBtns.length; i++) {
+    for (let i = 0; i < decrementBtns.length; i++) {
         decrementBtns[i].addEventListener("click", function(e) {
-            productId = this.getAttribute("data-id");
+            let orderProductId = this.getAttribute("data-id");
             const itemQuantity = document.querySelector(".quantity");
             itemQuantity.innerHTML--;
-            decrement(productId);
+           // decrement(orderProductId);
+
+            const request = {
+                method: "PUT",
+                headers: getHeaders(),
+            }
+            let url = BACKEND_HOST_URL + "/api/orders/products/" + `${orderProductId}` + "/quantity-decrement";
+            console.log(url);
+            fetch(url, request)
+                .then(function(response) {
+                    if(response.status !== 200) {
+                        console.log("fetch returned bad status code: " + response.status);
+                        console.log(response.statusText);
+                    }
+                })
 
         });
 
@@ -148,6 +182,11 @@ function setupDeleteHandlers() {
         });
     }
 }
+//for the badge counter in the cart
+function calculation() {
+    let cartCounter = document.querySelector(".cart-amount");
+    cartCounter.innerHTML = basket.map((x) => x.item).reduce((x, y) => x + y, 0);
+}
 // function pseudoDelete () {
 //     const deleteX = document.querySelectorAll(".cart-item")
 //     for(let i = 0; i < deleteX.length; i++) {
@@ -162,54 +201,16 @@ function setupDeleteHandlers() {
 
 
 //Add all the product items as a total sum of items to be displayed where needed, i.e., the cart badge, the total sum,
-function calculation() {
-    let cartCounter = document.querySelector(".cart-amount");
-    cartCounter.innerHTML = basket.map((x) => x.item).reduce((x, y) => x + y, 0);
-}
+
 //This function regenerates the cart and makes changes to cart in real time so we dont have to refresh the page
-let generateCartItems = () => {
-    let label = document.querySelector(".label");
-    let shoppingCart = document.querySelector(".shopping-cart");
-    //I want to target these products and create an array for the cart that is displayed in the cart view
-    let cartOrder = BACKEND_HOST_URL + "/api/orders";
-    if (basket.length !== 0) {
-        return shoppingCart.innerHTML = basket.map((x) => {
-            let {id, item} = x;
-            //I need to access the products database here
-            let search = cartOrder.find((y) => y.id === id) || []; //if you find it, cool, if not return an empty array; Also, y.id is the id from the database
-            let {img, name, price} = search; //lets destructure so I don't have type: search.img, or search.price, or search.name.
-            return `
-             <div class="cart-item">
-                 <img width="100" src=${img} alt=""
-             <div class="details">
-             <div class="title-price-x">
-                 <h4 class="title-price">
-                     <!--product name-->
-                     <p>${name}</p>
-                     <p class="cart-item-price">${price}</p>
-                 </h4>
-                 <!--Id like to remove the entire product card when I click this "X"  -->
-                 <i data-passthru onclick="removeItem()" class="fa-solid fa-x"></i>
-             </div>
-             <div class="buttons">
-                 <i onclick="decrement(${id})" class="fa-solid fa-minus"></i>
-                 <div id=${id} class="quantity">${item}</div>
-                 <i onclick="increment(${id})" class="fa-solid fa-plus"></i>
-             </div>
-             <h3>${item * price}</h3>
-             </div>
-             `;
-        })
-            .join("")
-    } else {
-        shoppingCart.innerHTML = ``;
-        label.innerHTML = `
-             <h2>Cart is Empty</h2>
-             <a style="margin-top: 50px" data-link href="/products">
-                 <button data-link class="products">Back to shopping</button>
-             </a>
-             `;
-    }
+
+    // shoppingCart.innerHTML = ``;
+    // label.innerHTML = `
+    //          <h2>Cart is Empty</h2>
+    //          <a style="margin-top: 50px" data-link href="/products">
+    //              <button data-link class="products">Back to shopping</button>
+    //          </a>
+    //          `;
 
 
     //Id like to tell the user they can't checkout when cart is empty
@@ -238,7 +239,7 @@ let generateCartItems = () => {
 //     return;
 // }
 
-}
+
 
 
 //increment and decrement functions
@@ -253,18 +254,19 @@ function increment(productId) {
         }
     }
     bucket.quantity++;
+    bucket.price
 
 }
 
-function decrement() {
-    for(let i=0; i < products.length; i++) {
-        if(products[i].id == productId) {
-
-            bucket = products[i];
-        }
-    }
-    bucket.quantity--;
-}
+// function decrement() {
+//     for(let i=0; i < products.length; i++) {
+//         if(products[i].id == productId) {
+//
+//             bucket = products[i];
+//         }
+//     }
+//     bucket.quantity--;
+// }
 //TODO: this function works with front end storage.
 // let increment = (id) => {
 //     let search = basket.find((x) => x.props.orders.id === props.orders.id);
