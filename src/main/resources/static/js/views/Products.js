@@ -1,6 +1,6 @@
 import createView from "../createView.js";
 import {getHeaders} from "../auth.js";
-import CreateView from "../createView.js";
+
 
 let products = [];
 export default function Products(props) {

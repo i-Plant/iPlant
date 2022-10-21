@@ -2,6 +2,7 @@
 //I need to push to a new array (basket) and display those cards in the cart(basket) when I add them
 import {getHeaders} from "../auth.js";
 import CreateView from "../createView.js";
+import createView from "../createView.js";
 
 let basket = [];
 let products;
@@ -38,7 +39,7 @@ export default function addToCart(props) {
                             <h5>${products[j].item.name}</h5>
                             <p class="cart-item-price">$ ${(products[j].item.price).toFixed(2)}</p>
                         </h5>
-                        <i id="removeItem" style="margin-bottom: 25px" class="fa-solid fa-x"></i>
+                        <i data-id="${products[j].id}" style="margin-bottom: 25px" class="fa-solid fa-x removeItem"></i>
                     </div>   
                     <div class="cart-buttons">
                         <i data-id="${products[j].id}" class="fa-solid fa-minus decrement-Btn"></i>
@@ -75,19 +76,17 @@ export default function addToCart(props) {
 // basket = JSON.parse(localStorage.getItem("data")) || [];
 // console.log(basket);
 
-
 export function addToCartEvent() {
     //  calculation();
     //  totalAmount();
-
      // update();
       clearCart();
      addIncrementDecrementHandlers();
      setupDeleteHandlers();
-     pseudoDelete();
-
+   //  pseudoDelete();
 
 }
+
 let productId;
 function addIncrementDecrementHandlers() {
     const incrementBtns = document.querySelectorAll(".increment-Btn")
@@ -121,43 +120,46 @@ function addIncrementDecrementHandlers() {
 
 function setupDeleteHandlers() {
     // target all delete buttons
-    const deleteButtons = document.querySelectorAll(".deleteOrder");
+    const deleteButtons = document.querySelectorAll(".removeItem");
     // add click handler to all delete buttons
     for (let i = 0; i < deleteButtons.length; i++) {
         deleteButtons[i].addEventListener("click", function(event) {
 
             // get the post id of the delete button
-            const orderId = this.getAttribute("data-id");
-      //      deleteOrder(orderId);
+            let orderProductId = this.getAttribute("data-id");
+
+            //      deleteOrder(orderId);
+
+            const request = {
+                method: "DELETE",
+                headers: getHeaders(),
+            }
+            let url = BACKEND_HOST_URL + "/api/orders/products/" + `${orderProductId}`;
+            console.log(url);
+            fetch(url, request)
+                .then(function(response) {
+                    if(response.status !== 200) {
+                        console.log("fetch returned bad status code: " + response.status);
+                        console.log(response.statusText);
+                    }
+                        createView("/cart")
+                })
 
         });
     }
 }
-function pseudoDelete () {
-    const deleteX = document.querySelectorAll(".cart-item")
-    for(let i = 0; i < deleteX.length; i++) {
-        deleteX[i].addEventListener("click", function () {
-            deleteX[i].classList.toggle("remove-item")
-        })
-    }
-}
+// function pseudoDelete () {
+//     const deleteX = document.querySelectorAll(".cart-item")
+//     for(let i = 0; i < deleteX.length; i++) {
+//         deleteX[i].addEventListener("click", function () {
+//             deleteX[i].classList.toggle("remove-item")
+//         })
+//     }
+// }
 
-function deleteOrder(orderId) {
-    const request = {
-        method: "DELETE",
-        headers: getHeaders(),
-    }
-    const url = BACKEND_HOST_URL + `/${orderId}`;
-    console.log(url);
-    fetch(url, request)
-        .then(function(response) {
-            if(response.status !== 200) {
-                console.log("fetch returned bad status code: " + response.status);
-                console.log(response.statusText);
-            }
 
-        })
-}
+
+
 
 //Add all the product items as a total sum of items to be displayed where needed, i.e., the cart badge, the total sum,
 function calculation() {
@@ -209,7 +211,9 @@ let generateCartItems = () => {
              `;
     }
 
-//Id like to tell the user they can't checkout when cart is empty
+
+    //Id like to tell the user they can't checkout when cart is empty
+
 // function setupValidationHandlers() {
 //     let checkout = document.querySelector("")
 //     checkout.addEventListener("click", validateOrder);
