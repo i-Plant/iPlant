@@ -10,7 +10,7 @@ export default function Products(props) {
 <!--For the shopping cart icon-->
      <div class="cart">
         <a data-link href="/cart"><i data-passthru id="cart" class="fa-solid fa-cart-shopping"></i></a>
-        <div class="cart-amount"></div>
+        <div class="cart-amount">0</div>
      </div>
      `;
 
@@ -45,10 +45,10 @@ export default function Products(props) {
                 <h6 class="products-card-text">${products[i].details}</h6>
                  <h4>${products[i].category}</h4>
             </p>
-             <button data-id="${products[i].id}" class="btn btn-primary addToCart">Add to Cart</button>
+             <button id="addToCart" data-id="${products[i].id}" class="btn btn-primary addToCart">Add to Cart</button>
         </div> 
     </div>
-<<<<<<< HEAD
+
 </div>   
                    
 `;
@@ -61,86 +61,63 @@ export default function Products(props) {
 
 export function ProductsEvent(){
     pushToCart();
-    saveOrder();
-    setupValidationHandlers();
+    //saveOrder();
+
 }
 
-let cartArray = [];
 function pushToCart() {
 
     let addToCart = document.querySelectorAll(".addToCart");
     for (let i = 0; i < addToCart.length; i++) {
         addToCart[i].addEventListener("click", (e) => {
             e.preventDefault();
-            let item = addToCart[i].getAttribute("data-id");
-            cartArray.push(item);
-            cartArray.sort();//should I sort before the loop?
-            console.log(item);
+            let itemId = addToCart[i].getAttribute("data-id");
+            let orderId = 0;
+            //if there's already an order id in local storage use that order
+            if(window.localStorage.getItem("order-id") ) {
+                orderId = window.localStorage.getItem("order-id")
+            }
+
+            const orderProduct = {
+                id: 0,
+                order: {
+                    id: orderId
+                },
+                item: {
+                    id: itemId
+                }
+            }
+            // make the request
+            const request = {
+                method: "POST",
+                headers: getHeaders(),
+                body: JSON.stringify(orderProduct)
+            }
+            let url = BACKEND_HOST_URL + "/api/orders/" + `${orderId}` +"/products/";
+            console.log(request);
+
+            fetch(url, request)
+                .then(function (response) {
+                    if (response.status !== 200) {
+                        console.log("fetch returned bad status code: " + response.status);
+                        console.log(response.statusText);
+                    }
+                    return response.json()
+                }).then(function(data){
+                console.log(data);
+                orderId = data.order.id;
+                window.localStorage.setItem("order-id", orderId)
+            })
+
         })
     }
     //I need to change the counter in the cart when I add a product to the cart
 }
-function setupValidationHandlers() {
-    let checkout = document.querySelector("")
-    checkout.addEventListener("click", validateOrder);
 
-}
-//If cart is empty do NOT allow checkout button --> checkout page and inform the user
-function validateOrder() {
-    let isValid = true;
-    let completeCheckout = document.querySelector("#checkout-btn");
-    if(completeCheckout.length < 1) {
-        completeCheckout.classList.add("order is-invalid");
-        completeCheckout.classList.remove("is-valid");
-        isValid = false;
-    } else {
-       completeCheckout.classList.add("is-valid");
-        completeCheckout.classList.remove("order is-invalid");
-    }
 
-    return isValid;
-}
 
-function saveOrder() {
-    const saveButton = document.querySelector(".addToCart");
-    saveButton.addEventListener("click", function(event) {
-        const orderId = parseInt(this.getAttribute("data-id"));
-        console.log(orderId)
-        // saveOrder(orderId);
 
-        if (!validateOrder()) {
-            return;
-        }
 
-        // make the new order?
-        const order = {
-            item: item
-        }
-        console.log(order)
-
-        // make the request
-        const request = {
-            method: "POST",
-            headers: getHeaders(),
-            body: JSON.stringify(order)
-        }
-        let url = BACKEND_HOST_URL + "/api/orders/" + `${orderId}` +"/products";
-        console.log(request);
-
-        fetch(url, request)
-            .then(function (response) {
-                if (response.status !== 200) {
-                    console.log("fetch returned bad status code: " + response.status);
-                    console.log(response.statusText);
-
-                    //I don't want to redirect to the cart page
-                    //          CreateView("/cart");
-                }
-
-            })
-
-    });
-}
 
 
 // function saveOrder(orderId) {

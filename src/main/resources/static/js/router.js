@@ -92,6 +92,9 @@ export default function router(URI) {
                 products: {
                     url: '/api/products'
                 }
+                // orders:{
+                //     url:'api/prof'
+                // }
             },
             uri: '/products',
             title: 'Products',

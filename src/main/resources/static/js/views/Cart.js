@@ -80,6 +80,7 @@ export default function addToCart(props) {
       clearCart();
      addIncrementDecrementHandlers();
      setupDeleteHandlers();
+     pseudoDelete();
 
  }
 let productId;
@@ -122,14 +123,21 @@ function setupDeleteHandlers() {
 
             // get the post id of the delete button
             const orderId = this.getAttribute("data-id");
+      //      deleteOrder(orderId);
 
-            deleteReview(orderId);
         });
     }
 }
+function pseudoDelete () {
+    const deleteX = document.querySelectorAll(".cart-item")
+    for(let i = 0; i < deleteX.length; i++) {
+        deleteX[i].addEventListener("click", function () {
+            deleteX[i].classList.toggle("remove-item")
+        })
+    }
+}
 
-
-function deleteReview(orderId) {
+function deleteOrder(orderId) {
     const request = {
         method: "DELETE",
         headers: getHeaders(),
@@ -196,6 +204,30 @@ function deleteReview(orderId) {
              `;
         }
     }
+//Id like to tell the user they can't checkout when cart is empty
+// function setupValidationHandlers() {
+//     let checkout = document.querySelector("")
+//     checkout.addEventListener("click", validateOrder);
+//
+// }
+// //If cart is empty do NOT allow checkout button --> checkout page and inform the user
+// function validateCheckout() {
+//     let isValid = true;
+//     let completeCheckout = document.querySelector("#checkout-btn");
+//     if(completeCheckout.length < 1) {
+//         completeCheckout.classList.add("order is-invalid");
+//         completeCheckout.classList.remove("is-valid");
+//         isValid = false;
+//     } else {
+//        completeCheckout.classList.add("is-valid");
+//         completeCheckout.classList.remove("order is-invalid");
+//     }
+//
+//     return isValid;
+// }
+// if (!validateCheckout()) {
+//     return;
+// }
 
     //increment and decrement functions
     let bucket;
