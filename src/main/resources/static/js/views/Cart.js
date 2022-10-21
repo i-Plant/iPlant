@@ -6,17 +6,18 @@ import CreateView from "../createView.js";
 let basket = [];
 let products;
 export default function addToCart(props) {
-    basket = props.orders
+    basket.push(props.order);
     console.log(basket);
 
     let myOrder;
     for (let i = 0; i < basket.length; i++) {
 
-        if (basket[i].buyer.id !== 1) {
-            continue;
-        } else {
-            myOrder = basket[i];
-        }
+        // if (basket[i].buyer.id !== 1) {
+        //     continue;
+        // } else {
+        //     myOrder = basket[i];
+        // }
+        myOrder = basket[i];
         let cardsHTML = `
         <!--For the checkout button-->
         <a data-link href="/checkout" id="checkout-btn"><i data-passthru class="fa-solid fa-dollar-sign">Checkout</i></a>
