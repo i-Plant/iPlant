@@ -4,7 +4,7 @@ let products = [];
 export default function Products(props) {
     products = props.products
     // console.log(props.products)
-   let html = `
+    let html = `
 <div id='label' class='text-center'></div>
 <div class="shopping-cart" id="shopping-cart"></div>
     <div>
@@ -15,7 +15,6 @@ export default function Products(props) {
    `
     for (let i = 0; i < products.length; i++){
         html += `
-
               <div class="flip-card">
     <div class="flip-card-inner">
         <div class="flip-card-front">
@@ -35,7 +34,6 @@ export default function Products(props) {
         </div> 
     </div>
 </div>     
-
 `
 
     }
@@ -54,4 +52,3 @@ export function ProductsEvent(){
         })
     }
 }
-
