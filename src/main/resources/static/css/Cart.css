@@ -4,19 +4,21 @@
 .body {
     font-family: sans-serif;
 }
+
 i {
     cursor: pointer;
 }
+/*For the cart icon*/
 .cart {
     position: fixed;
-    /*position: absolute;*/
-    top: 10%;
+    top: 15%;
     right: 3%;
     color: #fff;
     font-size: 30px;
     padding: 5px;
     border-radius: 4px;
 }
+/*for the badge counter on the cart icon*/
 .cart-amount {
     position: absolute;
     top: 0;
@@ -45,21 +47,21 @@ i {
 }
 .removeAll {
     background-color: red;
+
 }
 
-.bi-x-lg {
+.fa-x {
     color: red;
     font-weight: bold;
 }
-/*Style rules for shopping cart*/
+/*Style rules for cart items*/
 .shopping-cart {
     display: grid;
     grid-template-columns: repeat(1, 320px);
     justify-content: center;
     gap: 15px;
 }
-/*Style rules for cart item*/
-.cart-container{
+.cart-container {
     margin-top: 120px;
 }
 .cart-item {
@@ -70,26 +72,62 @@ i {
     margin-left: 10em;
     border: 4px solid black;
     border-radius: 5px;
+    /*padding: 5px !important;*/
+    margin: 10px auto;
+
+
 }
 .cart-buttons{
     display: flex;
 
 }
+/*For the item title and the delete button for the item*/
 .title-price-x {
-    width: 195px;
+    width: 310px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+
 }
 .title-price {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
+
+}
+/*product counter CSS*/
+.counter{
+    width: 15%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.count{
+    font-size: 20px;
+    font-family: 'Open Sans';
+    font-weight: 900;
+    color: #202020;
+
 }
 .cart-item-price {
     background-color: #212529;
     color: white;
     border: 4px;
     padding: 3px 6px;
+
 }
+#checkout-btn {
+    width: 10%;
+    font-family: "American Typewriter", sans-serif;
+    position: fixed;
+    margin: 1% 2%
+}
+.remove-item {
+    visibility: hidden;
+}
+
+
+
