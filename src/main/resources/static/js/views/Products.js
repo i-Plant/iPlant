@@ -55,6 +55,8 @@ export default function Products(props) {
 
 export function ProductsEvent(){
     pushToCart();
+    saveOrder();
+    setupValidationHandlers();
 }
 
 let cartArray = [];
@@ -93,6 +95,54 @@ function validateOrder() {
     return isValid;
 }
 
+function saveOrder() {
+    const saveButton = document.querySelector(".addToCart");
+    saveButton.addEventListener("click", function(event) {
+        const orderId = parseInt(this.getAttribute("data-id"));
+        console.log(orderId)
+        // saveOrder(orderId);
+
+        if (!validateOrder()) {
+            return;
+        }
+
+        // make the new order?
+        const order = {
+            item: item
+        }
+        console.log(order)
+
+        // make the request
+        const request = {
+            method: "POST",
+            headers: getHeaders(),
+            body: JSON.stringify(order)
+        }
+        let url = BACKEND_HOST_URL + "/api/orders/" + `${orderId}` +"/products";
+        console.log(request);
+
+        fetch(url, request)
+            .then(function (response) {
+                if (response.status !== 200) {
+                    console.log("fetch returned bad status code: " + response.status);
+                    console.log(response.statusText);
+
+                    //I don't want to redirect to the cart page
+                    //          CreateView("/cart");
+                }
+
+            })
+
+    });
+}
+
+
+// function saveOrder(orderId) {
+//     // get the order-id for the new order
+//     const item = document.querySelector("#item");
+//     // don't allow checkout if cart is empty
+//
+// }
 // function sortProductsByName(a, b) {
 //     // Use toUpperCase() to ignore character casing
 //     const nameA = a.name.toUpperCase();
@@ -106,40 +156,4 @@ function validateOrder() {
 //     }
 //     return comparison;
 // }
-function saveOrder(orderId) {
-    // get the order-id for the new order
-    const item = document.querySelector("#item");
-
-    // don't allow checkout if cart is empty
-    if (!validateOrder()) {
-        return;
-    }
-
-    // make the new order?
-    const order = {
-        item: item
-    }
-    console.log(order)
-
-    // make the request
-    const request = {
-        method: "POST",
-        headers: getHeaders(),
-        body: JSON.stringify(order)
-    }
-    let url = BACKEND_HOST_URL + "/api/orders/${order-id}/products";
-    console.log(request);
-
-    fetch(url, request)
-        .then(function (response) {
-            if (response.status !== 200) {
-                console.log("fetch returned bad status code: " + response.status);
-                console.log(response.statusText);
-
-                //I don't want to redirect to the cart page
-                //          CreateView("/cart");
-            }
-
-        })
-}
 

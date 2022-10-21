@@ -1,5 +1,8 @@
 //I need to display the carts in Jalopy
 //I need to push to a new array (basket) and display those cards in the cart(basket) when I add them
+import {getHeaders} from "../auth.js";
+import CreateView from "../createView.js";
+
 let basket = [];
 let products;
 export default function addToCart(props) {
@@ -78,14 +81,13 @@ export default function addToCart(props) {
      // update();
       clearCart();
      addIncrementDecrementHandlers();
+     setupDeleteHandlers();
 
  }
 let productId;
 function addIncrementDecrementHandlers() {
-
     const incrementBtns = document.querySelectorAll(".increment-Btn")
     const decrementBtns = document.querySelectorAll(".decrement-Btn")
-
     //looping through the increment buttons
     for (let i = 0; i < incrementBtns.length; i++) {
         console.log(incrementBtns[i]);
@@ -112,6 +114,40 @@ function addIncrementDecrementHandlers() {
     }
 
 }
+
+function setupDeleteHandlers() {
+    // target all delete buttons
+    const deleteButtons = document.querySelectorAll(".deleteOrder");
+    // add click handler to all delete buttons
+    for (let i = 0; i < deleteButtons.length; i++) {
+        deleteButtons[i].addEventListener("click", function(event) {
+
+            // get the post id of the delete button
+            const orderId = this.getAttribute("data-id");
+
+            deleteReview(orderId);
+        });
+    }
+}
+
+
+function deleteReview(orderId) {
+    const request = {
+        method: "DELETE",
+        headers: getHeaders(),
+    }
+    const url = BACKEND_HOST_URL + `/${orderId}`;
+    console.log(url);
+    fetch(url, request)
+        .then(function(response) {
+            if(response.status !== 200) {
+                console.log("fetch returned bad status code: " + response.status);
+                console.log(response.statusText);
+            }
+
+        })
+}
+
 //Add all the product items as a total sum of items to be displayed where needed, i.e., the cart badge, the total sum,
     function calculation() {
         let cartCounter = document.querySelector(".cart-amount");
@@ -140,7 +176,7 @@ function addIncrementDecrementHandlers() {
                      <p class="cart-item-price">${price}</p>
                  </h4>
                  <!--Id like to remove the entire product card when I click this "X"  -->
-                 <i onclick="removeItem()" class="fa-solid fa-x"></i>
+                 <i data-passthru onclick="removeItem()" class="fa-solid fa-x"></i>
              </div>
              <div class="buttons">
                  <i onclick="decrement(${id})" class="fa-solid fa-minus"></i>
@@ -156,7 +192,7 @@ function addIncrementDecrementHandlers() {
             shoppingCart.innerHTML = ``;
             label.innerHTML = `
              <h2>Cart is Empty</h2>
-             <a data-link href="/products">
+             <a style="margin-top: 50px" data-link href="/products">
                  <button data-link class="products">Back to shopping</button>
              </a>
              `;
@@ -166,9 +202,10 @@ function addIncrementDecrementHandlers() {
     //increment and decrement functions
     let bucket;
     function increment(productId) {
-
+        console.log(products);
         for(let i=0; i < products.length; i++) {
-             if(products[i].id == productId) {
+
+            if(products[i].id == productId) {
 
                  bucket = products[i];
              }
