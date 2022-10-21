@@ -1,21 +1,31 @@
 import createView from "../createView.js";
+import {getHeaders} from "../auth.js";
+import CreateView from "../createView.js";
 
 let products = [];
 export default function Products(props) {
     products = props.products
-    // console.log(props.products)
+//   sortProductsByName();
     let html = `
-<div id='label' class='text-center'></div>
-<div class="shopping-cart" id="shopping-cart"></div>
+<!--For the shopping cart icon-->
+     <div class="cart">
+        <a data-link href="/cart"><i data-passthru id="cart" class="fa-solid fa-cart-shopping"></i></a>
+        <div class="cart-amount"></div>
+     </div>
+     `;
+
+    html += `
+
     <div>
         <h1>Our Plants</h1>
     </div>
     <main>
-    
-   `
-    for (let i = 0; i < products.length; i++){
-        html += `
-              <div class="flip-card">
+`;
+    for (let i = 0; i < products.length; i++) {
+
+        html +=  `
+            
+<div class="flip-card">
     <div class="flip-card-inner">
         <div class="flip-card-front">
              <img class="card-img-top" src="${products[i].imageURL}" alt="plant-image">
@@ -33,22 +43,118 @@ export default function Products(props) {
              <button data-id="${products[i].id}" class="btn btn-primary addToCart">Add to Cart</button>
         </div> 
     </div>
-</div>     
-`
-
+</div>   
+                   
+`;
     }
-    return html+= `</main>`;
+
+    return html += `</main>`;
+
 }
 
+
 export function ProductsEvent(){
-    let cartArray = [];
+    pushToCart();
+    saveIt();
+    setupValidationHandlers();
+}
+
+let cartArray = [];
+function pushToCart() {
+
     let addToCart = document.querySelectorAll(".addToCart");
     for (let i = 0; i < addToCart.length; i++) {
         addToCart[i].addEventListener("click", (e) => {
             e.preventDefault();
             let item = addToCart[i].getAttribute("data-id");
             cartArray.push(item);
-            console.log(cartArray);
+            cartArray.sort();//should I sort before the loop?
+            console.log(item);
         })
     }
+    //I need to change the counter in the cart when I add a product to the cart
 }
+function setupValidationHandlers() {
+    let checkout = document.querySelector("")
+    checkout.addEventListener("click", validateOrder);
+
+}
+//If cart is empty do NOT allow checkout button --> checkout page and inform the user
+function validateOrder() {
+    let isValid = true;
+    let completeCheckout = document.querySelector("#checkout-btn");
+    if(completeCheckout.length < 1) {
+        completeCheckout.classList.add("order is-invalid");
+        completeCheckout.classList.remove("is-valid");
+        isValid = false;
+    } else {
+        completeCheckout.classList.add("is-valid");
+        completeCheckout.classList.remove("order is-invalid");
+    }
+
+    return isValid;
+}
+
+
+
+function saveIt() {
+    const saveButton = document.querySelector(".addToCart");
+    saveButton.addEventListener("click", function(event) {
+        const orderId = parseInt(this.getAttribute("data-id"));
+        console.log(orderId)
+        // saveOrder(orderId);
+
+        if (!validateOrder()) {
+            return;
+        }
+
+        // make the new order?
+        const order = {
+            item: item
+        }
+        console.log(order)
+
+        // make the request
+        const request = {
+            method: "POST",
+            headers: getHeaders(),
+            body: JSON.stringify(order)
+        }
+        let url = BACKEND_HOST_URL + "/api/orders/" + `${orderId}` +"/products";
+        console.log(request);
+
+        fetch(url, request)
+            .then(function (response) {
+                if (response.status !== 200) {
+                    console.log("fetch returned bad status code: " + response.status);
+                    console.log(response.statusText);
+
+                    //I don't want to redirect to the cart page
+                    //          CreateView("/cart");
+                }
+
+            })
+
+    });
+}
+
+
+// function saveOrder(orderId) {
+//     // get the order-id for the new order
+//     const item = document.querySelector("#item");
+//     // don't allow checkout if cart is empty
+//
+// }
+// function sortProductsByName(a, b) {
+//     // Use toUpperCase() to ignore character casing
+//     const nameA = a.name.toUpperCase();
+//     const nameB = b.name.toUpperCase();
+//
+//     let comparison = 0;
+//     if (nameA > nameB) {
+//         comparison = 1;
+//     } else if (nameA < nameB) {
+//         comparison = -1;
+//     }
+//     return comparison;
+// }
