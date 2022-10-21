@@ -68,12 +68,10 @@ export default function addToCart(props) {
         return cardsHTML;
     }
 
-
 }
 //I need to fill the  basket from the backend (orders), not localStorage because Jalopy sucks!
 // basket = JSON.parse(localStorage.getItem("data")) || [];
 // console.log(basket);
-
 
  export function addToCartEvent() {
     //  calculation();

@@ -5,7 +5,7 @@ import CreateView from "../createView.js";
 let products = [];
 export default function Products(props) {
     products = props.products
-//   sortProductsByName();
+
         let html = `
 <!--For the shopping cart icon-->
      <div class="cart">
@@ -16,10 +16,15 @@ export default function Products(props) {
 
    html += `
 
+
+<div id='label' class='text-center'></div>
+<div class="shopping-cart" id="shopping-cart"></div>
+
     <div>
         <h1>Our Plants</h1>
     </div>
     <main>
+
 `;
         for (let i = 0; i < products.length; i++) {
 
@@ -43,6 +48,7 @@ export default function Products(props) {
              <button data-id="${products[i].id}" class="btn btn-primary addToCart">Add to Cart</button>
         </div> 
     </div>
+<<<<<<< HEAD
 </div>   
                    
 `;
