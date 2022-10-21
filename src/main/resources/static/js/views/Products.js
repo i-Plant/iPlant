@@ -31,7 +31,7 @@ export default function Products(props) {
              <img class="card-img-top" src="${products[i].imageURL}" alt="plant-image">
             <div class="plantName">
              <h6 class="nameTitle">${products[i].name}</h6>
-             <h5 class="nameTitle">$ ${(products[i].price).toFixed(2)}</h5>
+             <h5 class="nameTitle"> $ ${(products[i].price).toFixed(2)}</h5>
              </div>
         </div>
         

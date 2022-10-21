@@ -8,6 +8,7 @@ export function LogoutEvent(){
     window.setTimeout(function () {
         window.localStorage.removeItem('access_token');
         window.localStorage.removeItem('user');
+        window.localStorage.removeItem('order-id');
         createView("/");
     }, 3)
 }
