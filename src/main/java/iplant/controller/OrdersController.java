@@ -18,7 +18,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import static iplant.data.Status.Active;
+import static iplant.data.Status.*;
 
 @CrossOrigin
 @AllArgsConstructor
@@ -88,9 +88,9 @@ public class OrdersController {
         originalOrder.setId(id);
         originalOrder.setCreatedAt(LocalDate.now());
 
-        orderRepository.save(originalOrder);
+        orderRepository.save(updatedOrder);
     }
-    @PostMapping("/{orderId}/products/")
+    @PostMapping("/{orderId}/products")
     public OrderProduct addProductToOrder(@RequestBody OrderProduct newProductToOrder, @PathVariable Long orderId){
 if(orderId == 0)
 {
@@ -138,4 +138,18 @@ if(orderId == 0)
         orderProductsRepository.deleteById(id);
     }
 
+    @PutMapping("/{id}/Completed")
+    public void completeOrder(@RequestBody Order updatedOrder,@PathVariable long id){
+        Optional<Order> orderOptional = orderRepository.findById(id);
+        if(orderOptional.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Order " + id + " not found");
+        }
+        Order originalOrder = orderOptional.get();
+        BeanUtils.copyProperties(updatedOrder, originalOrder, FieldHelper.getNullPropertyNames(updatedOrder));
+        updatedOrder.setId(id);
+        updatedOrder.setCreatedAt(LocalDate.now());
+        updatedOrder.setStatus(Completed);
+
+        orderRepository.save(updatedOrder);
+    }
 }

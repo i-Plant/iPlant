@@ -4,10 +4,8 @@ body {
     background: #ececec;
 }
 .check{
-    position: absolute;
-    top: 105px;
-    left: 15px;
-
+    position: relative;
+    top: 20px;
 }
 
 input[type="checkbox"]{
