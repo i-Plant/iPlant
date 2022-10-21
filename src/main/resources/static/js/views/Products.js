@@ -5,8 +5,8 @@ import CreateView from "../createView.js";
 let products = [];
 export default function Products(props) {
     products = props.products
-
-        let html = `
+//   sortProductsByName();
+    let html = `
 <!--For the shopping cart icon-->
      <div class="cart">
         <a data-link href="/cart"><i data-passthru id="cart" class="fa-solid fa-cart-shopping"></i></a>
@@ -14,21 +14,16 @@ export default function Products(props) {
      </div>
      `;
 
-   html += `
-
-
-<div id='label' class='text-center'></div>
-<div class="shopping-cart" id="shopping-cart"></div>
+    html += `
 
     <div>
         <h1>Our Plants</h1>
     </div>
     <main>
-
 `;
-        for (let i = 0; i < products.length; i++) {
+    for (let i = 0; i < products.length; i++) {
 
-            html +=  `
+        html +=  `
             
 <div class="flip-card">
     <div class="flip-card-inner">
@@ -52,9 +47,9 @@ export default function Products(props) {
 </div>   
                    
 `;
-        }
+    }
 
-        return html += `</main>`;
+    return html += `</main>`;
 
 }
 
@@ -118,8 +113,6 @@ function pushToCart() {
 
 
 
-
-
 // function saveOrder(orderId) {
 //     // get the order-id for the new order
 //     const item = document.querySelector("#item");
@@ -139,4 +132,3 @@ function pushToCart() {
 //     }
 //     return comparison;
 // }
-
