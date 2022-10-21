@@ -1,6 +1,5 @@
 export default function About(props) {
     return `
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +12,6 @@ export default function About(props) {
     
 </head>
 <body>
-
 <div class="about-container">  
     <div class="section-title">
         <h1>The I·Plant Team</h1>
@@ -112,7 +110,6 @@ export default function About(props) {
             </div>
                     
 <!--                    Louie's card-->
-
             <div class="about-column">
                 <div class="about-team">
                     <div class="team-img">
@@ -135,10 +132,7 @@ export default function About(props) {
             </div>
         </div>
     </div>
-
-
     </body>
-
 </html>
  
     `;
