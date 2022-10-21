@@ -6,17 +6,18 @@ import CreateView from "../createView.js";
 let basket = [];
 let products;
 export default function addToCart(props) {
-    basket = props.orders
+    basket.push(props.order);
     console.log(basket);
 
     let myOrder;
     for (let i = 0; i < basket.length; i++) {
 
-        if (basket[i].buyer.id !== 1) {
-            continue;
-        } else {
-            myOrder = basket[i];
-        }
+        // if (basket[i].buyer.id !== 1) {
+        //     continue;
+        // } else {
+        //     myOrder = basket[i];
+        // }
+        myOrder = basket[i];
         let cardsHTML = `
         <!--For the checkout button-->
         <a data-link href="/checkout" id="checkout-btn"><i data-passthru class="fa-solid fa-dollar-sign">Checkout</i></a>
@@ -78,10 +79,11 @@ export default function addToCart(props) {
 export function addToCartEvent() {
     //  calculation();
     //  totalAmount();
-    // update();
-    clearCart();
-    addIncrementDecrementHandlers();
-    setupDeleteHandlers();
+     // update();
+      clearCart();
+     addIncrementDecrementHandlers();
+     setupDeleteHandlers();
+     pseudoDelete();
 
 }
 let productId;
@@ -124,14 +126,21 @@ function setupDeleteHandlers() {
 
             // get the post id of the delete button
             const orderId = this.getAttribute("data-id");
+      //      deleteOrder(orderId);
 
-            deleteReview(orderId);
         });
     }
 }
+function pseudoDelete () {
+    const deleteX = document.querySelectorAll(".cart-item")
+    for(let i = 0; i < deleteX.length; i++) {
+        deleteX[i].addEventListener("click", function () {
+            deleteX[i].classList.toggle("remove-item")
+        })
+    }
+}
 
-
-function deleteReview(orderId) {
+function deleteOrder(orderId) {
     const request = {
         method: "DELETE",
         headers: getHeaders(),
@@ -223,40 +232,6 @@ function decrement() {
     }
     bucket.quantity--;
 }
-//TODO: this function works with front end storage.
-// let increment = (id) => {
-//     let search = basket.find((x) => x.props.orders.id === props.orders.id);
-//     //if the product is already in the basket, dont push the entire object, rather increment only the item#
-//     if(search === undefined){basket.push({
-//         id: props.orders.id,
-//         item: 1,
-//     })
-//     } else {
-//         search.item += 1;
-//     }
-//     //saving the increment to local storage immediately; same is done to decrement.
-//     update(props.orders.id);
-//     //rerender the cart after the updates
-//     generateCartItems();
-//     localStorage.setItem("data", JSON.stringify(basket));
-// }
-//I want decrement to remove quantity of items and then complete;ly remove the card when it reaches 0
-// let decrement = (id) => {
-//     let search = basket.find((x) => x.id === selectedItem.id);
-//     //if the product is not in the basket, don't decrement anymore.
-//     if (search === undefined) return
-//     else if (search.item === 0) return;
-//     else {
-//         search.item -= 1;
-//     }
-//     update(selectedItem.id);
-//     //while there are no items do not display
-//     basket = basket.filter((x) => x.item !== 0);
-//
-//     generateCartItems();
-//     localStorage.setItem("data", JSON.stringify(basket));
-// }
-
 
 let update = (productId) => {
     let search = basket.find((x) => x.id === id);
