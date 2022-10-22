@@ -3,13 +3,16 @@ package iplant.controller;
 
 import iplant.data.Order;
 import iplant.data.OrderProduct;
+import iplant.data.User;
 import iplant.repository.OrderProductsRepository;
 import iplant.repository.misc.FieldHelper;
 import iplant.repository.OrdersRepository;
+import iplant.services.AuthBuddy;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -30,6 +33,9 @@ public class OrdersController {
     private OrdersRepository orderRepository;
     @Autowired
     private OrderProductsRepository orderProductsRepository;
+    @Autowired
+    private AuthBuddy authBuddy;
+
 
     @GetMapping(path = "")
     public List<Order> getOrders() {
@@ -51,9 +57,10 @@ public class OrdersController {
     }
 
     @PostMapping("/create")
-    public void createOrder(@RequestBody Order newOrder ) {
+    public void createOrder(@RequestBody Order newOrder, @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authHeader ) {
 //        set UserId as Buyer for the newOrder. If not a user set Buyer to null:
-        newOrder.setBuyer(null);
+        User loggedInUser = authBuddy.getUserFromAuthHeaderJWT(authHeader);
+        newOrder.setBuyer(loggedInUser);
 //                if(isLoggedIn()) {
 //                    newOrder.setBuyer(user);
 //                }
@@ -90,6 +97,7 @@ public class OrdersController {
 
         orderRepository.save(updatedOrder);
     }
+
     @PostMapping("/{orderId}/products")
     public OrderProduct addProductToOrder(@RequestBody OrderProduct newProductToOrder, @PathVariable Long orderId){
 if(orderId == 0)

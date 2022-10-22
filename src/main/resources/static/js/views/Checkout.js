@@ -118,8 +118,17 @@ export async function CheckoutEvent() {
         }
     });
 }
-
-
+//TODO: I want Gabby Jay to say, "Yay"
+// let a = document.querySelector("#gabby");
+// a.classList.add("jay");
+// setTimeout(function() {
+//     a.classList.remove("jay")
+// }, 1E4)
+// onclick();
+//
+// function onclick(event) {
+//     document.getElementById('yay').play();
+// }
 // <div className="col">
 //     <label htmlFor="inputCity" className="form-label">City</label>
 //     <input type="text" className="form-control" id="inputCity">
