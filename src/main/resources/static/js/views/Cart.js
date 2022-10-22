@@ -96,26 +96,26 @@ function addIncrementDecrementHandlers() {
         // console.log(incrementBtns[i]);
         incrementBtns[i].addEventListener("click", function(e) {
             let orderProductId = this.getAttribute("data-id");
-            const itemQuantity = document.querySelector(".quantity");
-            const itemPrice = document.querySelector(".price");
-            const costPrice = document.querySelector(".cart-item-price");
-            let quan= parseFloat(itemQuantity.innerHTML);
-            let price= parseFloat(itemPrice.innerHTML);
-            let cost = parseFloat(costPrice.innerHTML);
+            const itemQuantity = document.querySelectorAll(".quantity");
+            const itemPrice = document.querySelectorAll(".price");
+            const costPrice = document.querySelectorAll(".cart-item-price");
+            let quan= parseFloat(itemQuantity[i].innerHTML);
+            let price= parseFloat(itemPrice[i].innerHTML);
+            let cost = parseFloat(costPrice[i].innerHTML);
             quan++;
-            console.log(price);
-            console.log(quan);
-            console.log(cost);
-            itemQuantity.innerHTML++;
-            itemPrice.innerText = (cost * quan).toFixed(2);
-            console.log(itemPrice.innerText);
+            // console.log(price);
+            // console.log(quan);
+            // console.log(cost);
+            itemQuantity[i].innerHTML++;
+            itemPrice[i].innerText = (cost * quan).toFixed(2);
+            // console.log(itemPrice[i].innerText);
             // increment(orderProductId);
             const request = {
                 method: "PUT",
                 headers: getHeaders(),
             }
             let url = BACKEND_HOST_URL + "/api/orders/products/" + `${orderProductId}`+ "/quantity-increment";
-            console.log(url);
+            // console.log(url);
             fetch(url, request)
                 .then(function(response) {
                     if(response.status !== 200) {
@@ -133,25 +133,25 @@ function addIncrementDecrementHandlers() {
     for (let i = 0; i < decrementBtns.length; i++) {
         decrementBtns[i].addEventListener("click", function(e) {
             let orderProductId = this.getAttribute("data-id");
-            const itemQuantity = document.querySelector(".quantity");
-            const itemPrice = document.querySelector(".price");
-            const costPrice = document.querySelector(".cart-item-price");
-            let quan= parseFloat(itemQuantity.innerHTML);
-            let price= parseFloat(itemPrice.innerHTML);
-            let cost = parseFloat(costPrice.innerHTML);
+            const itemQuantity = document.querySelectorAll(".quantity");
+            const itemPrice = document.querySelectorAll(".price");
+            const costPrice = document.querySelectorAll(".cart-item-price");
+            let quan= parseFloat(itemQuantity[i].innerHTML);
+            let price= parseFloat(itemPrice[i].innerHTML);
+            let cost = parseFloat(costPrice[i].innerHTML);
             quan--;
-            console.log(price);
+            // console.log(price);
             console.log(quan);
             console.log(cost);
-            itemQuantity.innerHTML--;
-            itemPrice.innerText = (cost * quan).toFixed(2);
-            console.log(itemPrice.innerText);
+            itemQuantity[i].innerHTML--;
+            itemPrice[i].innerText = (cost * quan).toFixed(2);
+            console.log(itemPrice[i].innerText);
             const request = {
                 method: "PUT",
                 headers: getHeaders(),
             }
             let url = BACKEND_HOST_URL + "/api/orders/products/" + `${orderProductId}` + "/quantity-decrement";
-            console.log(url);
+            // console.log(url);
             fetch(url, request)
                 .then(function(response) {
                     if(response.status !== 200) {
