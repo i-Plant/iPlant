@@ -83,8 +83,8 @@ export function addToCartEvent() {
       clearCart();
      addIncrementDecrementHandlers();
      setupDeleteHandlers();
-   //  pseudoDelete();
 
+   //  pseudoDelete();
 }
 
 let productId;
@@ -204,6 +204,7 @@ function calculation() {
 
 //This function regenerates the cart and makes changes to cart in real time so we dont have to refresh the page
 
+
     // shoppingCart.innerHTML = ``;
     // label.innerHTML = `
     //          <h2>Cart is Empty</h2>
@@ -242,6 +243,52 @@ function calculation() {
 
 
 
+let generateCartItems = () => {
+    let label = document.querySelector(".label");
+    let shoppingCart = document.querySelector(".shopping-cart");
+    //I want to target these products and create an array for the cart that is displayed in the cart view
+    let cartOrder = BACKEND_HOST_URL + "/api/orders";
+    if (basket.length !== 0) {
+        return shoppingCart.innerHTML = basket.map((x) => {
+            let {id, item} = x;
+            //I need to access the products database here
+            let search = cartOrder.find((y) => y.id === id) || []; //if you find it, cool, if not return an empty array; Also, y.id is the id from the database
+            let {img, name, price} = search; //lets destructure so I don't have type: search.img, or search.price, or search.name.
+            return `
+             <div class="cart-item">
+                 <img width="100" src=${img} alt=""
+             <div class="details">
+             <div class="title-price-x">
+                 <h4 class="title-price">
+                     <!--product name-->
+                     <p>${name}</p>
+                     <p class="cart-item-price">${price}</p>
+                 </h4>
+                 <!--Id like to remove the entire product card when I click this "X"  -->
+                 <i data-passthru onclick="removeItem()" class="fa-solid fa-x"></i>
+             </div>
+             <div class="buttons">
+                 <i onclick="decrement(${id})" class="fa-solid fa-minus"></i>
+                 <div id=${id} class="quantity">${item}</div>
+                 <i onclick="increment(${id})" class="fa-solid fa-plus"></i>
+             </div>
+             <h3>${item * price}</h3>
+             </div>
+             `;
+        })
+            .join("")
+    } else {
+        shoppingCart.innerHTML = ``;
+        label.innerHTML = `
+             <h2>Cart is Empty</h2>
+             <a style="margin-top: 50px" data-link href="/products">
+                 <button data-link class="products">Back to shopping</button>
+             </a>
+             `;
+    }
+}
+
+
 //increment and decrement functions
 let bucket;
 function increment(productId) {
@@ -258,6 +305,7 @@ function increment(productId) {
 
 }
 
+
 // function decrement() {
 //     for(let i=0; i < products.length; i++) {
 //         if(products[i].id == productId) {
@@ -267,6 +315,7 @@ function increment(productId) {
 //     }
 //     bucket.quantity--;
 // }
+
 //TODO: this function works with front end storage.
 // let increment = (id) => {
 //     let search = basket.find((x) => x.props.orders.id === props.orders.id);
@@ -300,7 +349,6 @@ function increment(productId) {
 //     generateCartItems();
 //     localStorage.setItem("data", JSON.stringify(basket));
 // }
-
 
 let update = (productId) => {
     let search = basket.find((x) => x.id === id);
