@@ -99,6 +99,7 @@ public class OrdersController {
     }
 
 
+
     @PostMapping("/{orderId}/products/")
     public OrderProduct addProductToOrder(@RequestBody OrderProduct newProductToOrder, @PathVariable Long orderId, @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authHeader ) {
         User loggedInUser = authBuddy.getUserFromAuthHeaderJWT(authHeader);

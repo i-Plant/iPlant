@@ -8,7 +8,7 @@ let basket = [];
 let products;
 export default function addToCart(props) {
     basket.push(props.order);
-    console.log(basket);
+    // console.log(basket);
 
     let myOrder;
     for (let i = 0; i < basket.length; i++) {
@@ -37,7 +37,7 @@ export default function addToCart(props) {
                         <h4 class="title-price">
                             <!--product name-->
                             <h5>${products[j].item.name}</h5>
-                            <p class="cart-item-price">$ ${(products[j].item.price).toFixed(2)}</p>
+                            <p>$ <span class="cart-item-price">${(products[j].item.price).toFixed(2)}</span></p>
                         </h5>
                         <i data-id="${products[j].id}" style="margin-bottom: 25px" class="fa-solid fa-x removeItem"></i>
                     </div>   
@@ -48,7 +48,7 @@ export default function addToCart(props) {
                         <i data-id="${products[j].id}" class="fa-solid fa-plus increment-Btn"></i>
                     </div>   
                     <!--This multiplies the item quantity by the price of the item-->
-                    <h3 >$ <span class="price">${(products[j].item.price).toFixed(2) * products[j].quantity}</span></h3>      
+                    <h3 >$ <span class="price">${((products[j].item.price) * products[j].quantity).toFixed(2)}</span></h3>      
                               
                 </div>
             </div>
@@ -80,10 +80,9 @@ export function addToCartEvent() {
     //  calculation();
     //  totalAmount();
      // update();
-      clearCart();
+    //  clearCart();
      addIncrementDecrementHandlers();
      setupDeleteHandlers();
-
    //  pseudoDelete();
 }
 
@@ -93,24 +92,29 @@ function addIncrementDecrementHandlers() {
     const decrementBtns = document.querySelectorAll(".decrement-Btn")
     //looping through the increment buttons
     for (let i = 0; i < incrementBtns.length; i++) {
-        console.log(incrementBtns[i]);
+        // console.log(incrementBtns[i]);
         incrementBtns[i].addEventListener("click", function(e) {
             let orderProductId = this.getAttribute("data-id");
-            const itemQuantity = document.querySelector(".quantity");
-            const itemPrice = document.querySelector(".price");
-            let quan= itemQuantity.innerHTML;
-            let price= itemPrice.innerHTML/quan;
-           // quan++
-            console.log(price);
-            itemQuantity.innerHTML++;
-            itemPrice.innerHTML = price * quan ;
-            increment(orderProductId);
+            const itemQuantity = document.querySelectorAll(".quantity");
+            const itemPrice = document.querySelectorAll(".price");
+            const costPrice = document.querySelectorAll(".cart-item-price");
+            let quan= parseFloat(itemQuantity[i].innerHTML);
+            let price= parseFloat(itemPrice[i].innerHTML);
+            let cost = parseFloat(costPrice[i].innerHTML);
+            quan++;
+            // console.log(price);
+            // console.log(quan);
+            // console.log(cost);
+            itemQuantity[i].innerHTML++;
+            itemPrice[i].innerText = (cost * quan).toFixed(2);
+            // console.log(itemPrice[i].innerText);
+            // increment(orderProductId);
             const request = {
                 method: "PUT",
                 headers: getHeaders(),
             }
             let url = BACKEND_HOST_URL + "/api/orders/products/" + `${orderProductId}`+ "/quantity-increment";
-            console.log(url);
+            // console.log(url);
             fetch(url, request)
                 .then(function(response) {
                     if(response.status !== 200) {
@@ -128,16 +132,25 @@ function addIncrementDecrementHandlers() {
     for (let i = 0; i < decrementBtns.length; i++) {
         decrementBtns[i].addEventListener("click", function(e) {
             let orderProductId = this.getAttribute("data-id");
-            const itemQuantity = document.querySelector(".quantity");
-            itemQuantity.innerHTML--;
-           // decrement(orderProductId);
-
+            const itemQuantity = document.querySelectorAll(".quantity");
+            const itemPrice = document.querySelectorAll(".price");
+            const costPrice = document.querySelectorAll(".cart-item-price");
+            let quan= parseFloat(itemQuantity[i].innerHTML);
+            let price= parseFloat(itemPrice[i].innerHTML);
+            let cost = parseFloat(costPrice[i].innerHTML);
+            quan--;
+            // console.log(price);
+            console.log(quan);
+            console.log(cost);
+            itemQuantity[i].innerHTML--;
+            itemPrice[i].innerText = (cost * quan).toFixed(2);
+            console.log(itemPrice[i].innerText);
             const request = {
                 method: "PUT",
                 headers: getHeaders(),
             }
             let url = BACKEND_HOST_URL + "/api/orders/products/" + `${orderProductId}` + "/quantity-decrement";
-            console.log(url);
+            // console.log(url);
             fetch(url, request)
                 .then(function(response) {
                     if(response.status !== 200) {
@@ -176,7 +189,7 @@ function setupDeleteHandlers() {
                         console.log("fetch returned bad status code: " + response.status);
                         console.log(response.statusText);
                     }
-                        createView("/cart")
+                    createView("/cart")
                 })
 
         });
@@ -202,25 +215,7 @@ function calculation() {
 
 //Add all the product items as a total sum of items to be displayed where needed, i.e., the cart badge, the total sum,
 
-//This function regenerates the cart and makes changes to cart in real time so we dont have to refresh the page
 
-
-    // shoppingCart.innerHTML = ``;
-    // label.innerHTML = `
-    //          <h2>Cart is Empty</h2>
-    //          <a style="margin-top: 50px" data-link href="/products">
-    //              <button data-link class="products">Back to shopping</button>
-    //          </a>
-    //          `;
-
-
-    //Id like to tell the user they can't checkout when cart is empty
-
-// function setupValidationHandlers() {
-//     let checkout = document.querySelector("")
-//     checkout.addEventListener("click", validateOrder);
-//
-// }
 // //If cart is empty do NOT allow checkout button --> checkout page and inform the user
 // function validateCheckout() {
 //     let isValid = true;
@@ -288,23 +283,59 @@ let generateCartItems = () => {
     }
 }
 
+// shoppingCart.innerHTML = ``;
+// label.innerHTML = `
+//          <h2>Cart is Empty</h2>
+//          <a style="margin-top: 50px" data-link href="/products">
+//              <button data-link class="products">Back to shopping</button>
+//          </a>
+//          `;
+
+
+//Id like to tell the user they can't checkout when cart is empty
+
+// function setupValidationHandlers() {
+//     let checkout = document.querySelector("")
+//     checkout.addEventListener("click", validateOrder);
+//
+// }
+// //If cart is empty do NOT allow checkout button --> checkout page and inform the user
+// function validateCheckout() {
+//     let isValid = true;
+//     let completeCheckout = document.querySelector("#checkout-btn");
+//     if(completeCheckout.length < 1) {
+//         completeCheckout.classList.add("order is-invalid");
+//         completeCheckout.classList.remove("is-valid");
+//         isValid = false;
+//     } else {
+//        completeCheckout.classList.add("is-valid");
+//         completeCheckout.classList.remove("order is-invalid");
+//     }
+//
+//     return isValid;
+// }
+// if (!validateCheckout()) {
+//     return;
+// }
+
+
+
 
 //increment and decrement functions
-let bucket;
-function increment(productId) {
-
-    for(let i=0; i < products.length; i++) {
-        console.log(products);
-        if(products[i].id == productId) {
-
-            bucket = products[i];
-        }
-    }
-    bucket.quantity++;
-    bucket.price
-
-}
-
+// let bucket;
+// function increment(productId) {
+//
+//     for(let i=0; i < products.length; i++) {
+//         // console.log(products);
+//         if(products[i].id == productId) {
+//
+//             bucket = products[i];
+//         }
+//     }
+//     bucket.quantity++;
+//     bucket.price
+//
+// }
 
 // function decrement() {
 //     for(let i=0; i < products.length; i++) {
@@ -358,7 +389,7 @@ let update = (productId) => {
     totalAmount();
 }
 let removeItem = (id) => {
-    console.log(id.id);
+    // console.log(id.id);
     basket = basket.filter((x) => x.id !== id.id);
 
     generateCartItems();
@@ -369,7 +400,7 @@ let removeItem = (id) => {
 
 let clearCart = () => {
     //clearing the basket by making it equal to an empty array
-    basket = []
+    basket = [];
     // generateCartItems();
     // calculation();
     // localStorage.setItem("data", JSON.stringify(basket));
