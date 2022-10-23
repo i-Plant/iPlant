@@ -13,62 +13,72 @@ export default function addToCart(props) {
     let myOrder;
     for (let i = 0; i < basket.length; i++) {
 
-        // if (basket[i].buyer.id !== 1) {
-        //     continue;
-        // } else {
-        //     myOrder = basket[i];
-        // }
         myOrder = basket[i];
-        let cardsHTML = `
-        <!--For the checkout button-->
-        <a data-link href="/checkout" id="checkout-btn"><i data-passthru class="fa-solid fa-dollar-sign">Checkout</i></a>
-         
-        <div class="container cart-container">`;
-        products = myOrder.products;
-        for (let j = 0; j < products.length; j++) {
-            //Here, should I push to an array to store all items?
+
+        let cardsHTML = ``;
+        //conditional for an empty cart is in else statement
+        if(myOrder !== [] ) {
 
             cardsHTML += `
-            
-            <div class="cart-item">                
-                 <img src="${products[j].item.imageURL}" alt="A plant" style="width:35%" >
-                 <div class="details">
-                    <div class="title-price-x">
-                        <h4 class="title-price">
-                            <!--product name-->
-                            <h5>${products[j].item.name}</h5>
-                            <p>$ <span class="cart-item-price">${(products[j].item.price).toFixed(2)}</span></p>
-                        </h5>
-                        <i data-id="${products[j].id}" style="margin-bottom: 25px" class="fa-solid fa-x removeItem"></i>
-                    </div>   
-                    <div class="cart-buttons">
-                        <i data-id="${products[j].id}" class="fa-solid fa-minus decrement-Btn"></i>
-                        <div data-id="${products[j].id}" class="quantity">${products[j].quantity}
-                        </div>     
-                        <i data-id="${products[j].id}" class="fa-solid fa-plus increment-Btn"></i>
-                    </div>   
-                    <!--This multiplies the item quantity by the price of the item-->
-                    <h3 >$ <span class="price">${((products[j].item.price) * products[j].quantity).toFixed(2)}</span></h3>      
-                              
+            <!--For the checkout button-->
+            <a data-link href="/checkout" id="checkout-btn"><i data-passthru class="fa-solid fa-dollar-sign">Checkout</i></a>
+             
+            <div class="container cart-container">`;
+            products = myOrder.products;
+            for (let j = 0; j < products.length; j++) {
+
+                cardsHTML += `               
+                <div class="cart-item">                
+                     <img src="${products[j].item.imageURL}" alt="A plant" style="width:35%" >
+                     <div class="details">
+                        <div class="title-price-x">
+                            <h4 class="title-price">
+                                <!--product name-->
+                                <h5>${products[j].item.name}</h5>
+                                <p>$ <span class="cart-item-price">${(products[j].item.price).toFixed(2)}</span></p>
+                            </h5>
+                            <i data-id="${products[j].id}" style="margin-bottom: 25px" class="fa-solid fa-x removeItem"></i>
+                        </div>   
+                        <div class="cart-buttons">
+                            <i data-id="${products[j].id}" class="fa-solid fa-minus decrement-Btn"></i>
+                            <div data-id="${products[j].id}" class="quantity">${products[j].quantity}
+                            </div>     
+                            <i data-id="${products[j].id}" class="fa-solid fa-plus increment-Btn"></i>
+                        </div>   
+                        <!--This multiplies the item quantity by the price of the item-->
+                        <h3 >$ <span class="price">${((products[j].item.price) * products[j].quantity).toFixed(2)}</span></h3>      
+                                  
+                    </div>
                 </div>
-            </div>
+                
+                `;
+
+                cardsHTML += `
+                 <!--For the shopping cart icon-->
+                 <div class="cart">
+                    <a data-link href="/cart"><i data-passthru id="cart" class="fa-solid fa-cart-shopping"></i></a>
+                    <!--This is the cart total item counter-->
+                    <div class="cart-amount">${products[i].quantity}</div>
+                 </div>
+                 
+                 <div id='label' class='text-center'></div>
+                 <div class="shopping-cart" id="shopping-cart"></div>
+                 `;
+            }
+
+            } else {
+                cardsHTML = `
+                  <h2>Cart is Empty</h2>
+                  <a style="margin-top: 50px" data-link href="/products">
+                      <button data-link class="productsEmpty">Back to shopping</button>
+                  </a> 
             
-        `;
+              `;
 
         }
-        cardsHTML += `
- <!--For the shopping cart icon-->
-     <div class="cart">
-        <a data-link href="/cart"><i data-passthru id="cart" class="fa-solid fa-cart-shopping"></i></a>
-        <div class="cart-amount">${products[i].quantity}</div>
-     </div>
-     
-     <div id='label' class='text-center'></div>
-     <div class="shopping-cart" id="shopping-cart"></div>
-     `;
-        //     cardsHTML += `</div>`;
         return cardsHTML;
     }
+
 
 
 }
@@ -98,15 +108,20 @@ function addIncrementDecrementHandlers() {
             const itemQuantity = document.querySelectorAll(".quantity");
             const itemPrice = document.querySelectorAll(".price");
             const costPrice = document.querySelectorAll(".cart-item-price");
+            const cartCounter = document.querySelectorAll(".cart-amount")
             let quan= parseFloat(itemQuantity[i].innerHTML);
-            let price= parseFloat(itemPrice[i].innerHTML);
+          //  let price= parseFloat(itemPrice[i].innerHTML);
             let cost = parseFloat(costPrice[i].innerHTML);
+
             quan++;
             // console.log(price);
             // console.log(quan);
             // console.log(cost);
+            //console.log(totalCartQuantity);
+
             itemQuantity[i].innerHTML++;
             itemPrice[i].innerText = (cost * quan).toFixed(2);
+            cartCounter[i].innerText = quan;
             // console.log(itemPrice[i].innerText);
             // increment(orderProductId);
             const request = {
@@ -135,15 +150,19 @@ function addIncrementDecrementHandlers() {
             const itemQuantity = document.querySelectorAll(".quantity");
             const itemPrice = document.querySelectorAll(".price");
             const costPrice = document.querySelectorAll(".cart-item-price");
+            const cartCounter = document.querySelectorAll(".cart-amount")
             let quan= parseFloat(itemQuantity[i].innerHTML);
             let price= parseFloat(itemPrice[i].innerHTML);
             let cost = parseFloat(costPrice[i].innerHTML);
+
+            //lets add a const and function that increments/decrements the item quantity in the cart badge
             quan--;
             // console.log(price);
             console.log(quan);
             console.log(cost);
             itemQuantity[i].innerHTML--;
             itemPrice[i].innerText = (cost * quan).toFixed(2);
+            cartCounter[i].innerText = quan;
             console.log(itemPrice[i].innerText);
             const request = {
                 method: "PUT",
