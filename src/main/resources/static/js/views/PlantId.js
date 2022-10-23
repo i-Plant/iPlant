@@ -8,6 +8,10 @@ export default function PlantId(props) {
         <h1>Plant ID</h1>
     </header>
     <main>
+    
+    
+    
+    
             <div>
                 <form class="upload" id="myForm">
                     <div class="mb-3">
