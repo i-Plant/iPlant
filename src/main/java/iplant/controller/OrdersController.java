@@ -98,18 +98,24 @@ public class OrdersController {
         orderRepository.save(updatedOrder);
     }
 
-    @PostMapping("/{orderId}/products")
-    public OrderProduct addProductToOrder(@RequestBody OrderProduct newProductToOrder, @PathVariable Long orderId){
-if(orderId == 0)
-{
-    Order newOrder = new Order();
-    newOrder.setBuyer(null);
-    newOrder.setCreatedAt(LocalDate.now());
-    newOrder.setStatus(Active);
-    newOrder = orderRepository.save(newOrder);
-    newProductToOrder.setOrder(newOrder);
-    orderId = newOrder.getId();
-}
+
+
+    @PostMapping("/{orderId}/products/")
+    public OrderProduct addProductToOrder(@RequestBody OrderProduct newProductToOrder, @PathVariable Long orderId, @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authHeader ) {
+        User loggedInUser = authBuddy.getUserFromAuthHeaderJWT(authHeader);
+        if(loggedInUser == null) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Not logged in");
+        }
+        if(orderId == 0) {
+            Order newOrder = new Order();
+            newOrder.setBuyer(loggedInUser);
+            newOrder.setCreatedAt(LocalDate.now());
+            newOrder.setStatus(Active);
+            newOrder = orderRepository.save(newOrder);
+            newProductToOrder.setOrder(newOrder);
+            orderId = newOrder.getId();
+        }
+
         newProductToOrder.getOrder().setId(orderId);
         newProductToOrder.setQuantity(1);
         newProductToOrder = orderProductsRepository.save(newProductToOrder);
