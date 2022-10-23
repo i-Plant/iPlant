@@ -1,7 +1,6 @@
 import createView from "../createView.js";
 import {getHeaders} from "../auth.js";
 
-
 let products = [];
 export default function Products(props) {
     products = props.products
@@ -43,7 +42,6 @@ export default function Products(props) {
              <button id="addToCart" data-id="${products[i].id}" class="btn btn-primary addToCart">Add to Cart</button>
         </div> 
     </div>
-
 </div>   
                    
 `;
@@ -57,7 +55,6 @@ export default function Products(props) {
 export function ProductsEvent(){
     pushToCart();
     //saveOrder();
-
 }
 
 function pushToCart() {
@@ -108,10 +105,6 @@ function pushToCart() {
     }
     //I need to change the counter in the cart when I add a product to the cart
 }
-
-
-
-
 
 // function saveOrder(orderId) {
 //     // get the order-id for the new order

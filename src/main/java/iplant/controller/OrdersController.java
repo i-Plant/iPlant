@@ -21,7 +21,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import static iplant.data.Status.Active;
+import static iplant.data.Status.*;
 
 @CrossOrigin
 @AllArgsConstructor
@@ -95,24 +95,21 @@ public class OrdersController {
         originalOrder.setId(id);
         originalOrder.setCreatedAt(LocalDate.now());
 
-        orderRepository.save(originalOrder);
+        orderRepository.save(updatedOrder);
     }
 
-    @PostMapping("/{orderId}/products/")
-    public OrderProduct addProductToOrder(@RequestBody OrderProduct newProductToOrder, @PathVariable Long orderId, @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authHeader ) {
-        User loggedInUser = authBuddy.getUserFromAuthHeaderJWT(authHeader);
-        if(loggedInUser == null) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Not logged in");
-        }
-        if(orderId == 0) {
-            Order newOrder = new Order();
-            newOrder.setBuyer(loggedInUser);
-            newOrder.setCreatedAt(LocalDate.now());
-            newOrder.setStatus(Active);
-            newOrder = orderRepository.save(newOrder);
-            newProductToOrder.setOrder(newOrder);
-            orderId = newOrder.getId();
-        }
+    @PostMapping("/{orderId}/products")
+    public OrderProduct addProductToOrder(@RequestBody OrderProduct newProductToOrder, @PathVariable Long orderId){
+if(orderId == 0)
+{
+    Order newOrder = new Order();
+    newOrder.setBuyer(null);
+    newOrder.setCreatedAt(LocalDate.now());
+    newOrder.setStatus(Active);
+    newOrder = orderRepository.save(newOrder);
+    newProductToOrder.setOrder(newOrder);
+    orderId = newOrder.getId();
+}
         newProductToOrder.getOrder().setId(orderId);
         newProductToOrder.setQuantity(1);
         newProductToOrder = orderProductsRepository.save(newProductToOrder);
@@ -149,4 +146,18 @@ public class OrdersController {
         orderProductsRepository.deleteById(id);
     }
 
+    @PutMapping("/{id}/Completed")
+    public void completeOrder(@RequestBody Order updatedOrder,@PathVariable long id){
+        Optional<Order> orderOptional = orderRepository.findById(id);
+        if(orderOptional.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Order " + id + " not found");
+        }
+        Order originalOrder = orderOptional.get();
+        BeanUtils.copyProperties(updatedOrder, originalOrder, FieldHelper.getNullPropertyNames(updatedOrder));
+        updatedOrder.setId(id);
+        updatedOrder.setCreatedAt(LocalDate.now());
+        updatedOrder.setStatus(Completed);
+
+        orderRepository.save(updatedOrder);
+    }
 }
