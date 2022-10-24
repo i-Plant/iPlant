@@ -18,15 +18,22 @@ body
 }
 
 .ourTeam {
+    /*width: 200px;*/
+    height: 400px;
     margin-top: 150px;
     text-align: center;
-    font-size: xx-large;
+    font-size: xxx-large;
+    background-image: url("../assets/review-jumbo.jpg");
+
+}
+
+.ourTeam h1{
 
 }
 
 .aboutContainer
 {
-    margin-top: 250px;
+    margin-top: 0px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -87,7 +94,7 @@ body
 }
 .aboutContainer .aboutCard .aboutContent .sci
 {
-    margin-top: 20px;
+    margin-top: -1px;
 }
 .aboutContainer .aboutCard .aboutContent .sci a
 {
