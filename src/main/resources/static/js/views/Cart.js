@@ -16,6 +16,7 @@ export default function addToCart(props) {
 
         let cardsHTML = ``;
         //conditional for an empty cart is in else statement
+
         if (myOrder.products.length > 0 ) {
 
             cardsHTML += `
@@ -48,6 +49,7 @@ export default function addToCart(props) {
                         <h3 >$ <span class="price">${((products[j].item.price) * products[j].quantity).toFixed(2)}</span></h3>      
                                   
                     </div>
+
                 </div>
                 
                 `;
@@ -72,15 +74,12 @@ export default function addToCart(props) {
                   <a style="margin-top: 150px" data-link href="/products">
                       <button data-link class="productsEmpty">Back to shopping</button>
                   </a> 
-                </div>
-            
-              `;
-
-        }
+                </div>               
+                `;
+            }
         return cardsHTML;
+        }
 
-
-    }
 }
 //I need to fill the  basket from the backend (orders), not localStorage because Jalopy sucks!
 // basket = JSON.parse(localStorage.getItem("data")) || [];
@@ -109,7 +108,7 @@ function addIncrementDecrementHandlers() {
             const costPrice = document.querySelectorAll(".cart-item-price");
             const cartCounter = document.querySelectorAll(".cart-amount")
             let quan= parseFloat(itemQuantity[i].innerHTML);
-            //  let price= parseFloat(itemPrice[i].innerHTML);
+
             let cost = parseFloat(costPrice[i].innerHTML);
 
             quan++;
