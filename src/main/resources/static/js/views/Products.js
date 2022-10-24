@@ -9,7 +9,7 @@ export default function Products(props) {
 <!--For the shopping cart icon-->
      <div class="cart">
         <a data-link href="/cart"><i data-passthru id="cart" class="fa-solid fa-cart-shopping"></i></a>
-        <div class="cart-amount">0</div>
+        <div class="cart-amount"></div>
      </div>
      `;
 
@@ -76,6 +76,9 @@ function pushToCart() {
             e.preventDefault();
             let itemId = addToCart[i].getAttribute("data-id");
             let orderId = 0;
+            let cartCounter = document.querySelector(".cart-amount");
+            //cartCounter.parseInt(innerText++);
+            cartCounter.innerText++;
             //if there's already an order id in local storage use that order
             if(window.localStorage.getItem("order-id") ) {
                 orderId = window.localStorage.getItem("order-id")

@@ -15,7 +15,7 @@ import Profile, {ProfileEvent} from "./views/Profile.js";
 import Checkout, {CheckoutEvent} from "./views/Checkout.js";
 import PlantId, {PlantIdEvent} from "./views/PlantId.js";
 import Logout, {LogoutEvent} from "./views/Logout.js";
-import PaymentOk from "./views/PaymentOk.js";
+import PaymentOk, {PaymentOkEvent} from "./views/PaymentOk.js";
 import addToCart, {addToCartEvent} from "./views/Cart.js";
 
 /**
@@ -146,6 +146,7 @@ export default function router(URI) {
             state: {},
             uri: '/paymentOk',
             title: 'PaymentOkay',
+            viewEvent: PaymentOkEvent
         }
 
     };

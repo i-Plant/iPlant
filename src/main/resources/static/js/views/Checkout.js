@@ -4,11 +4,22 @@ export default function Checkout(props) {
     return `
         
 <main class="bg-light-blue">
-<div class="container-checkout">
-<div class="py-5 text-center">
-<img class="mb-4 d block mx-auto" src="../../assets/1.jpg" alt="Logo" width="72" height="72">
-<h2>Checkout</h2>
+<div class="jumbotron jumbotron-3 d-flex justify-content-center">
+    <div class="inner-content text-center text-white bg-steelblue p-5">
+        <h2 class="text uppercase">Thank you for shopping with us, are you sure you wish to checkout?</h2>
+        <p style="color: white; font-size: 20px"  >Shipping: $10.00</p>
+        <p style="color: white; font-size: 20px" class="checkout-total" >Total: $100.50</p>
+        <form>
+            <a data-link href="/products" class="checkout-redirect">Continue Shopping</a>
+            <a data-link href="/cart" class="checkout-redirect">Go Back To Cart</a>
+           
+        </form>
+    </div>
 </div>
+<hr style="height:2px;border-width:0;color:gray;background-color:gray">
+
+<div class="container-checkout">
+<img src="../../assets/iplant-logo.png" alt="logo" sizes="" srcset="" class="checkout-logo">
 <div class="row">
   <div class="col-3">
     <label for="inputEmail4" class="form-label">First name</label>
@@ -46,7 +57,7 @@ export default function Checkout(props) {
                 <div id="payment-element">
                     <!-- Elements will create form elements here -->
                 </div>
-                <button id="submit">Pay now</button>
+                <button id="submit" class="confirm-payment">Confirm Payment</button>
                 <div id="error-message">
                     <!-- Display error message to your customers here -->
                 </div>
@@ -143,4 +154,4 @@ export async function CheckoutEvent() {
 // <div className="col-3">
 //     <label htmlFor="inputZip" className="form-label">Zip</label>
 //     <input type="text" className="form-control" id="inputZip">
-// </div>
+// </div>>

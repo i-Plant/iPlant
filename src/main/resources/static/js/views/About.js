@@ -3,137 +3,115 @@ export default function About(props) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<!--    <meta name="viewport" content="width=device-width", initial-scale="1.0>"-->
-    
-    <title>Document</title>
-    
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Our Team Section Using HTML & CSS | CSS Neumorphism</title>
+
+ 
 </head>
 <body>
-<div class="about-container">  
-    <div class="section-title">
-        <h1>The I·Plant Team</h1>
-    </div>
+        <div class="ourTeam">
+            <h1 class="ourTeam">Our Team</h1>
+        </div>
+    <div class="aboutContainer">
         
-        <div class="about-row">
-        
-<!--        Justin's Card-->
-        
-            <div class="about-column">
-                <div class="about-team">
-                    <div class="team-img">
-                    <img src="../../assets/Justin.jpg" alt="Justin Image">
-                    </div>
-                    <div class="team-content">
-                        <h2 class="about-name">Justin</h2>
-                        <h3 class="about-line">Backend Hero</h3>
-                        <p>Talk about our great team here....</p>
-                        <h4 class="about-email">justin.quinn09@gmail.com</h4>
-                    </div>
-                    <div class="team-social">
-                        <a href="#" class="social-tw"> <i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-fb"> <i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-li"> <i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="social-in"> <i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-yt"> <i class="fab fa-youtube"></i></a>
-                    </div>
+        <div class="aboutCard">
+            <div class="aboutContent">
+                <div class="imgBx">
+                    <img src="../../assets/Kat.jpg" alt="">
                 </div>
-            </div>
-            
-<!--            Rogelio's Card-->
-            
-            <div class="about-column">
-                <div class="about-team">
-                    <div class="team-img">
-                        <img src="../../assets/Roger.jpg" alt="Rogelio Image">
-                    </div>
-                    <div class="team-content">
-                        <h2 class="about-name"> Rogelio</h2>
-                        <h3 class="about-line"">All Around</h3>
-                        <p>Talk about Rogelio ... </p>
-                        <h4 class="about-email">Rogelio@gmail.com</h4>
-                    </div>
-                    <div class="team-social">
-                        <a href="#" class="social-tw"> <i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-fb"> <i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-li"> <i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="social-in"> <i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-yt"> <i class="fab fa-youtube"></i></a>
-                    </div>
+                <div class="aboutContentBx">
+                    <h4 class="aboutTitle">Katherine Gil</h4>
+                    <h5 class="aboutTitle">Full Stack Web Developer</h5>
+                    <h6 class="aboutTitle">"It's never done that before.-unknown"</h6>
                 </div>
-            </div>
-            
-<!--            Kat's card-->
-            <div class="about-column">
-                <div class="about-team">
-                    <div class="team-img">
-                        <img src="../../assets/Kat.jpg" alt="Kat image">           
-                    </div>
-                    <div class="team-content">
-                        <h2 class="about-name">Kat</h2>
-                        <h3 class="about-line">In Charge</h3>
-                        <p>Talk about Kat ... </p>
-                        <h4 class="about-email">gil.katherine22@gmail.com</h4>
-                    </div>
-                    <div class="team-social">
-                        <a href="#" class="social-tw"> <i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-fb"> <i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-li"> <i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="social-in"> <i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-yt"> <i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-            </div>
-            
-<!--            Nat's card-->
-            <div class="about-column">
-                <div class="about-team">
-                    <div class="team-img">
-                        <img src="../../assets/Sneed.jpg" alt="Nat image">           
-                    </div>
-                    <div class="team-content">
-                        <h2>Nat</h2>
-                        <h3 class="about-us-line">Got Style</h3>
-                        <p>Talk about Nat ... </p>
-                        <h4 class="about-us-email">Natalie.Sneed@gmail.com</h4>
-                    </div>
-                    <div class="team-social">
-                        <a href="#" class="social-tw"> <i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-fb"> <i class="fab fa-facebook-f"></i></a>
-                        <a href="www.linkedin.com/in/natalie-n-sneed" class="social-li"> <i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="social-in"> <i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-yt"> <i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-            </div>
-                    
-<!--                    Louie's card-->
-            <div class="about-column">
-                <div class="about-team">
-                    <div class="team-img">
-                        <img src="../../assets/Louie.jpg" alt="Louie's image">           
-                    </div>
-                    <div class="team-content">
-                        <h2 class="about-us-name">Louie</h2>
-                        <h3 class="about-us-line">Idea Guy</h3>
-                        <p>Talk about Louie ... </p>
-                        <h4 class="about-us-email">louie.espinosa@proton.me</h4>
-                    </div>
-                    <div class="team-social">
-                        <a href="#" class="social-tw"> <i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-fb"> <i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-li"> <i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="social-in"> <i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-yt"> <i class="fab fa-youtube"></i></a>
-                    </div>
+                <div class="sci">
+                    <a data-link href="https://www.linkedin.com/in/katherinegil22/"><i data-useparent class="fa fa-linkedin" aria-hidden="true"></i></a>
+                    <a data-link href="https://github.com/katygil7"><i data-useparent class="fa fa-github" aria-hidden="true"></i></a>
+                    <a data-link href="#"><i data-useparent class="fa fa-twitter" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                 </div>
             </div>
         </div>
+        <div class="aboutCard">
+            <div class="aboutContent">
+                <div class="imgBx">
+                    <img src="../../assets/Louie.jpg" alt="">
+                </div>
+                <div class="aboutContentBx">
+                    <h4 class="aboutTitle">Louie Espinosa</h4>
+                    <h5 class="aboutTitle">Full Stack Web Developer</h5>
+                    <h6 class="aboutTitle">"It works on my machine.-unknown"</h6>
+                </div>
+                <div class="sci">
+                    <a data-link href="https://www.linkedin.com/in/louie-a-espinosa/"><i data-useparent class="fa fa-linkedin" aria-hidden="true"></i></a>
+                    <a data-link href="https://github.com/louie-espinosa"><i data-useparent class="fa fa-github" aria-hidden="true"></i></a>
+                    <a data-link href="#"><i data-useparent class="fa fa-twitter" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+
+                </div>
+            </div>
+        </div>
+        <div class="aboutCard">
+            <div class="aboutContent">
+                <div class="imgBx">
+                    <img src="../../assets/Roger.jpg" alt="">
+                </div>
+                <div class="aboutContentBx">
+                    <h4 class="aboutTitle">Rogelio Lozano</h4>
+                    <h5 class="aboutTitle">Full Stack Web Developer</h5>
+                    <h6 class="aboutTitle">"It worked yesterday.-every programmer"</h6>
+                </div>
+                <div class="sci">
+                    <a data-link href="https://www.linkedin.com/in/lozanorogelio/" ><i data-useparent class="fa fa-linkedin" aria-hidden="true"></i></a>
+                    <a data-link href="https://github.com/LozanoRogelio"><i data-useparent class="fa fa-github" aria-hidden="true"></i></a>
+                    <a data-link href="#"><i data-useparent class="fa fa-twitter" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+
+                </div>
+            </div>
+        </div>
+        <div class="aboutCard">
+            <div class="aboutContent">
+                <div class="imgBx">
+                    <img src="../../assets/Sneed.jpg" alt="">
+                </div>
+                    <div class="aboutContentBx">
+                        <h4 class="aboutTitle">Natalie Sneed</h4>
+                        <h5 class="aboutTitle">Full Stack Web Developer</h5>
+                        <h6 class="aboutTitle">"Somebody must've changed my code.-hmmmmm"</h6>
+                    </div>
+                <div class="sci">
+                    <a data-link href="https://www.linkedin.com/in/natalie-n-sneed" ><i data-useparent class="fa fa-linkedin" aria-hidden="true"></i></a>
+                    <a data-link href="https://github.com/NatalieSneed"><i data-useparent class="fa fa-github" aria-hidden="true"></i></a>
+                    <a data-link href="https://twitter.com/luv2ball76"><i data-useparent class="fa fa-twitter" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+
+                </div>
+            </div>
+        </div>
+        <div class="aboutCard">
+            <div class="aboutContent">
+                <div class="imgBx">
+                    <img src="../../assets/Justin.jpg" alt="">
+                </div>
+                <div class="aboutContentBx">
+                    <h4 class="aboutTitle">Justin Quinn</h4>
+                    <h5 class="aboutTitle">Full Stack Web Developer</h5>
+                    <h6 class="aboutTitle">"I can't test everything!-all of us"</h6>
+                </div>
+                <div class="sci">
+                    <a data-link href="https://www.linkedin.com/in/justin-quinn-877a41246/" ><i data-useparent class="fa fa-linkedin" aria-hidden="true"></i></a>
+                    <a data-link href="https://github.com/JustinLQuinn"><i data-useparent class="fa fa-github" aria-hidden="true"></i></a>
+                    <a data-link href=""><i data-useparent class="fa fa-twitter" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+            </div>
+        </div>
     </div>
-    </body>
+  
+</body>
 </html>
- 
+
     `;
 }

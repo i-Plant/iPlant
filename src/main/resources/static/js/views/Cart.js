@@ -53,14 +53,18 @@ export default function addToCart(props) {
                 </div>
                 
                 `;
-
+                let total = 0;
+                for (let k = 0; k < products.length; k++) {
+                    total += products[k].quantity;
+                }
                 cardsHTML += `
-                 <!--For the shopping cart icon-->
-                 <div class="cart">
-                    <a data-link href="/cart"><i data-passthru id="cart" class="fa-solid fa-cart-shopping"></i></a>
-                    <!--This is the cart total item counter-->
-                    <div class="cart-amount">${products[i].quantity}</div>
-                 </div>
+ <!--For the shopping cart icon-->
+ <div class="cart">
+    <a data-link href="/cart"><i data-passthru id="cart" class="fa-solid fa-cart-shopping"></i></a>
+    <!--This is the cart total item counter-->
+    <div class="cart-amount">${total}</div>
+ </div>
+
                  
                  <div id='label' class='text-center'></div>
                  <div class="shopping-cart" id="shopping-cart"></div>
@@ -206,9 +210,10 @@ function setupDeleteHandlers() {
                         console.log("fetch returned bad status code: " + response.status);
                         console.log(response.statusText);
                     }
-                    createView("/cart")
-                })
+                    //createView("/cart")
 
+                })
+            deleteButtons[i].parentElement.parentElement.parentElement.outerHTML = ""
         });
     }
 }
