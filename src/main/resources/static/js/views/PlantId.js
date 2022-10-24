@@ -7,11 +7,7 @@ export default function PlantId(props) {
     <header xmlns="http://www.w3.org/1999/html">
         <h1>Plant ID</h1>
     </header>
-    <main>
-    
-    
-    
-    
+    <main class="mainPlantId">
             <div>
                 <form class="upload" id="myForm">
                     <div class="mb-3">
@@ -22,15 +18,16 @@ export default function PlantId(props) {
                 </form>
             </div>
            
-            <div class="card" class="d-flex flex-wrap align-content-center" style="width:18rem" id="results">
+            <div class="cardImageHolder" class="d-flex flex-wrap align-content-center" style="width:18rem" id="results">
        
             </div>
-<!--           <label for="results"  class="form-label" id="allResults">Results</label>-->
-<!--            <pre id="results" style="white-space: break-spaces;">-->
-<!--            </pre>-->
+            
         </div>
+       
         </main>
-
+ <div class="instructions">
+                <h3>Instructions</h3>
+           </div>
     `
 }
 
