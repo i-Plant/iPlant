@@ -18,6 +18,10 @@ i {
     padding: 5px;
     border-radius: 4px;
 }
+.empty-cart {
+    text-align: center;
+    margin-top: 150px;
+}
 /*for the badge counter on the cart icon*/
 .cart-amount {
     position: absolute;

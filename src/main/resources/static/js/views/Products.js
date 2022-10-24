@@ -55,6 +55,17 @@ export default function Products(props) {
 export function ProductsEvent(){
     pushToCart();
     //saveOrder();
+    morphButtonsWhenPressed()
+}
+function morphButtonsWhenPressed() {
+    const buttonsPressed = document.querySelectorAll(".addToCart");
+    buttonsPressed.forEach(function (button) {
+        button.addEventListener("click", function (){
+            button.innerText = "Added To Cart!"
+            button.style.background = "green"
+
+        })
+    })
 }
 
 function pushToCart() {
