@@ -23,7 +23,7 @@ export default function Home(props) {
            </div>  
            <div class="col-md-4">
                 <image class="right-top" src="../assets/HomeAloe.jpg"></image>
-                <image class="right-mid" src="../assets/homecoding.jpg"></image>
+                <image class="right-mid" src="../assets/Homecoding.jpg"></image>
                 <div class="right-bottom"></div>
            </div> 
            
