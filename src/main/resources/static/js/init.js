@@ -54,9 +54,15 @@ function addListenerToNavLinks() {
             event.target = event.target.parentElement;
             return;
         }
+        // console.log(e.target);
         e.preventDefault();
+        if (e.target.dataset['useparent'] !== undefined) {
+            window.location = e.target.parentElement.href;
+            return;
+        }
         if (e.target.dataset['link'] !== undefined) {
             const URI = e.target.href.substring(location.origin.length);
+            console.log(URI);
             createView(URI);
         }
     });

@@ -71,11 +71,14 @@ function morphButtonsWhenPressed() {
 }
 
 function pushToCart() {
-
     let addToCart = document.querySelectorAll(".addToCart");
     for (let i = 0; i < addToCart.length; i++) {
         addToCart[i].addEventListener("click", (e) => {
             e.preventDefault();
+            //change button class to btn-success from btn-primary; or equivalent
+            addToCart[i].style.background = "Green";
+            //change innerTEXT to "Added To Cart"
+            addToCart[i].innerText = "Added to Cart";
             let itemId = addToCart[i].getAttribute("data-id");
             let orderId = 0;
             let cartCounter = document.querySelector(".cart-amount");
@@ -133,7 +136,8 @@ function pushToCart() {
                     headers: getHeaders(),
                     body: JSON.stringify(orderProduct)
                 }
-                let url = BACKEND_HOST_URL + "/api/orders/" + `${orderId}` + "/products/";
+                let url = BACKEND_HOST_URL + "/api/orders/" + `${orderId}` +"/products/";
+                console.log(url);
                 console.log(request);
 
                 fetch(url, request)
@@ -153,9 +157,9 @@ function pushToCart() {
 
         })
     }
+
     //I need to change the counter in the cart when I add a product to the cart
 }
-
 // function saveOrder(orderId) {
 //     // get the order-id for the new order
 //     const item = document.querySelector("#item");

@@ -6,8 +6,8 @@ export default function PlantId(props) {
     <header xmlns="http://www.w3.org/1999/html">
         <h1>Plant ID</h1>
     </header>
-    <main class="mainPlantId">
-            <div class="upload">
+    <main>
+      <div>
                 <form class="upload" id="myForm">
                     <div class="mb-3">
                         <label data-link for="flowerFile" class="form-label-plantId">Upload plant picture</label>

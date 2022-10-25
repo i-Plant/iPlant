@@ -99,7 +99,7 @@ export default function About(props) {
                 <div class="aboutContentBx">
                     <h4 class="aboutTitle">Justin Quinn</h4>
                     <h5 class="aboutTitle">Full Stack Web Developer</h5>
-                    <h6 class="aboutTitle">"I can't test everything!-all of us"</h6>
+                    <h6 class="aboutTitle">“I can't test everything!-all of us”</h6>
                 </div>
                 <div class="sci">
                     <a data-link href="https://www.linkedin.com/in/justin-quinn-877a41246/" ><i data-useparent class="fa fa-linkedin" aria-hidden="true"></i></a>

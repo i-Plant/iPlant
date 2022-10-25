@@ -6,7 +6,7 @@ let basket = [];
 let products;
 export default function addToCart(props) {
     basket.push(props.order);
-    // console.log(basket);
+    console.log(basket);
 
     let myOrder;
     console.log(basket);
