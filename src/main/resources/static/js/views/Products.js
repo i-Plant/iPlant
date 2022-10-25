@@ -1,10 +1,11 @@
 import createView from "../createView.js";
 import {getHeaders} from "../auth.js";
 
-
 let products = [];
+let order = [];
 export default function Products(props) {
     products = props.products
+    order = props.order;
 //   sortProductsByName();
     let html = `
 <!--For the shopping cart icon-->
@@ -43,7 +44,6 @@ export default function Products(props) {
              <button id="addToCart" data-id="${products[i].id}" class="btn btn-primary addToCart">Add to Cart</button>
         </div> 
     </div>
-
 </div>   
                    
 `;
@@ -57,62 +57,97 @@ export default function Products(props) {
 export function ProductsEvent(){
     pushToCart();
     //saveOrder();
-
 }
 
 function pushToCart() {
-
     let addToCart = document.querySelectorAll(".addToCart");
     for (let i = 0; i < addToCart.length; i++) {
         addToCart[i].addEventListener("click", (e) => {
             e.preventDefault();
+            //change button class to btn-success from btn-primary; or equivalent
+            addToCart[i].style.background = "Green";
+            //change innerTEXT to "Added To Cart"
+            addToCart[i].innerText = "Added to Cart";
             let itemId = addToCart[i].getAttribute("data-id");
             let orderId = 0;
             //if there's already an order id in local storage use that order
             if(window.localStorage.getItem("order-id") ) {
                 orderId = window.localStorage.getItem("order-id")
             }
+// if conditional that says if item is already in order.
 
-            const orderProduct = {
-                id: 0,
-                order: {
-                    id: orderId
-                },
-                item: {
-                    id: itemId
+            console.log(order);
+            console.log(itemId);
+            let item = 0;
+            let orderProductId = 0;
+            for (let k = 0; k < order.products.length; k++) {
+                if(order.products[k].item.id == itemId){
+                    console.log(item);
+                    item++;
+                    console.log(item);
+                    orderProductId = order.products[k].id;
                 }
             }
-            // make the request
-            const request = {
-                method: "POST",
-                headers: getHeaders(),
-                body: JSON.stringify(orderProduct)
-            }
-            let url = BACKEND_HOST_URL + "/api/orders/" + `${orderId}` +"/products/";
-            console.log(request);
+            console.log(item);
+            console.log(orderProductId);
+            if(item > 0){
+                const request = {
+                    method: "PUT",
+                    headers: getHeaders(),
+                }
+                let url = BACKEND_HOST_URL + "/api/orders/products/" + `${orderProductId}`+ "/quantity-increment";
+                console.log(url);
+                fetch(url, request)
+                    .then(function(response) {
+                        if(response.status !== 200) {
+                            console.log("fetch returned bad status code: " + response.status);
+                            console.log(response.statusText);
+                        }
 
-            fetch(url, request)
-                .then(function (response) {
-                    if (response.status !== 200) {
-                        console.log("fetch returned bad status code: " + response.status);
-                        console.log(response.statusText);
+                    });
+            }else{
+
+                const orderProduct = {
+                    id: 0,
+                    order: {
+                        id: orderId
+                    },
+                    item: {
+                        id: itemId
                     }
-                    return response.json()
-                }).then(function(data){
-                console.log(data);
-                orderId = data.order.id;
-                window.localStorage.setItem("order-id", orderId)
-            })
+                }
+                // make the request
+                const request = {
+                    method: "POST",
+                    headers: getHeaders(),
+                    body: JSON.stringify(orderProduct)
+                }
+                let url = BACKEND_HOST_URL + "/api/orders/" + `${orderId}` +"/products/";
+                console.log(url);
+                console.log(request);
+
+                fetch(url, request)
+                    .then(function (response) {
+                        if (response.status !== 200) {
+                            console.log("fetch returned bad status code: " + response.status);
+                            console.log(response.statusText);
+                        }
+                        return response.json()
+                    }).then(function(data){
+                    console.log(data);
+                    orderId = data.order.id;
+                    window.localStorage.setItem("order-id", orderId)
+                    order.products.push(data);
+                });
+
+            }
+
 
         })
     }
+
     //I need to change the counter in the cart when I add a product to the cart
 }
-
-
-
-
-
 // function saveOrder(orderId) {
 //     // get the order-id for the new order
 //     const item = document.querySelector("#item");

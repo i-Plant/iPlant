@@ -15,7 +15,7 @@ import Profile, {ProfileEvent} from "./views/Profile.js";
 import Checkout, {CheckoutEvent} from "./views/Checkout.js";
 import PlantId, {PlantIdEvent} from "./views/PlantId.js";
 import Logout, {LogoutEvent} from "./views/Logout.js";
-import PaymentOk from "./views/PaymentOk.js";
+import PaymentOk, {PaymentOkEvent} from "./views/PaymentOk.js";
 import addToCart, {addToCartEvent} from "./views/Cart.js";
 
 /**
@@ -24,10 +24,11 @@ import addToCart, {addToCartEvent} from "./views/Cart.js";
  * @returns {*}
  */
 export default function router(URI) {
-    let orderId = 0;
+    let orderId;
     //if there's already an order id in local storage use that order
     if(window.localStorage.getItem("order-id") ) {
         orderId = window.localStorage.getItem("order-id")
+        console.log("orderId",orderId);
     }
 
     const routes = {
@@ -97,10 +98,10 @@ export default function router(URI) {
             state: {
                 products: {
                     url: '/api/products'
+                },
+                order:{
+                    url: '/api/orders/' + orderId
                 }
-                // orders:{
-                //     url:'api/prof'
-                // }
             },
             uri: '/products',
             title: 'Products',
@@ -146,6 +147,7 @@ export default function router(URI) {
             state: {},
             uri: '/paymentOk',
             title: 'PaymentOkay',
+            viewEvent: PaymentOkEvent
         }
 
     };

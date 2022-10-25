@@ -13,62 +13,72 @@ export default function addToCart(props) {
     let myOrder;
     for (let i = 0; i < basket.length; i++) {
 
-        // if (basket[i].buyer.id !== 1) {
-        //     continue;
-        // } else {
-        //     myOrder = basket[i];
-        // }
         myOrder = basket[i];
-        let cardsHTML = `
-        <!--For the checkout button-->
-        <a data-link href="/checkout" id="checkout-btn"><i data-passthru class="fa-solid fa-dollar-sign">Checkout</i></a>
-         
-        <div class="container cart-container">`;
-        products = myOrder.products;
-        for (let j = 0; j < products.length; j++) {
-            //Here, should I push to an array to store all items?
+
+        let cardsHTML = ``;
+        //conditional for an empty cart is in else statement
+        if(myOrder !== [] ) {
 
             cardsHTML += `
-            
-            <div class="cart-item">                
-                 <img src="${products[j].item.imageURL}" alt="A plant" style="width:35%" >
-                 <div class="details">
-                    <div class="title-price-x">
-                        <h4 class="title-price">
-                            <!--product name-->
-                            <h5>${products[j].item.name}</h5>
-                            <p class="cart-item-price">$ ${(products[j].item.price).toFixed(2)}</p>
-                        </h5>
-                        <i data-id="${products[j].id}" style="margin-bottom: 25px" class="fa-solid fa-x removeItem"></i>
-                    </div>   
-                    <div class="cart-buttons">
-                        <i data-id="${products[j].id}" class="fa-solid fa-minus decrement-Btn"></i>
-                        <div data-id="${products[j].id}" class="quantity">${products[j].quantity}
-                        </div>     
-                        <i data-id="${products[j].id}" class="fa-solid fa-plus increment-Btn"></i>
-                    </div>   
-                    <!--This multiplies the item quantity by the price of the item-->
-                    <h3 >$ <span class="price">${(products[j].item.price).toFixed(2) * products[j].quantity}</span></h3>      
-                              
+            <!--For the checkout button-->
+            <a data-link href="/checkout" id="checkout-btn"><i data-passthru class="fa-solid fa-dollar-sign">Checkout</i></a>
+             
+            <div class="container cart-container">`;
+            products = myOrder.products;
+            for (let j = 0; j < products.length; j++) {
+
+                cardsHTML += `               
+                <div class="cart-item">                
+                     <img src="${products[j].item.imageURL}" alt="A plant" style="width:35%" >
+                     <div class="details">
+                        <div class="title-price-x">
+                            <h4 class="title-price">
+                                <!--product name-->
+                                <h5>${products[j].item.name}</h5>
+                                <p>$ <span class="cart-item-price">${(products[j].item.price).toFixed(2)}</span></p>
+                            </h5>
+                            <i data-id="${products[j].id}" style="margin-bottom: 25px" class="fa-solid fa-x removeItem"></i>
+                        </div>   
+                        <div class="cart-buttons">
+                            <i data-id="${products[j].id}" class="fa-solid fa-minus decrement-Btn"></i>
+                            <div data-id="${products[j].id}" class="quantity">${products[j].quantity}
+                            </div>     
+                            <i data-id="${products[j].id}" class="fa-solid fa-plus increment-Btn"></i>
+                        </div>   
+                        <!--This multiplies the item quantity by the price of the item-->
+                        <h3 >$ <span class="price">${((products[j].item.price) * products[j].quantity).toFixed(2)}</span></h3>      
+                                  
+                    </div>
                 </div>
-            </div>
+                
+                `;
+
+                cardsHTML += `
+                 <!--For the shopping cart icon-->
+                 <div class="cart">
+                    <a data-link href="/cart"><i data-passthru id="cart" class="fa-solid fa-cart-shopping"></i></a>
+                    <!--This is the cart total item counter-->
+                    <div class="cart-amount">${products[i].quantity}</div>
+                 </div>
+                 
+                 <div id='label' class='text-center'></div>
+                 <div class="shopping-cart" id="shopping-cart"></div>
+                 `;
+            }
+
+            } else {
+                cardsHTML = `
+                  <h2>Cart is Empty</h2>
+                  <a style="margin-top: 50px" data-link href="/products">
+                      <button data-link class="productsEmpty">Back to shopping</button>
+                  </a> 
             
-        `;
+              `;
 
         }
-        cardsHTML += `
- <!--For the shopping cart icon-->
-     <div class="cart">
-        <a data-link href="/cart"><i data-passthru id="cart" class="fa-solid fa-cart-shopping"></i></a>
-        <div class="cart-amount">${products[i].quantity}</div>
-     </div>
-     
-     <div id='label' class='text-center'></div>
-     <div class="shopping-cart" id="shopping-cart"></div>
-     `;
-        //     cardsHTML += `</div>`;
         return cardsHTML;
     }
+
 
 
 }
@@ -80,11 +90,10 @@ export function addToCartEvent() {
     //  calculation();
     //  totalAmount();
      // update();
-      clearCart();
+    //  clearCart();
      addIncrementDecrementHandlers();
      setupDeleteHandlers();
    //  pseudoDelete();
-
 }
 
 let productId;
@@ -93,24 +102,34 @@ function addIncrementDecrementHandlers() {
     const decrementBtns = document.querySelectorAll(".decrement-Btn")
     //looping through the increment buttons
     for (let i = 0; i < incrementBtns.length; i++) {
-        console.log(incrementBtns[i]);
+        // console.log(incrementBtns[i]);
         incrementBtns[i].addEventListener("click", function(e) {
             let orderProductId = this.getAttribute("data-id");
-            const itemQuantity = document.querySelector(".quantity");
-            const itemPrice = document.querySelector(".price");
-            let quan= itemQuantity.innerHTML;
-            let price= itemPrice.innerHTML/quan;
-           // quan++
-            console.log(price);
-            itemQuantity.innerHTML++;
-            itemPrice.innerHTML = price * quan ;
-            increment(orderProductId);
+            const itemQuantity = document.querySelectorAll(".quantity");
+            const itemPrice = document.querySelectorAll(".price");
+            const costPrice = document.querySelectorAll(".cart-item-price");
+            const cartCounter = document.querySelectorAll(".cart-amount")
+            let quan= parseFloat(itemQuantity[i].innerHTML);
+          //  let price= parseFloat(itemPrice[i].innerHTML);
+            let cost = parseFloat(costPrice[i].innerHTML);
+
+            quan++;
+            // console.log(price);
+            // console.log(quan);
+            // console.log(cost);
+            //console.log(totalCartQuantity);
+
+            itemQuantity[i].innerHTML++;
+            itemPrice[i].innerText = (cost * quan).toFixed(2);
+            cartCounter[i].innerText = quan;
+            // console.log(itemPrice[i].innerText);
+            // increment(orderProductId);
             const request = {
                 method: "PUT",
                 headers: getHeaders(),
             }
             let url = BACKEND_HOST_URL + "/api/orders/products/" + `${orderProductId}`+ "/quantity-increment";
-            console.log(url);
+            // console.log(url);
             fetch(url, request)
                 .then(function(response) {
                     if(response.status !== 200) {
@@ -128,16 +147,29 @@ function addIncrementDecrementHandlers() {
     for (let i = 0; i < decrementBtns.length; i++) {
         decrementBtns[i].addEventListener("click", function(e) {
             let orderProductId = this.getAttribute("data-id");
-            const itemQuantity = document.querySelector(".quantity");
-            itemQuantity.innerHTML--;
-           // decrement(orderProductId);
+            const itemQuantity = document.querySelectorAll(".quantity");
+            const itemPrice = document.querySelectorAll(".price");
+            const costPrice = document.querySelectorAll(".cart-item-price");
+            const cartCounter = document.querySelectorAll(".cart-amount")
+            let quan= parseFloat(itemQuantity[i].innerHTML);
+            let price= parseFloat(itemPrice[i].innerHTML);
+            let cost = parseFloat(costPrice[i].innerHTML);
 
+            //lets add a const and function that increments/decrements the item quantity in the cart badge
+            quan--;
+            // console.log(price);
+            console.log(quan);
+            console.log(cost);
+            itemQuantity[i].innerHTML--;
+            itemPrice[i].innerText = (cost * quan).toFixed(2);
+            cartCounter[i].innerText = quan;
+            console.log(itemPrice[i].innerText);
             const request = {
                 method: "PUT",
                 headers: getHeaders(),
             }
             let url = BACKEND_HOST_URL + "/api/orders/products/" + `${orderProductId}` + "/quantity-decrement";
-            console.log(url);
+            // console.log(url);
             fetch(url, request)
                 .then(function(response) {
                     if(response.status !== 200) {
@@ -176,7 +208,7 @@ function setupDeleteHandlers() {
                         console.log("fetch returned bad status code: " + response.status);
                         console.log(response.statusText);
                     }
-                        createView("/cart")
+                    createView("/cart")
                 })
 
         });
@@ -202,18 +234,84 @@ function calculation() {
 
 //Add all the product items as a total sum of items to be displayed where needed, i.e., the cart badge, the total sum,
 
-//This function regenerates the cart and makes changes to cart in real time so we dont have to refresh the page
 
-    // shoppingCart.innerHTML = ``;
-    // label.innerHTML = `
-    //          <h2>Cart is Empty</h2>
-    //          <a style="margin-top: 50px" data-link href="/products">
-    //              <button data-link class="products">Back to shopping</button>
-    //          </a>
-    //          `;
+// //If cart is empty do NOT allow checkout button --> checkout page and inform the user
+// function validateCheckout() {
+//     let isValid = true;
+//     let completeCheckout = document.querySelector("#checkout-btn");
+//     if(completeCheckout.length < 1) {
+//         completeCheckout.classList.add("order is-invalid");
+//         completeCheckout.classList.remove("is-valid");
+//         isValid = false;
+//     } else {
+//        completeCheckout.classList.add("is-valid");
+//         completeCheckout.classList.remove("order is-invalid");
+//     }
+//
+//     return isValid;
+// }
+// if (!validateCheckout()) {
+//     return;
+// }
 
 
-    //Id like to tell the user they can't checkout when cart is empty
+
+
+let generateCartItems = () => {
+    let label = document.querySelector(".label");
+    let shoppingCart = document.querySelector(".shopping-cart");
+    //I want to target these products and create an array for the cart that is displayed in the cart view
+    let cartOrder = BACKEND_HOST_URL + "/api/orders";
+    if (basket.length !== 0) {
+        return shoppingCart.innerHTML = basket.map((x) => {
+            let {id, item} = x;
+            //I need to access the products database here
+            let search = cartOrder.find((y) => y.id === id) || []; //if you find it, cool, if not return an empty array; Also, y.id is the id from the database
+            let {img, name, price} = search; //lets destructure so I don't have type: search.img, or search.price, or search.name.
+            return `
+             <div class="cart-item">
+                 <img width="100" src=${img} alt=""
+             <div class="details">
+             <div class="title-price-x">
+                 <h4 class="title-price">
+                     <!--product name-->
+                     <p>${name}</p>
+                     <p class="cart-item-price">${price}</p>
+                 </h4>
+                 <!--Id like to remove the entire product card when I click this "X"  -->
+                 <i data-passthru onclick="removeItem()" class="fa-solid fa-x"></i>
+             </div>
+             <div class="buttons">
+                 <i onclick="decrement(${id})" class="fa-solid fa-minus"></i>
+                 <div id=${id} class="quantity">${item}</div>
+                 <i onclick="increment(${id})" class="fa-solid fa-plus"></i>
+             </div>
+             <h3>${item * price}</h3>
+             </div>
+             `;
+        })
+            .join("")
+    } else {
+        shoppingCart.innerHTML = ``;
+        label.innerHTML = `
+             <h2>Cart is Empty</h2>
+             <a style="margin-top: 50px" data-link href="/products">
+                 <button data-link class="products">Back to shopping</button>
+             </a>
+             `;
+    }
+}
+
+// shoppingCart.innerHTML = ``;
+// label.innerHTML = `
+//          <h2>Cart is Empty</h2>
+//          <a style="margin-top: 50px" data-link href="/products">
+//              <button data-link class="products">Back to shopping</button>
+//          </a>
+//          `;
+
+
+//Id like to tell the user they can't checkout when cart is empty
 
 // function setupValidationHandlers() {
 //     let checkout = document.querySelector("")
@@ -243,20 +341,20 @@ function calculation() {
 
 
 //increment and decrement functions
-let bucket;
-function increment(productId) {
-
-    for(let i=0; i < products.length; i++) {
-        console.log(products);
-        if(products[i].id == productId) {
-
-            bucket = products[i];
-        }
-    }
-    bucket.quantity++;
-    bucket.price
-
-}
+// let bucket;
+// function increment(productId) {
+//
+//     for(let i=0; i < products.length; i++) {
+//         // console.log(products);
+//         if(products[i].id == productId) {
+//
+//             bucket = products[i];
+//         }
+//     }
+//     bucket.quantity++;
+//     bucket.price
+//
+// }
 
 // function decrement() {
 //     for(let i=0; i < products.length; i++) {
@@ -267,6 +365,7 @@ function increment(productId) {
 //     }
 //     bucket.quantity--;
 // }
+
 //TODO: this function works with front end storage.
 // let increment = (id) => {
 //     let search = basket.find((x) => x.props.orders.id === props.orders.id);
@@ -301,7 +400,6 @@ function increment(productId) {
 //     localStorage.setItem("data", JSON.stringify(basket));
 // }
 
-
 let update = (productId) => {
     let search = basket.find((x) => x.id === id);
     document.querySelector("#id").innerHTML = search.item;
@@ -310,7 +408,7 @@ let update = (productId) => {
     totalAmount();
 }
 let removeItem = (id) => {
-    console.log(id.id);
+    // console.log(id.id);
     basket = basket.filter((x) => x.id !== id.id);
 
     generateCartItems();
@@ -321,7 +419,7 @@ let removeItem = (id) => {
 
 let clearCart = () => {
     //clearing the basket by making it equal to an empty array
-    basket = []
+    basket = [];
     // generateCartItems();
     // calculation();
     // localStorage.setItem("data", JSON.stringify(basket));
