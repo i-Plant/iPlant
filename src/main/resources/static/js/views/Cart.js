@@ -23,12 +23,18 @@ export default function addToCart(props) {
             <!--For the checkout button-->
             <a data-link href="/checkout" id="checkout-btn"><i data-passthru class="fa-solid fa-dollar-sign">Checkout</i></a>
              
-            <div class="container cart-container">`;
+            <div class="container cart-container">
+            `;
             products = myOrder.products;
             for (let j = 0; j < products.length; j++) {
 
-                cardsHTML += `               
-                <div class="cart-item">                
+                cardsHTML += `       
+       
+                 <h2>Total Bill: $ ${products[j].item.price}</h2>
+                 <button class="checkout">Checkout</button>
+                 <button onclick="clearCart()" class="removeAll">Clear Cart</button>
+                
+                 <div class="cart-item">                
                      <img src="${products[j].item.imageURL}" alt="A plant" style="width:35%" >
                      <div class="details">
                         <div class="title-price-x">
@@ -220,7 +226,7 @@ function setupDeleteHandlers() {
 //for the badge counter in the cart
 function calculation() {
     let cartCounter = document.querySelector(".cart-amount");
-    cartCounter.innerHTML = basket.map((x) => x.item).reduce((x, y) => x + y, 0);
+    cartCounter.innerHTML = products.map((x) => x.item).reduce((x, y) => x + y, 0);
 }
 // function pseudoDelete () {
 //     const deleteX = document.querySelectorAll(".cart-item")
@@ -357,19 +363,18 @@ function calculation() {
 // }
 
 let clearCart = () => {
-    //clearing the basket by making it equal to an empty array
-    basket = [];
-    // generateCartItems();
-    // calculation();
-    // localStorage.setItem("data", JSON.stringify(basket));
+   let banish =  document.querySelector(".cart-container")
+    banish.addEventListener("dblClick", function(){
+        this.outerHTML
+    })
 }
 
 let totalAmount = () => {
-    if (basket.length !== 0) {
-        let amount = basket.map((x) => {
+    if (basket.products.length !== 0) {
+        let amount = products.map((x) => {
             let {item, id} = x;
-            let search = productsAPI.find((y) => y.id === id) || [];
-            return item * search.price;
+            let search = products.find((y) => y.id === id) || [];
+            return item * products.item.price;
         }).reduce((x, y) => x + y, 0);
         label.innerHTML = `
          <h2>Total Bill: $ ${amount}</h2>

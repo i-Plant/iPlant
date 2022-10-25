@@ -1,5 +1,4 @@
 
-
 let images = [];
 export default function PlantId(props) {
     images = props.images
@@ -7,26 +6,33 @@ export default function PlantId(props) {
     <header xmlns="http://www.w3.org/1999/html">
         <h1>Plant ID</h1>
     </header>
-    <main>
-            <div>
+    <main class="mainPlantId">
+            <div class="upload">
                 <form class="upload" id="myForm">
                     <div class="mb-3">
-                        <label data-link for="flowerFile" class="form-label">Upload plant picture</label>
-                        <input data-link  name="flower" class="form-control" type="file" id="flowerFile">
+                        <label data-link for="flowerFile" class="form-label-plantId">Upload plant picture</label>
+                        <input data-link  name="flower" class="form-control-plantId" type="file" id="flowerFile">
                         <input type="submit" id="uploadStuff" class="btn btn-primary" value="Identify">
                     </div>
                 </form>
             </div>
            
-            <div class="card" class="d-flex flex-wrap align-content-center" style="width:18rem" id="results">
+            <div class="cardImageHolder" class="d-flex flex-wrap align-content-center" style="width:18rem" id="results">
        
             </div>
-<!--           <label for="results"  class="form-label" id="allResults">Results</label>-->
-<!--            <pre id="results" style="white-space: break-spaces;">-->
-<!--            </pre>-->
+            
         </div>
+       
         </main>
-
+ <div class="instructions">
+                <h3>Instructions</h3>
+                <ul>
+                    <li>1. Take a picture or search an image online.</li>
+                    <li>2. Add it to your computer or mobile device</li>
+                    <li>3. Use our upload feature to pull up your plant picture</li>
+                    <li>4. Get results about the plant!</li>
+                </ul>
+           </div>
     `
 }
 
@@ -65,10 +71,10 @@ export function PlantIdEvent() {
                 } else {
                     console.log(data);
                     document.getElementById('results').innerHTML = `
-
                    
                     
-                   
+                    <br>
+                    <br>
                     <img class="card-img-top" src="${data.results[0].images[0].url.m}" alt="plant-image" class="images">
                       <div class="card-body" style="width: 100%">
                       <h4><i><u>${data.results[0].species.family.scientificName}</u></i></h4>
@@ -79,7 +85,6 @@ export function PlantIdEvent() {
                        
                         
 <!--                        <a href="#" class="btn btn-primary">buy</a>-->
-
                       </div>
                     
                     `
