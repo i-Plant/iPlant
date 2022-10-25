@@ -18,16 +18,13 @@ export default function PlantId(props) {
                 </form>
             </div>
            
-            <div class="cardImageHolder" class="d-flex flex-wrap align-content-center" style="width:18rem" id="results">
+            <div class="cardImageHolder" class="d-flex flex-wrap align-content-center" style="width:18rem" id="results" aria-placeholder="Image">
        
             </div>
             
         </div>
        
         </main>
- <div class="instructions">
-                <h3>Instructions</h3>
-           </div>
     `
 }
 

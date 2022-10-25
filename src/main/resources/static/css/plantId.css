@@ -1,14 +1,16 @@
 
 .mainPlantId{
-    background-color: rgba(236, 235, 235, 0.51);
+    background-color: rgba(175, 196, 159, 0.36);
     align-content: center;
     justify-content: space-evenly;
     flex-wrap: wrap;
 }
-.mb-3{
-    margin-top: 20px;
-    padding-top: 10px;
+.upload{
+    border: solid rgba(84, 116, 53, 0.31);
+    margin: 60px;
+    padding: 30px;
 }
+
 .form-label{
     font-weight: bold;
     font-size: larger;
@@ -17,7 +19,20 @@
 .form-control{
     margin-bottom: 5px;
     padding: 5px;
+    color: #353f1c;
+    background-color: #f0f1e5;
 }
-.instructions{
-    margin-left: 60px;
+.cardImageHolder{
+    margin-top: 45px;
+}
+#uploadStuff{
+    background-color: rgba(49, 117, 150, 0.64);
+    border-color: #353f1c;
+}
+input[type="file"]::file-selector-button {
+    border: 2px solid #6f7c59;
+    padding: 0.2em 0.4em ;
+    border-radius: 0.1em;
+    background-color: #c0ceac;
+    transition: 1s;
 }
