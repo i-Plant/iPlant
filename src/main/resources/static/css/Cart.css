@@ -3,7 +3,18 @@
 }
 .body {
     font-family: sans-serif;
+
 }
+/*.back-image {*/
+/*    background-image: url("../assets/Plantkillers.jpg");*/
+/*    background-size: 100vw 100vh;*/
+/*    !*object-fit: cover;*!*/
+/*    !*width: 100vw;*!*/
+/*    !*height: 100vh;*!*/
+/*    !*margin: 0;*!*/
+/*    !*padding: 0;*!*/
+/*    background-repeat: no-repeat;*/
+/*}*/
 
 i {
     cursor: pointer;

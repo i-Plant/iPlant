@@ -18,13 +18,19 @@ export default function addToCart(props) {
         //conditional for an empty cart is in else statement
 
         if (myOrder.length > 0 || myOrder.products.length > 0 ) {
+            let totalCost = 0;
+            for (let h = 0; h < myOrder.products.length; h++) {
 
+                totalCost += myOrder.products[h].quantity * myOrder.products[h].item.price;
+
+            }
 
                 cardsHTML += `
             <!--For the checkout button-->
+            <div class="back-image"></div>
             <div class="container cart-container">
                 <div class="delete-cart">
-                    <h2>Total Bill: $</h2>
+                    <h2>Total Bill: $<span class="totalBill">${totalCost}</span></h2>
                     <button data-passthru id="checkoutBtn" class="checkout">Checkout</button>
                     <button data-id="${myOrder.id}" class="removeAll">Clear Cart</button>
                 </div>
