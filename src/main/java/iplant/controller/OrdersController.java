@@ -74,7 +74,7 @@ public class OrdersController {
         orderRepository.save(newOrder);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteOrderById(@PathVariable long id) {
         Optional<Order> optionalOrder = orderRepository.findById(id);
         if (optionalOrder.isEmpty()) {
@@ -84,7 +84,7 @@ public class OrdersController {
         }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public void updateOrder(@RequestBody Order updatedOrder, @PathVariable long id) {
         Optional<Order> orderOptional = orderRepository.findById(id);
         if(orderOptional.isEmpty()) {

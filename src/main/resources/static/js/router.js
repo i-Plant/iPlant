@@ -97,10 +97,10 @@ export default function router(URI) {
             state: {
                 products: {
                     url: '/api/products'
+                },
+                orders:{
+                    url:'/api/orders/' + orderId
                 }
-                // orders:{
-                //     url:'api/prof'
-                // }
             },
             uri: '/products',
             title: 'Products',

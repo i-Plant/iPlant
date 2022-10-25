@@ -2,8 +2,10 @@ import createView from "../createView.js";
 import {getHeaders} from "../auth.js";
 
 let products = [];
+let order = [];
 export default function Products(props) {
     products = props.products
+    order = props.orders
 //   sortProductsByName();
     let html = `
 <!--For the shopping cart icon-->
@@ -83,37 +85,71 @@ function pushToCart() {
             if(window.localStorage.getItem("order-id") ) {
                 orderId = window.localStorage.getItem("order-id")
             }
+            // if conditional that says if item is already in order.
 
-            const orderProduct = {
-                id: 0,
-                order: {
-                    id: orderId
-                },
-                item: {
-                    id: itemId
+            console.log(order);
+            console.log(itemId);
+            let item = 0;
+            let orderProductId = 0;
+            for (let k = 0; k < order.products.length; k++) {
+                if(order.products[k].item.id == itemId){
+                    console.log(item);
+                    item++;
+                    console.log(item);
+                    orderProductId = order.products[k].id;
                 }
             }
-            // make the request
-            const request = {
-                method: "POST",
-                headers: getHeaders(),
-                body: JSON.stringify(orderProduct)
-            }
-            let url = BACKEND_HOST_URL + "/api/orders/" + `${orderId}` +"/products/";
-            console.log(request);
+            console.log(item);
+            console.log(orderProductId);
+            if(item > 0){
+                const request = {
+                    method: "PUT",
+                    headers: getHeaders(),
+                }
+                let url = BACKEND_HOST_URL + "/api/orders/products/" + `${orderProductId}`+ "/quantity-increment";
+                console.log(url);
+                fetch(url, request)
+                    .then(function(response) {
+                        if(response.status !== 200) {
+                            console.log("fetch returned bad status code: " + response.status);
+                            console.log(response.statusText);
+                        }
 
-            fetch(url, request)
-                .then(function (response) {
-                    if (response.status !== 200) {
-                        console.log("fetch returned bad status code: " + response.status);
-                        console.log(response.statusText);
+                    });
+            }else {
+
+                const orderProduct = {
+                    id: 0,
+                    order: {
+                        id: orderId
+                    },
+                    item: {
+                        id: itemId
                     }
-                    return response.json()
-                }).then(function(data){
-                console.log(data);
-                orderId = data.order.id;
-                window.localStorage.setItem("order-id", orderId)
-            })
+                }
+                // make the request
+                const request = {
+                    method: "POST",
+                    headers: getHeaders(),
+                    body: JSON.stringify(orderProduct)
+                }
+                let url = BACKEND_HOST_URL + "/api/orders/" + `${orderId}` + "/products/";
+                console.log(request);
+
+                fetch(url, request)
+                    .then(function (response) {
+                        if (response.status !== 200) {
+                            console.log("fetch returned bad status code: " + response.status);
+                            console.log(response.statusText);
+                        }
+                        return response.json()
+                    }).then(function (data) {
+                    console.log(data);
+                    orderId = data.order.id;
+                    window.localStorage.setItem("order-id", orderId)
+                    order.products.push(data);
+                })
+            }
 
         })
     }

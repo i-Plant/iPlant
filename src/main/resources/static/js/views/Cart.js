@@ -13,25 +13,26 @@ export default function addToCart(props) {
     for (let i = 0; i < basket.length; i++) {
 
         myOrder = basket[i];
-
+        let total = 0;
         let cardsHTML = ``;
         //conditional for an empty cart is in else statement
 
-        if (myOrder.products.length > 0 ) {
+        if (myOrder.length > 0 || myOrder.products.length > 0 ) {
 
-            cardsHTML += `
+
+                cardsHTML += `
             <!--For the checkout button-->
             <div class="container cart-container">
                 <div class="delete-cart">
                     <h2>Total Bill: $</h2>
                     <button data-passthru id="checkoutBtn" class="checkout">Checkout</button>
-                    <button class="removeAll">Clear Cart</button>
+                    <button data-id="${myOrder.id}" class="removeAll">Clear Cart</button>
                 </div>
             `;
-            products = myOrder.products;
-            for (let j = 0; j < products.length; j++) {
+                products = myOrder.products;
+                for (let j = 0; j < products.length; j++) {
 
-                cardsHTML += `       
+                    cardsHTML += `       
                            
                  <div class="cart-item">                
                      <img src="${products[j].item.imageURL}" alt="A plant" style="width:35%" >
@@ -54,27 +55,24 @@ export default function addToCart(props) {
                         <h3 >$ <span class="price">${((products[j].item.price) * products[j].quantity).toFixed(2)}</span></h3>      
                                   
                     </div>
-
-                </div>
+            </div>
+                `;
+                }
+                    for (let k = 0; k < products.length; k++) {
+                        total += products[k].quantity;
+                    }
+                    cardsHTML += `
+                    <!--For the shopping cart icon-->
+                    <div class="cart">
+                        <a data-link href="/cart"><i data-passthru id="cart" class="fa-solid fa-cart-shopping"></i></a>
+                        <!--This is the cart total item counter-->
+                        <div class="cart-amount">${total}</div>
+                    </div>
+            
                 
                 `;
-                let total = 0;
-                for (let k = 0; k < products[j].length; k++) {
-                    total += products[k].quantity.reduce(total);
-                }
-                cardsHTML += `
-                 <!--For the shopping cart icon-->
-                 <div class="cart">
-                    <a data-link href="/cart"><i data-passthru id="cart" class="fa-solid fa-cart-shopping"></i></a>
-                    <!--This is the cart total item counter-->
-                    <div class="cart-amount">${total}</div>
-                 </div>
 
-                 
-                 <div id='label' class='text-center'></div>
-                 <div class="shopping-cart" id="shopping-cart"></div>
-                 `;
-            }
+
 
         } else {
             cardsHTML += `
@@ -116,7 +114,7 @@ function addIncrementDecrementHandlers() {
             const itemQuantity = document.querySelectorAll(".quantity");
             const itemPrice = document.querySelectorAll(".price");
             const costPrice = document.querySelectorAll(".cart-item-price");
-            const cartCounter = document.querySelectorAll(".cart-amount")
+            const cartCounter = document.querySelector(".cart-amount")
             let quan= parseFloat(itemQuantity[i].innerHTML);
 
             let cost = parseFloat(costPrice[i].innerHTML);
@@ -129,7 +127,7 @@ function addIncrementDecrementHandlers() {
 
             itemQuantity[i].innerHTML++;
             itemPrice[i].innerText = (cost * quan).toFixed(2);
-            cartCounter[i].innerText = quan;
+            cartCounter.innerText++;
             // console.log(itemPrice[i].innerText);
             // increment(orderProductId);
             const request = {
@@ -158,7 +156,7 @@ function addIncrementDecrementHandlers() {
             const itemQuantity = document.querySelectorAll(".quantity");
             const itemPrice = document.querySelectorAll(".price");
             const costPrice = document.querySelectorAll(".cart-item-price");
-            const cartCounter = document.querySelectorAll(".cart-amount")
+            const cartCounter = document.querySelector(".cart-amount")
             let quan= parseFloat(itemQuantity[i].innerHTML);
             let price= parseFloat(itemPrice[i].innerHTML);
             let cost = parseFloat(costPrice[i].innerHTML);
@@ -170,7 +168,7 @@ function addIncrementDecrementHandlers() {
             console.log(cost);
             itemQuantity[i].innerHTML--;
             itemPrice[i].innerText = (cost * quan).toFixed(2);
-            cartCounter[i].innerText = quan;
+            cartCounter.innerText--;
             console.log(itemPrice[i].innerText);
             const request = {
                 method: "PUT",
@@ -224,15 +222,39 @@ function setupDeleteHandlers() {
     }
 }
 function checkout() {
-   const checkoutBtn = document.querySelector("#checkoutBtn");
+   const checkoutBtn = document.querySelector(".checkout");
    checkoutBtn.addEventListener("click", function(){
        createView("/checkout")
    })
 }
+
 let clearCart = () => {
     let banish =  document.querySelector(".removeAll")
-    banish.addEventListener("dblClick", function(){
-        this.outerHTML.childElementCount = [];
+    banish.addEventListener("click", function(){
+        let items = document.querySelectorAll(".cart-item");
+        // get the post id of the delete button
+        let orderProductId = this.getAttribute("data-id");
+
+        const request = {
+            method: "DELETE",
+            headers: getHeaders(),
+        }
+        let url = BACKEND_HOST_URL + "/api/orders/delete/" + `${orderProductId}`;
+        console.log(url);
+        fetch(url, request)
+            .then(function(response) {
+                if(response.status !== 200) {
+                    console.log("fetch returned bad status code: " + response.status);
+                    console.log(response.statusText);
+                }
+                //createView("/cart")
+
+            })
+
+        items.forEach( item =>
+        item.outerHTML = "");
+
+        window.localStorage.setItem(order-id, "0" );
     })
 }
 
