@@ -1,12 +1,64 @@
-.homeBody{
-    background: white;
+* {
+    box-sizing: border-box;
 }
 
-.homeLogo{
-    text-indent: -999999999px;
-    background: url("../assets/iplant-logo.png");
-    width: auto;
-    height: 500px;
-    background-size: cover;
-    align-content: center;
+.homeBody{
+    background: cadetblue;
+}
+
+/*.homeLogo{*/
+/*    text-indent: -999999999px;*/
+
+/*    background: url("../assets/iplant-logo.png");*/
+/*    */
+/*    width: 100vw;*/
+/*    height: 100vh;*/
+/*    background-size: cover;*/
+/*    align-content: center;*/
+/*}*/
+.welcome {
+    font-weight: bold;
+    margin-top: 120px ;
+    position: fixed;
+    right: 15%;
+    bottom: 1%;
+
+    color: rebeccapurple;
+    font-size: 2em;
+}
+.codey {
+    width: 100%;
+    height: 100vh;
+    rotate: x;
+    background-size: contain;
+}
+
+.center-top {
+    opacity: 70%;
+    width: 100%;
+    height: 65vh;
+}
+.home-red {
+    opacity: 70%;
+    width: 100%;
+    height: 35vh;
+    rotate: x;
+    background-size: contain;
+    /*overflow: hidden;*/
+}
+.right-top {
+
+    width: 100%;
+    height: 50vh;
+    background-size: contain;
+}
+.right-mid {
+    width: 100%;
+    height: 37vh;
+}
+.right-bottom {
+    background-color: palegreen;
+    width: 100%;
+    height: 20vh;
+    opacity: 60%;
 }

@@ -99,8 +99,8 @@ export default function router(URI) {
                 products: {
                     url: '/api/products'
                 },
-                order:{
-                    url: '/api/orders/' + orderId
+                orders:{
+                    url:'/api/orders/' + orderId
                 }
             },
             uri: '/products',

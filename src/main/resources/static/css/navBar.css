@@ -45,7 +45,7 @@ ul, li {
 
 body {
     background-color: white;
-    color: #19f519;
+    /*color: #19f519;*/
     margin-top: 60px; /* height of nav-bar */
 }
 
@@ -103,13 +103,11 @@ p {
     height: 100px;
     align-content: space-evenly;
 }
-.logIn{
-    padding-top: 20px;
-    padding-right: 10px;
+.login{
+
 }
-.logOut{
-    padding-top: 20px;
-    padding-right: 10px;
+.logout{
+
 }
 
 /* Hide checkbox that controls Mobile Nav Button*/

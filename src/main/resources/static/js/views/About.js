@@ -24,7 +24,7 @@ export default function About(props) {
                 <div class="aboutContentBx">
                     <h4 class="aboutTitle">Katherine Gil</h4>
                     <h5 class="aboutTitle">Full Stack Web Developer</h5>
-                    <h6 class="aboutTitle">“It’s never done that before.-unknown”</h6>
+                    <h6 class="aboutTitle">"It's never done that before.-unknown"</h6>
                 </div>
                 <div class="sci">
                     <a data-link href="https://www.linkedin.com/in/katherinegil22/"><i data-useparent class="fa fa-linkedin" aria-hidden="true"></i></a>
@@ -42,7 +42,7 @@ export default function About(props) {
                 <div class="aboutContentBx">
                     <h4 class="aboutTitle">Louie Espinosa</h4>
                     <h5 class="aboutTitle">Full Stack Web Developer</h5>
-                    <h6 class="aboutTitle">“It works on my machine.-unknown”</h6>
+                    <h6 class="aboutTitle">"It works on my machine.-unknown"</h6>
                 </div>
                 <div class="sci">
                     <a data-link href="https://www.linkedin.com/in/louie-a-espinosa/"><i data-useparent class="fa fa-linkedin" aria-hidden="true"></i></a>
@@ -61,7 +61,7 @@ export default function About(props) {
                 <div class="aboutContentBx">
                     <h4 class="aboutTitle">Rogelio Lozano</h4>
                     <h5 class="aboutTitle">Full Stack Web Developer</h5>
-                    <h6 class="aboutTitle">“It worked yesterday.-every programmer”</h6>
+                    <h6 class="aboutTitle">"It worked yesterday.-every programmer"</h6>
                 </div>
                 <div class="sci">
                     <a data-link href="https://www.linkedin.com/in/lozanorogelio/" ><i data-useparent class="fa fa-linkedin" aria-hidden="true"></i></a>
@@ -80,7 +80,7 @@ export default function About(props) {
                     <div class="aboutContentBx">
                         <h4 class="aboutTitle">Natalie Sneed</h4>
                         <h5 class="aboutTitle">Full Stack Web Developer</h5>
-                        <h6 class="aboutTitle">“Somebody must've changed my code.-hmmmmm”</h6>
+                        <h6 class="aboutTitle">"Somebody must've changed my code.-hmmmmm"</h6>
                     </div>
                 <div class="sci">
                     <a data-link href="https://www.linkedin.com/in/natalie-n-sneed" ><i data-useparent class="fa fa-linkedin" aria-hidden="true"></i></a>

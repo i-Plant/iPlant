@@ -5,13 +5,13 @@ let products = [];
 let order = [];
 export default function Products(props) {
     products = props.products
-    order = props.order;
+    order = props.orders
 //   sortProductsByName();
     let html = `
 <!--For the shopping cart icon-->
      <div class="cart">
         <a data-link href="/cart"><i data-passthru id="cart" class="fa-solid fa-cart-shopping"></i></a>
-        <div class="cart-amount">0</div>
+        <div class="cart-amount"></div>
      </div>
      `;
 
@@ -57,6 +57,17 @@ export default function Products(props) {
 export function ProductsEvent(){
     pushToCart();
     //saveOrder();
+    morphButtonsWhenPressed()
+}
+function morphButtonsWhenPressed() {
+    const buttonsPressed = document.querySelectorAll(".addToCart");
+    buttonsPressed.forEach(function (button) {
+        button.addEventListener("click", function (){
+            button.innerText = "Added To Cart!"
+            button.style.background = "green"
+
+        })
+    })
 }
 
 function pushToCart() {
@@ -70,11 +81,14 @@ function pushToCart() {
             addToCart[i].innerText = "Added to Cart";
             let itemId = addToCart[i].getAttribute("data-id");
             let orderId = 0;
+            let cartCounter = document.querySelector(".cart-amount");
+            //cartCounter.parseInt(innerText++);
+            cartCounter.innerText++;
             //if there's already an order id in local storage use that order
             if(window.localStorage.getItem("order-id") ) {
                 orderId = window.localStorage.getItem("order-id")
             }
-// if conditional that says if item is already in order.
+            // if conditional that says if item is already in order.
 
             console.log(order);
             console.log(itemId);
@@ -105,7 +119,7 @@ function pushToCart() {
                         }
 
                     });
-            }else{
+            }else {
 
                 const orderProduct = {
                     id: 0,
@@ -133,15 +147,13 @@ function pushToCart() {
                             console.log(response.statusText);
                         }
                         return response.json()
-                    }).then(function(data){
+                    }).then(function (data) {
                     console.log(data);
                     orderId = data.order.id;
                     window.localStorage.setItem("order-id", orderId)
                     order.products.push(data);
-                });
-
+                })
             }
-
 
         })
     }

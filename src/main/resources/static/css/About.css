@@ -45,7 +45,7 @@ body
 {
     width: 267px;
     height: 416px;
-    padding: 60px 30px;
+    padding: 20px 30px;
     margin: 20px;
     background: #f2f3f7;
     box-shadow: 0.6em 0.6em 1.2em #d2dce9,
@@ -108,19 +108,3 @@ body
 {
     color: #0196e3;
 }
-
-/*.jumbotron-2 {*/
-/*    background: url('../assets/review-jumbo.jpg') center no-repeat;*/
-/*    background-size: cover;*/
-/*    padding-top: 15%;*/
-/*    padding-bottom: 15%;*/
-/*    height: 600px;*/
-/*    font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif*/
-
-/*}*/
-/*   colors
-        #f2f3f7
-        #d2dce9
-        #36187d
-        #6c758f
-        #0196e3

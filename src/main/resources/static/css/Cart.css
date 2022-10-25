@@ -3,7 +3,18 @@
 }
 .body {
     font-family: sans-serif;
+
 }
+/*.back-image {*/
+/*    background-image: url("../assets/Plantkillers.jpg");*/
+/*    background-size: 100vw 100vh;*/
+/*    !*object-fit: cover;*!*/
+/*    !*width: 100vw;*!*/
+/*    !*height: 100vh;*!*/
+/*    !*margin: 0;*!*/
+/*    !*padding: 0;*!*/
+/*    background-repeat: no-repeat;*/
+/*}*/
 
 i {
     cursor: pointer;
@@ -18,7 +29,11 @@ i {
     padding: 5px;
     border-radius: 4px;
 }
+.delete-cart {
+    text-align: center;
+}
 .empty-cart {
+    text-align: center;
     margin-top: 150px;
 }
 /*for the badge counter on the cart icon*/
@@ -30,6 +45,9 @@ i {
     border-radius: 3px;
     background-color: red;
     color: white;
+}
+.total-cart-amount{
+
 }
 /*Style rules for some label and buttons*/
 .text-center {
