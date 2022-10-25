@@ -16,7 +16,8 @@ export default function Home(props) {
            </div>   
            <div class="col-md-3">
                 <div>
-                    <div class="center-top"></div>
+<!--                    <div class="center-top"></div>-->
+                    <img src="https://img0.joyreactor.com/pics/post/gif-garden-doodle-photoshop-2228327.gif" alt="https://img0.joyreactor.com/pics/post/gif-garden-doodle-photoshop-2228327.gif" class="transparent shrinkToFit center-top" width="489" height="494"></img>
                     <image class="home-red" src="../assets/Homered.jpg"></image>
                 </div>
            </div>  

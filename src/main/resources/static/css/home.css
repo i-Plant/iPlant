@@ -17,9 +17,11 @@
 /*    align-content: center;*/
 /*}*/
 .welcome {
+    font-weight: bold;
     margin-top: 120px ;
     position: fixed;
-    left: 50%;
+    right: 15%;
+    bottom: 1%;
 
     color: rebeccapurple;
     font-size: 2em;
