@@ -18,6 +18,9 @@ i {
     padding: 5px;
     border-radius: 4px;
 }
+.delete-cart {
+    text-align: center;
+}
 .empty-cart {
     text-align: center;
     margin-top: 150px;
