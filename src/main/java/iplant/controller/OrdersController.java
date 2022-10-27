@@ -56,25 +56,8 @@ public class OrdersController {
         return optionalOrder;
     }
 
-    @PostMapping("/create")
-    public void createOrder(@RequestBody Order newOrder, @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authHeader ) {
-//        set UserId as Buyer for the newOrder. If not a user set Buyer to null:
-        User loggedInUser = authBuddy.getUserFromAuthHeaderJWT(authHeader);
-        newOrder.setBuyer(loggedInUser);
-//                if(isLoggedIn()) {
-//                    newOrder.setBuyer(user);
-//                }
 
-//        create and set DateTimeStamp as createdAt to newOrder:
-        newOrder.setCreatedAt(LocalDate.now());
-        newOrder.setStatus(Active);
-
-//        add in item selected to the list; then save it to the newOrder:
-
-        orderRepository.save(newOrder);
-    }
-
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteOrderById(@PathVariable long id) {
         Optional<Order> optionalOrder = orderRepository.findById(id);
         if (optionalOrder.isEmpty()) {
@@ -84,7 +67,7 @@ public class OrdersController {
         }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public void updateOrder(@RequestBody Order updatedOrder, @PathVariable long id) {
         Optional<Order> orderOptional = orderRepository.findById(id);
         if(orderOptional.isEmpty()) {
@@ -100,7 +83,7 @@ public class OrdersController {
 
 
 
-    @PostMapping("/{orderId}/products/")
+    @PostMapping("/products/{orderId}")
     public OrderProduct addProductToOrder(@RequestBody OrderProduct newProductToOrder, @PathVariable Long orderId, @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authHeader ) {
         User loggedInUser = authBuddy.getUserFromAuthHeaderJWT(authHeader);
         if(loggedInUser == null) {
@@ -115,7 +98,6 @@ public class OrdersController {
             newProductToOrder.setOrder(newOrder);
             orderId = newOrder.getId();
         }
-
         newProductToOrder.getOrder().setId(orderId);
         newProductToOrder.setQuantity(1);
         newProductToOrder = orderProductsRepository.save(newProductToOrder);
@@ -146,9 +128,8 @@ public class OrdersController {
         orderProductsRepository.save(originalProduct.get());
     }
 
-    @DeleteMapping("/products/{id}")
+    @DeleteMapping("/products/delete/{id}")
     public void deleteProductInOrder(@PathVariable long id){
-        System.out.println();
         orderProductsRepository.deleteById(id);
     }
 

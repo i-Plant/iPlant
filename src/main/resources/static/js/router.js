@@ -24,12 +24,14 @@ import addToCart, {addToCartEvent} from "./views/Cart.js";
  * @returns {*}
  */
 export default function router(URI) {
-    let orderId;
+    let orderId = 37;
     //if there's already an order id in local storage use that order
-    if(window.localStorage.getItem("order-id") ) {
-        orderId = window.localStorage.getItem("order-id")
-        console.log("orderId",orderId);
-    }
+    // if(window.localStorage.getItem("order-id") ) {
+    //     orderId = window.localStorage.getItem("order-id")
+    //     console.log("orderId",orderId);
+    // }else{
+    //     orderId = 0;
+    // }
 
     const routes = {
         '/': {
