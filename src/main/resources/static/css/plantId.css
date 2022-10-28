@@ -1,6 +1,6 @@
 
 .mainPlantId{
-    background-color: rgba(175, 196, 159, 0.36);
+    background-color: rgba(175, 196, 159, 0.18);
     align-content: center;
     justify-content: space-evenly;
     flex-wrap: wrap;
@@ -35,4 +35,10 @@ input[type="file"]::file-selector-button {
     border-radius: 0.1em;
     background-color: #c0ceac;
     transition: 1s;
+}
+.instructions{
+    display: flex;
+    border: solid rgba(84, 116, 53, 0.31);
+    margin: 60px;
+    padding: 30px;
 }

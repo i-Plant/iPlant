@@ -23,6 +23,15 @@ export default function PlantId(props) {
             </div>
             
         </div>
+        <div class="instructions">
+        <h2>Instructions</h2>
+            <ul>
+              <li>1. Take a picture or search an image online.</li>
+              <li>2. Add it to your computer or mobile device</li>
+              <li>3. Use our upload feature to pull up your plant picture</li>
+              <li>4. Get results about the plant!</li>
+            </ul>
+        </div>
        
         </main>
     `
